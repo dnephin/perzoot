@@ -1,0 +1,17 @@
+<html>
+<head>
+<title>Stubbed</title>
+</head>
+<body>
+
+
+<ul>
+<form action="{% url jobsite_main.views.index %}" method="POST">
+	{{ form.as_ul }}
+	{% csrf_token %}
+	<input type="submit" />
+</form>
+</ul>
+
+</body>
+</html?
