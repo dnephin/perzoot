@@ -7,9 +7,12 @@ import solr
 from django.conf import settings
 from datetime import datetime
 import string
+import logging
+
+
+log = logging.getLogger('Search')
 
 SOLR_DATE_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
-
 
 solr_conn = solr.SolrConnection(settings.SOLR_URL)
 
@@ -41,7 +44,11 @@ class Search(object):
 		q_parts.append(self.handle_days(data.get('days')))
 		q_parts.append(self.handle_city(data.get('city')))
 
-		return {'q': " AND ".join(q_parts), }
+		return {
+			'q': " AND ".join(q_parts),
+			'sort': self.handle_sort(data.get('sort')),
+			'sort_order': 'desc'
+		}
 
 
 
@@ -62,3 +69,12 @@ class Search(object):
 		if not city:
 			return ""
 		return "city: %s" % city.lower()
+
+
+	def handle_sort(self, sort):
+		if not sort:
+			return "date, id"
+		if sort not in ('date', 'relevency'):
+			log.warn("Unknown sort type: %s" % (sort)) 
+			return "date, id"
+		return sort

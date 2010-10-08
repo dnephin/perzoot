@@ -10,6 +10,10 @@
 	{{ form.as_ul }}
 	{% csrf_token %}
 	<input type="submit" />
+
+	{% for result in response %}
+		<p>{{ result.title }} - {{ result.url }}</p>
+	{% endfor %}
 </form>
 </ul>
 
