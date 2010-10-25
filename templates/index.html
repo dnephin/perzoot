@@ -1,21 +1,107 @@
 <html>
 <head>
-<title>Stubbed</title>
+<title>Perzoot</title>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.js" ></script>
+		<script src="/m/js/jquery.class.js" ></script>
+		<script src="/m/js/jquery.json-2.2.js" ></script>
+
+<script>
+
+
+var GLOBAL_TIMESTAMP = new Date().getTime();
+
+
+function update_location() {
+
+
+}
+
+
+
+function get_loc_data() {
+	var loc_hash = decodeURIComponent(document.location.hash.substring(1));
+	var page_data = new Object();
+	jQuery.map(loc_hash.split(','), function (i) {
+		var parts = i.split(':');
+		page_data[parts[0]] = parts[1];
+	});
+	return page_data;
+}
+
+function build_loc_data(search_form) {
+	GLOBAL_TIMESTAMP = new Date().getTime();
+	return encodeURIComponent(GLOBAL_TIMESTAMP + 
+			"#search:" + search_form.serialize() );
+}
+
+
+function check_loc_data_has_changed() {
+	var loc_hash = decodeURIComponent(document.location.hash.substring(1));
+	var timestamp = loc_hash.split('#')[0];
+
+	if (timestamp == GLOBAL_TIMESTAMP)
+		return;
+
+	var page_data = get_loc_data();
+	// TODO: perform search
+}
+
+
+function search() {
+
+	form = $('#search');
+	document.location.href = '#' + build_loc_data(form);
+	alert(form.serialize());
+	$.ajax({
+		url: '/search?' + form.serialize(),
+		dataType: 'json',
+		success: function(data) {
+			alert(data);
+		},
+		error: function(data) {
+			alert('error' + data);
+		}
+	});
+
+}
+
+</script>
+
+<script>
+
+$(document).ready(function() {
+
+
+	// Check for loc data
+
+
+	// Start page change poller
+	setInterval('check_loc_data_has_changed()', 1300);
+
+});
+
+</script>
 </head>
 <body>
 
 
+<form action="{% url jobsite_main.views.index %}" method="GET" id="search">
 <ul>
-<form action="{% url jobsite_main.views.index %}" method="POST">
 	{{ form.as_ul }}
 	{% csrf_token %}
-	<input type="submit" />
+	<input type="button" value="Search" onClick="search()" />
+</ul>
+</form>
 
+
+<div id="results">
 	{% for result in response %}
 		<p>{{ result.title }} - {{ result.url }}</p>
 	{% endfor %}
-</form>
-</ul>
+</div>
+
 
 </body>
 </html?
