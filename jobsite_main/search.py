@@ -7,6 +7,7 @@ import solr
 from django.conf import settings
 from datetime import datetime
 import string
+import simplejson
 import logging
 
 
@@ -17,7 +18,27 @@ SOLR_DATE_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
 solr_conn = solr.SolrConnection(settings.SOLR_URL)
 
 
+class SolrJSONEncoder(simplejson.JSONEncoder):
+	"""
+	 A JSON encoder which has been extended to encode Solr Response 
+	 objects and datetime objects.
+	 """
 
+	def default(self, o):
+
+		if isinstance(o, solr.Response):
+			return {
+				'results': o.results,
+				'start': o.results.start,
+				'numFound': o.results.numFound,
+				}
+		elif isinstance(o, datetime):
+			return o.strftime('%Y-%m-%dT%H-%M-%S')
+		else:
+			return simplejson.JSONEncoder.default(self, o);
+
+
+#TODO: query with json output format
 class Search(object):
 	"""
 	 Perform a search from a django form.

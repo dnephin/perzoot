@@ -10,7 +10,7 @@ from django.template import RequestContext
 from django.http import HttpResponse
 
 from jobsite_main.forms import JobSearchForm
-from jobsite_main.search import Search
+from jobsite_main.search import Search, SolrJSONEncoder
 
 
 
@@ -47,21 +47,12 @@ import simplejson
 OK='ok'
 ERROR='error'
 
-class ExJSONEncoder(simplejson.JSONEncoder):
-
-	def default(self, o):
-		try:
-			return simplejson.JSONEncoder.default(self, o);
-		except TypeError:
-			return ""
-
-
 
 def json_response(request, code=OK, data=None, message=None):
 	" Format the json response "
 
 	resp = {'code': code, 'message': message, 'content': data}
-	return HttpResponse(simplejson.dumps(resp, cls=ExJSONEncoder), mimetype="application/json")
+	return HttpResponse(simplejson.dumps(resp, cls=SolrJSONEncoder), mimetype="application/json")
 
 
 
@@ -71,5 +62,5 @@ def search(request):
 	"""
 	form = JobSearchForm(request.GET)
 	form.is_valid()
-	resp = Search().search(form).results
+	resp = Search().search(form)
 	return json_response(request, data=resp)
