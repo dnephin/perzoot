@@ -7,116 +7,31 @@
 		<script src="/m/js/jquery.json-2.2.js" ></script>
 		<script src="/m/js/ejs_production.js" ></script>
 
+		<script src="/m/js/pz.pagedata.js" ></script>
+		<script src="/m/js/pz.searchpage.js" ></script>
+
 <script>
 
-
-var GLOBAL_TIMESTAMP = new Date().getTime();
-
-
-
-
-function get_page_data() {
-	var loc_hash = decodeURIComponent(document.location.hash.substring(1));
-	var page_data_part = loc_hash.split('#')[1];
-
-	var page_data = new Object();
-	jQuery.map(page_data_part.split(','), function (i) {
-		var parts = i.split(':');
-		page_data[parts[0]] = parts[1];
-	});
-	return page_data;
-}
-
-function build_page_data(search_data) {
-	GLOBAL_TIMESTAMP = new Date().getTime();
-	return encodeURIComponent(GLOBAL_TIMESTAMP + "#search:" + search_data );
-}
-
-function set_page_data(search_form) {
-	document.location.href = '#' + build_page_data(search_form);
-}
-
-function check_page_data_has_changed() {
-	var timestamp = get_timestamp_data();
-
-	if (timestamp == GLOBAL_TIMESTAMP || timestamp.length < 1) {
-		$('#status').empty();
-		return;
-	}
-
-	update_page(timestamp, get_page_data());
-	$('#status').append('Update now');
-}
-
-
-function get_timestamp_data() {
-	var loc_hash = decodeURIComponent(document.location.hash.substring(1));
-	return loc_hash.split('#')[0];
-}
-
-
-function update_page(timestamp, page_data) {
-	GLOBAL_TIMESTAMP = timestamp;
-	// TODO: is this safe?
-	$.each(page_data, function(f, d) {
-		new Function('d', 'return perform_' + f + '(d)')(d);
-		// TODO: fill in search form
-	});
-}
-
-
-/*
- * search - Perform a search, update the page location, and display the results.
- */
-function perform_search(form_data) {
-
-	$('#results').empty();
-
-	$.ajax({
-		url: '/search?' + form_data,
-		dataType: 'json',
-		success: function(data) {
-			append_results(data);
-		},
-		error: function(data) {
-			// TODO: cleanup
-			alert('error' + data);
-		}
-	});
-}
-
-function search() {
-	var form_data = $('#search').serialize()
-	perform_search(form_data);
-	set_page_data(form_data);
-}
-
-
-function append_results(data) {
-
-	listing = new EJS({text: "<div><h3><%= title %></h3><p><%= city %>, <%= date %></p>"});
-	$.each(data.content.results, function(i, p) {
-		$('#results').append(listing.render(p));
-	});
-}
+// TODO: tracking
+// TODO: analytics (pageTracker._trackPageview("/pagefilename1");)
+// TODO: floating windows
 
 </script>
 
 <script>
-
 $(document).ready(function() {
 
 
-	// Check for page data
-
-
 	// Start page change poller
-	setInterval('check_page_data_has_changed()', 1300);
+	setInterval('check_page_data_has_changed()', 1000);
 
 	// Set keybinds
 	$('#search input').keypress(function(e) { 
 		if (e.keyCode == 13) $('#search_button').click();
 	});
+
+	// Set auto load extra results on page scroll to bottom
+	$(window).scroll(handle_search_scroll)
 
 });
 

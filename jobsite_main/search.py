@@ -68,7 +68,9 @@ class Search(object):
 		return {
 			'q': " AND ".join(q_parts),
 			'sort': self.handle_sort(data.get('sort')),
-			'sort_order': 'desc'
+			'sort_order': 'desc',
+			'start': data.get('start', 0),
+			'rows': data.get('rows', 20),
 		}
 
 
