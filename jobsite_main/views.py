@@ -60,7 +60,20 @@ def search(request):
 	"""
 	Perform a search and return the data as JSON.
 	"""
+	# TODO: error handling
 	form = JobSearchForm(request.GET)
 	form.is_valid()
 	resp = Search().search(form)
 	return json_response(request, data=resp)
+
+
+
+def track_outbound(request, posting_id):
+	"""
+	Track a user opening an outgoing link.
+	"""
+	# TODO: track
+	print posting_id
+	return HttpResponse("")
+
+

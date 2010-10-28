@@ -30,6 +30,8 @@ function search() {
 	var form_data = build_form_data();
 	perform_search(form_data);
 	set_page_data(form_data);
+
+	ga_track();
 }
 
 
@@ -52,7 +54,8 @@ function handle_search_scroll(event) {
 		var form_data = build_form_data();
 		perform_search(form_data + "&start=" + start, true);
 		set_page_data(form_data + "&rows=" + (start+CONST_NUM_RESULTS));
+
+		ga_track();
 	}
 }
-
 

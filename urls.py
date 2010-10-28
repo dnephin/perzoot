@@ -11,9 +11,9 @@ urlpatterns = patterns('',
 	(r'^$', jobsite_main.views.index),
 	(r'^search$', jobsite_main.views.search),
 
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
+	(r'^track/outbound/(?P<posting_id>\d+)/$', jobsite_main.views.track_outbound),
 
+	# Dev only
 	(r'^m/(?P<path>.*)$', 'django.views.static.serve',
 	        {'document_root': settings.MEDIA_ROOT}),
 
