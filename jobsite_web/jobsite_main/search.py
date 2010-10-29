@@ -1,6 +1,7 @@
 """
  Search module for jobsite_web app.
 
+ Performs search and handles response from solr.
 """
 
 import solr

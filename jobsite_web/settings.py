@@ -22,7 +22,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': '',
+        'NAME': 'jobs',
         'USER': 'jobs',
         'PASSWORD': 'jobspass',
         'HOST': '',
@@ -43,6 +43,7 @@ MEDIA_URL = '/m/'
 ADMIN_MEDIA_PREFIX = '/media_admin/'
 SECRET_KEY = '129e12jnakfm23rjf90JIKN@uf4niq2n3fk129jfkn9jf9jrf2300;.'
 ROOT_URLCONF = 'jobsite_web.urls'
+SESSION_COOKIE_AGE = 6 * 7 * 24 * 60 * 60 	# 6 weeks
 
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
@@ -74,5 +75,6 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.admin',
+	'jobsite_web.jobsite_main',
 )
 

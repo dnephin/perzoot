@@ -3,7 +3,7 @@ from django.forms import *
 
 class JobSearchForm(Form):
 	"""
-	Basic job posting search form.
+	Basic job search form.
 	"""
 
 	keywords = 	CharField(max_length=255)
