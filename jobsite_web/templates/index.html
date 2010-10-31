@@ -7,6 +7,19 @@ $(document).ready(function() {
 	build_tooltips();
 	set_search_keybind();
 	build_async_links();
+
+// TODO: make this a form widget
+ $.sexyCombo.create({
+          id : "days_id",
+          name: "days",
+          container: "#combo_span",
+          data: [
+              {value: "1", text: "1", selected: true},
+              {value: "3", text: "3"},
+              {value: "7", text: "7"},
+              {value: "14", text: "14"}
+          ]
+      });
 });
 </script>
 
@@ -17,14 +30,12 @@ $(document).ready(function() {
 
 	<form id="search" action="{% url jobsite_main.views.search %}" method="GET">
 		<p>
-			{{ form.keywords }}	
+			{{ search_form.keywords }}	
 			<input type="submit" value="Search" id="search_button" /><br />
-			employment in {{ form.city }} posted in the last
-			{{ form.days }} day(s)
+			employment in {{ search_form.city }} posted in the last
+			<span id="combo_span"></span> day(s)
 		</p>
 
-		<p>
-		</p>
 
 	</form>
 	<hr />

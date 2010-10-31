@@ -75,6 +75,7 @@ function build_async_links() {
 				url: add_async_param($(this).attr('href')), 
 				dataType: 'json',
 				success: function(data) {
+					// TODO: handle empty document (404)
 					d.html('<p>' + data.content.page_data.content + '</p>');
 					d.dialog('option', 'title', data.content.page_data.title);
 				},

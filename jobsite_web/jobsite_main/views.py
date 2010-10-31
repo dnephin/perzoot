@@ -69,7 +69,7 @@ def index(request):
 	# TODO: Set city in city field of form
 	form = JobSearchForm()
 	return render_to_response('index.html', 
-			context_instance=RequestContext(request, {'form': form}))
+			context_instance=RequestContext(request, {'search_form': form}))
 
 
 

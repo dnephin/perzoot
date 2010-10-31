@@ -21,7 +21,7 @@ $(document).ready(function() {
 {% block content %}
 <form action="{% url jobsite_main.views.index %}" method="GET" id="search">
 <ul>
-	{{ form.as_ul }}
+	{{ search_form.as_ul }}
 	<input type="button" value="Search" onClick="search()" id="search_button" />
 </ul>
 </form>
