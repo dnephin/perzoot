@@ -4,6 +4,17 @@
  */
 
 
+
+function build_input_select() {
+	var tags = ['1','2','3','7','14'];
+
+	$("#id_days").autocomplete({
+		source: tags	
+	});
+
+}
+
+
 /*
  * build_tooltips
  *		Create tooltip elements for all elements with the tt_link class.
@@ -80,3 +91,9 @@ function build_async_links() {
 		});
 	});
 }
+
+
+
+
+
+

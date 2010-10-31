@@ -8,19 +8,11 @@ $(document).ready(function() {
 	set_search_keybind();
 	build_async_links();
 
-// TODO: make this a form widget
- $.sexyCombo.create({
-          id : "days_id",
-          name: "days",
-          container: "#combo_span",
-          data: [
-              {value: "1", text: "1", selected: true},
-              {value: "3", text: "3"},
-              {value: "7", text: "7"},
-              {value: "14", text: "14"}
-          ]
-      });
+	build_input_select();
+
+
 });
+
 </script>
 
 {% endblock %}
@@ -33,9 +25,9 @@ $(document).ready(function() {
 			{{ search_form.keywords }}	
 			<input type="submit" value="Search" id="search_button" /><br />
 			employment in {{ search_form.city }} posted in the last
-			<span id="combo_span"></span> day(s)
-		</p>
+			{{ search_form.days }} day(s)
 
+		</p>
 
 	</form>
 	<hr />

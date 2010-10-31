@@ -39,11 +39,16 @@
 
 #id_city {
 	width: 110px;
-	padding: 0 2px;
+	padding: 1px 2px;
 }
 
 #search_button {
 	padding: 4px;
+}
+
+#id_days {
+	width: 30px;
+	padding: 1px;
 }
 /* end search form */
 

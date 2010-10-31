@@ -7,7 +7,7 @@ class JobSearchForm(Form):
 	"""
 
 	keywords = 	CharField(max_length=255)
-	days =		IntegerField()
+	days =		IntegerField(initial=3)
 	city = 		CharField(max_length=200, initial='Montreal')
 	start =		IntegerField(widget=HiddenInput, initial=0, required=False)
 	rows = 		IntegerField(widget=HiddenInput, initial=20, required=False)
