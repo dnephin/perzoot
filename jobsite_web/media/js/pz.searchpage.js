@@ -59,3 +59,10 @@ function handle_search_scroll(event) {
 	}
 }
 
+
+function set_search_keybind() {
+	// Set keybinds
+	$('#search input').keypress(function(e) { 
+		if (e.keyCode == 13) $('#search_button').click();
+	});
+}
