@@ -11,7 +11,8 @@ from django.http import HttpResponse, HttpResponseNotFound
 from django.http import HttpResponseServerError
 
 from jobsite_main.forms import JobSearchForm
-from jobsite_main.search import Search, SolrJSONEncoder
+from jobsite_main.search import Search 
+from jobsite_main.util import DjangoJSONEncoder
 from jobsite_main.db import *
 
 import simplejson
@@ -33,7 +34,7 @@ def json_response(request, code=OK, data=None):
 	" Format the json response "
 
 	resp = {'code': code, 'content': data}
-	return HttpResponse(simplejson.dumps(resp, cls=SolrJSONEncoder), 
+	return HttpResponse(simplejson.dumps(resp, cls=DjangoJSONEncoder), 
 			mimetype="application/json")
 
 
@@ -65,8 +66,8 @@ def index(request):
 	 Default landing page.  Contains a basic search form.
 	"""
 	# TODO: set session data to force the cookie (do i need to?)
-	# TODO: deal with default form
-	form = JobSearchForm(request.GET)
+	# TODO: Set city in city field of form
+	form = JobSearchForm()
 	return render_to_response('index.html', 
 			context_instance=RequestContext(request, {'form': form}))
 

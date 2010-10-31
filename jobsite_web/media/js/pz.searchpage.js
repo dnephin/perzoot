@@ -32,6 +32,7 @@ function search() {
 	set_page_data(form_data);
 
 	ga_track();
+	return false;
 }
 
 

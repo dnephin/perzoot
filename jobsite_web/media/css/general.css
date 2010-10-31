@@ -28,16 +28,25 @@
 	text-align: center;
 }
 
+.prepend-top-5 { margin-top:7.5em; }
 
-/*   Search forms    */
-#keywords {
+
+/*   Search form    */
+#id_keywords {
 	width: 390px;
+	padding: 4px 4px 4px 24px;
 }
 
-#city {
+#id_city {
 	width: 110px;
 	padding: 0 2px;
 }
+
+#search_button {
+	padding: 4px;
+}
+/* end search form */
+
 
 .tooltip{
     position:absolute;
@@ -57,3 +66,11 @@
 	padding:2px 7px;
 	}
 
+
+/*  Dialogs */
+
+
+
+
+
+/* end dialogs */

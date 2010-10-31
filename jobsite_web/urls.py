@@ -19,10 +19,12 @@ urlpatterns = patterns('',
 	(r'^search$', jobsite_main.views.search),
 
 	# Static pages
-	(r'^page/(?P<page_name>\w+)', jobsite_main.views.static_page),
+	url(r'^page/(?P<page_name>\w+)', jobsite_main.views.static_page,
+		name='static_page'),
 
 	# Ajax only
-	(r'^track/(?P<event_name>\w+)/(?P<posting_id>\d+)/$', jobsite_main.views.track_event),
+	url(r'^track/(?P<event_name>\w+)/(?P<posting_id>\d+)/$', 
+		jobsite_main.views.track_event, name='track'),
 
 	# Dev only
 	(r'^m/(?P<path>.*)$', 'django.views.static.serve',

@@ -6,24 +6,35 @@
 $(document).ready(function() {
 	build_tooltips();
 	set_search_keybind();
+	build_async_links();
 });
 </script>
 
 {% endblock %}
 
 {% block content %}
-<form action="{% url jobsite_main.views.index %}" method="GET" id="search">
-<ul>
-	{{ form.as_ul }}
-	<input type="button" value="Search" onClick="search()" id="search_button" />
-</ul>
-</form>
+	<div class="span-14 prepend-5 append-5 last prepend-top-5">
 
-<center>
-<a href="#" title="what one" class="tt_link">one</a>
-<a href="#" title="what two" class="tt_link">two</a></center>
+	<form id="search" action="{% url jobsite_main.views.search %}" method="GET">
+		<p>
+			{{ form.keywords }}	
+			<input type="submit" value="Search" id="search_button" /><br />
+			employment in {{ form.city }} posted in the last
+			{{ form.days }} day(s)
+		</p>
 
+		<p>
+		</p>
 
+	</form>
+	<hr />
+	<p class="center">
+		<a class="async" href="{% url static_page 'statistics' %}">Search Statistics</a> | 
+		<a class="async" href="{% url static_page 'aboutus' %}">About Perzoot</a>  | 
+		<a class="async" href="{% url static_page 'reportproblem' %}">Report a problem</a> | 
+		<a class="async" href="{% url static_page 'contactus' %}">Contact us</a> |
+		<a class="async" href="{% url static_page 'terms' %}">Terms of Use</a> 
+	</p>
 
-
+	</div>
 {% endblock %}

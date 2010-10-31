@@ -48,6 +48,7 @@ class SitePage(Model):
 	added_date = DateTimeField(auto_now_add=True)
 	updated_date = DateTimeField(auto_now_add=True, auto_now=True)
 	content = TextField()
+	title = CharField(max_length=200)
 	active = BooleanField(default=False)
 
 	class Meta:
@@ -57,6 +58,13 @@ class SitePage(Model):
 		active = "DISABLED" if not self.active else ""
 		return "%s page %s (version: %s, last updated: %s)" % (
 				self.page, active, self.version, self.updated_date)
+
+
+	def __json__(self):
+		return {
+			'name': self.page, 'title': self.title,
+			'last_modified': self.updated_date,
+			'content': self.content }
 
 
 class SearchEvent(Model):
