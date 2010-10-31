@@ -1,0 +1,59 @@
+.default_button {
+	display: block;
+	text-align: center;
+	color: black;
+	font-weight: bold;
+	border-color: #e0e0e0;
+	border-width: 0 1px 1px 0; 
+	border-style: solid;
+	width: 69px;
+	text-decoration: none;
+}
+
+#logo {
+	height: 54px;
+}
+
+#logo img {
+	height: 54px;
+	width: 230px;
+	float: left;
+	display: block;
+	margin: 0 10px 0 0;
+	border: 0;
+}
+
+
+.center {
+	text-align: center;
+}
+
+
+/*   Search forms    */
+#keywords {
+	width: 390px;
+}
+
+#city {
+	width: 110px;
+	padding: 0 2px;
+}
+
+.tooltip{
+    position:absolute;
+    z-index:999;
+    left: -9999px;
+    background-color:#dedede;
+    padding:5px;
+    border:1px solid #fff;
+    width:250px;
+}
+
+.tooltip p{
+   margin:0;
+    padding:0;
+	color:#fff;
+	background-color:#222;
+	padding:2px 7px;
+	}
+

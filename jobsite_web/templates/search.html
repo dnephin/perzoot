@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block document_head %}
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+	// Start page change poller
+	setInterval('check_page_data_has_changed()', 1000);
+
+	// Set auto load extra results on page scroll to bottom
+	$(window).scroll(handle_search_scroll)
+
+	build_tooltips();
+	set_search_keybind();
+});
+</script>
+
+{% endblock %}
+
+{% block content %}
+<form action="{% url jobsite_main.views.index %}" method="GET" id="search">
+<ul>
+	{{ form.as_ul }}
+	<input type="button" value="Search" onClick="search()" id="search_button" />
+</ul>
+</form>
+
+<center>
+<a href="#" title="what one" class="tt_link">one</a>
+<a href="#" title="what two" class="tt_link">two</a></center>
+
+
+
+
+{% endblock %}
