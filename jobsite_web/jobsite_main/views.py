@@ -34,7 +34,17 @@ def json_response(request, code=OK, data=None):
 	" Format the json response "
 
 	resp = {'code': code, 'content': data}
-	return HttpResponse(simplejson.dumps(resp, cls=DjangoJSONEncoder), 
+	http_obj = HttpResponse
+
+	if code == NOTFOUND:
+		http_obj = HttpResponseNotFound
+		resp['content'] = 'Page not found.'
+
+	if code == ERROR:
+		http_obj = HttpResponseServerError
+		resp['content'] = 'Server error.'
+
+	return http_obj(simplejson.dumps(resp, cls=DjangoJSONEncoder), 
 			mimetype="application/json")
 
 

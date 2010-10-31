@@ -1,3 +1,6 @@
 
+ - Fix days combo select widget to be inline
+ - Add oauth
+ - Setup dev server
 
  - Improve logging with a django logging mechanism

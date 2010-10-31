@@ -61,27 +61,20 @@ function build_async_links() {
 			event.preventDefault();
 
 			var d = $('#dialog_window');
-			d.dialog('open');
-			if (!d.length) {
-				d = $(document.createElement('div'));
-				d.attr('id', 'dialog_window');
-				$('body').append(d);
-				d.dialog({width: 600, minHeight: 400 });
-				d.html('Loading ...');
-			}
+			d.dialog({'width': 500, 'minHeight': 400});
+			d.html('Loading ...');
 
 			// Fetch the content
 			$.ajax({
 				url: add_async_param($(this).attr('href')), 
 				dataType: 'json',
-				success: function(data) {
-					// TODO: handle empty document (404)
+				success: function(data, code) {
 					d.html('<p>' + data.content.page_data.content + '</p>');
 					d.dialog('option', 'title', data.content.page_data.title);
 				},
 				error: function(data, status, error) {
-					// TODO: handle error 
-					alert('Page not found: ' + status + ' ' + error);
+					d.dialog('close');
+					handle_error(data);
 				}
 			});
 		});

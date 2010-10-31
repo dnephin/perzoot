@@ -99,8 +99,7 @@ function perform_search(form_data, append) {
 			GLOBAL_FETCHING_PAGE = false;
 		},
 		error: function(data) {
-			// TODO: cleanup
-			alert('error' + data);
+			handle_error(data);
 		}
 	});
 }
