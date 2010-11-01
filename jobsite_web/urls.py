@@ -7,6 +7,8 @@ from django.conf.urls.defaults import *
 import jobsite_main.views
 from django.conf import settings
 
+import oauth_access.urls
+
 
 ### ADMIN
 from django.contrib import admin
@@ -29,6 +31,9 @@ urlpatterns = patterns('',
 	# Dev only
 	(r'^m/(?P<path>.*)$', 'django.views.static.serve',
 	        {'document_root': settings.MEDIA_ROOT}),
+
+	# OAuth
+    (r'^auth/', include(oauth_access.urls)),
 
 	# Admin
     (r'^admin/', include(admin.site.urls)),

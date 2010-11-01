@@ -4,7 +4,9 @@ __ Required packages __
 
 http://pypi.python.org/packages/source/s/simplejson/simplejson-2.1.1.tar.gz
 http://embeddedjs.com/
-http://code.google.com/p/sexy-combo/
+
+django-oath-access
+oauth2 1.2.0
 
 solr
 

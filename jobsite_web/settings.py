@@ -31,6 +31,24 @@ DATABASES = {
 }
 
 
+# OAuth
+OAUTH_ACCESS_SETTINGS = {
+	'linkedin': {
+		'keys': {
+			'KEY':	  'OVWYIVnMYcNsaHsf3BRhzLMuaviknWiufpDrvJq_Cv5013547ezQioYZpZtZWeE8',
+			'SECRET': 'Jk1yH4a4SvLysl3Ph__E9LIXp_lJgJ_M1DbXU3rj6oyV3ZJUaJqvcAvWu46h-y2H',
+		},
+		'endpoints': {
+			'request_token': 'https://api.linkedin.com/uas/oauth/requestToken',
+			'access_token': 'https://api.linkedin.com/uas/oauth/accessToken',
+			'authorize': 'https://api.linkedin.com/uas/oauth/authorize',
+			'provider_scope':'',
+			'callback': 'jobsite_web.jobsite_main.oauth_callbacks.linked_in',
+		},
+	},
+}
+
+
 # Locale
 TIME_ZONE = 'America/Montreal'
 LANGUAGE_CODE = 'en-us'
@@ -76,5 +94,6 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.admin',
 	'jobsite_web.jobsite_main',
+	'oauth_access',
 )
 

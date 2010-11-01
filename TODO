@@ -1,6 +1,6 @@
 
- - Fix days combo select widget to be inline
  - Add oauth
  - Setup dev server
+ - Extend autocomplete widget to show the list when input is focused
 
  - Improve logging with a django logging mechanism
