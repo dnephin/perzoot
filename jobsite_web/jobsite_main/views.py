@@ -9,6 +9,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponse, HttpResponseNotFound
 from django.http import HttpResponseServerError
+from django.contrib.auth import logout as django_logout
 
 from jobsite_main.forms import JobSearchForm
 from jobsite_main.search import Search 
@@ -125,3 +126,21 @@ def static_page(request, page_name):
 
 	return handle_response(request, {'page_data': page}, 
 			template="static_page.html")
+
+
+def logout(request):
+	"""
+	A simple request to check what the users auth status.
+	Used to updated the user_block.
+	"""
+	django_logout(request)
+
+	return handle_auth_block(request)
+
+
+def handle_auth_block(request):
+	"""
+	Return the templated login block.
+	"""
+	return handle_response(request, {}, template='blocks/auth_block.html')
+

@@ -32,6 +32,10 @@ urlpatterns = patterns('',
 	(r'^m/(?P<path>.*)$', 'django.views.static.serve',
 	        {'document_root': settings.MEDIA_ROOT}),
 
+	# Auth
+	(r'^logout', jobsite_main.views.logout, {}, 'logout'),
+	(r'^auth_status', jobsite_main.views.handle_auth_block, {}, 'auth_status'),
+
 	# OAuth
     (r'^auth/', include(oauth_access.urls)),
 

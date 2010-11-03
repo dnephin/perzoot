@@ -5,14 +5,11 @@
 <script type="text/javascript">
 $(document).ready(function() {
 
-	// Start page change poller
+	default_doc_ready();
 	setInterval('check_page_data_has_changed()', 1000);
-
-	// Set auto load extra results on page scroll to bottom
 	$(window).scroll(handle_search_scroll)
-
-	build_tooltips();
 	set_search_keybind();
+
 });
 </script>
 

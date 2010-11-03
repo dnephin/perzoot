@@ -18,7 +18,11 @@
 	<script type="text/javascript" src="/m/js/pz.enhance.js"></script>
 
 	{% block document_head %}
-
+	<script type="text/javascript">
+		$(document).ready(function() {
+			defualt_doc_ready();
+		};
+	</script>
 	{% endblock %}
 
 </head>
@@ -29,9 +33,7 @@
 		<a href="#"><img src="" /></a><p class="large prepend-top">Employment opportunities made easy.</p>
 	</div>
 
-	<div class="span-4 last">
-		<a href="#" class="span-2 default_button ">login</a>
-		<a href="#" class="span-2 last default_button">register</a>
+	<div class="span-4 last" id="user_block">
 	</div>
 	{% endblock %}
 

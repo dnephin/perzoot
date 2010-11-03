@@ -1,0 +1,8 @@
+
+	{% if not user.is_anonymous %}
+		<a href="#">{{ user }}</a>
+		<a href="{% url logout %}" id="logout" onClick="logout(this)">logout</a>
+	{% else %}
+		<a href="#" class="span-2 default_button ">login</a>
+		<a href="#" class="span-2 last default_button">register</a>
+	{% endif %}

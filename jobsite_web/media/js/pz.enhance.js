@@ -93,7 +93,26 @@ function build_async_links() {
 }
 
 
+function update_user_block() {
+	$('#user_block').load('/auth_status');
+}
 
 
+function logout(elem) {
+
+	event.preventDefault();
+	$('#user_block').html();
+	$.ajax({
+			'url': $(elem).attr('href'), 
+			'success': update_user_block, 
+	});
+}
 
 
+function default_doc_ready() {
+	build_tooltips();
+	build_async_links();
+	build_input_select();
+	set_search_keybind();
+	update_user_block();
+}

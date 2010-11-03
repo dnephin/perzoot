@@ -1,6 +1,7 @@
 
  - Add oauth
  - Setup dev server
+ - Integrate search results page
  - Extend autocomplete widget to show the list when input is focused
 
  - Improve logging with a django logging mechanism
