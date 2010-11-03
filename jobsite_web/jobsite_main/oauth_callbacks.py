@@ -3,6 +3,10 @@
 """
 
 from oauth_access.callback import AuthenticationCallback, Callback
+from django.contrib.auth import login
+from django.contrib.auth.models import User
+
+from oauth_access.utils.anyetree import etree
 
 
 def linked_in(request, access, token):
@@ -10,8 +14,52 @@ def linked_in(request, access, token):
 	return a(request, access, token)
 
 
-class LinkedIn(AuthenticationCallback):
+# TODO: move this out
+class UserData(object):
+	
+	def __init__(self, id, first, last):
+		self.id = id
+		self.first = first
+		self.last = last
+
+
+class LinkedIn(Callback):
+
+	# TODO: change to async callback
+	REDIRECT_URL = '/'
+	BASE_URL = 'https://api.linkedin.com'
 
 	def redirect_url(self, request):
-		return '/'
+		return self.REDIRECT_URL
+
+
+	def fetch_user_data(self, request, access, token):
+		"""
+		Perform an API call to retrieve data about the profile that
+		was just authenticated.
+		"""
+		resp = access.make_api_call('xml', 
+				self.BASE_URL + '/v1/people/~:(id,first-name,last-name,industry)', token)
+
+		ud = UserData(resp.find('id').text, resp.find('first-name').text, resp.find('last-name').text)
+		return ud		
+
+	def identifier_from_data(self, data):
+		return "linkedin-%s" % data.id 
+
+	def handle_no_user(self, request, access, token, user_data):
+		# create django user
+		user = User.objects.create_user(self.identifier_from_data(user_data), '')
+		user.first_name = user_data.first
+		user.last_name = user_data.last
+		user.save()
+		# TODO: assumes default backend, should check settings
+		user.backend = "django.contrib.auth.backends.ModelBackend"
+		login(request, user)
+		return user
+
+	def handle_unauthenticated_user(self, request, user, access, token, user_data):
+		# TODO: assumes default backend, should check settings
+		user.backend = "django.contrib.auth.backends.ModelBackend"
+		login(request, user)
 
