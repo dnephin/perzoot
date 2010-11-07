@@ -6,15 +6,18 @@
 import logging
 
 from django.shortcuts import render_to_response
+from django.template.loader import render_to_string
 from django.template import RequestContext
 from django.http import HttpResponse, HttpResponseNotFound
 from django.http import HttpResponseServerError
 from django.contrib.auth import logout as django_logout
+from django.conf import settings
 
 from jobsite_main.forms import JobSearchForm
 from jobsite_main.search import Search 
 from jobsite_main.util import DjangoJSONEncoder
 from jobsite_main.db import *
+from jobsite_main.helpers import service_friendly_name
 
 import simplejson
 
@@ -128,6 +131,11 @@ def static_page(request, page_name):
 			template="static_page.html")
 
 
+
+###############################################################################
+#		Authentication Actions
+###############################################################################
+
 def logout(request):
 	"""
 	A simple request to check what the users auth status.
@@ -144,3 +152,20 @@ def handle_auth_block(request):
 	"""
 	return handle_response(request, {}, template='blocks/auth_block.html')
 
+
+# TODO: can this be refactored to beter fit with the handlers ?
+def auth_frame_wrapper(request, service):
+	"""
+	Return a page with a frame for login.
+	"""
+
+	if service not in settings.OAUTH_ACCESS_SETTINGS:
+		return handle_response(request, code=NOTFOUND)
+
+	if request.method == 'GET' and request.GET.get('async'):
+		return json_response(request, data={
+				'body': render_to_string('auth/frame.html', {'service': service}),
+				'title': 'Login using %s' % service_friendly_name(service),
+			})
+
+	return handle_response(request, {'service': service}, 'auth/frame_wrapper.html')

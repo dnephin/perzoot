@@ -35,9 +35,10 @@ urlpatterns = patterns('',
 	# Auth
 	(r'^logout', jobsite_main.views.logout, {}, 'logout'),
 	(r'^auth_status', jobsite_main.views.handle_auth_block, {}, 'auth_status'),
+	(r'^auth/(?P<service>\w+)', jobsite_main.views.auth_frame_wrapper, {}, 'auth_wrapper'),
 
 	# OAuth
-    (r'^auth/', include(oauth_access.urls)),
+    (r'^oauth/', include(oauth_access.urls)),
 
 	# Admin
     (r'^admin/', include(admin.site.urls)),

@@ -3,6 +3,11 @@
 		<a href="#">{{ user.first_name }}</a>
 		<a href="{% url logout %}" id="logout" onClick="logout(this)">logout</a>
 	{% else %}
-		<a href="#" class="span-2 default_button ">login</a>
-		<a href="#" class="span-2 last default_button">register</a>
+		Sign in: 
+		<a class="async_frame" href="{% url auth_wrapper 'linkedin' %}">in</a>
+		<a class="async_frame" href="{% url auth_wrapper 'facebook' %}">fb</a>
+		<a class="async_frame" href="{% url auth_wrapper 'openid' %}">oi</a>
+		| <a class="async_frame" href="#">login</a>
+		| <a class="async_frame" href="#">register</a>
+
 	{% endif %}

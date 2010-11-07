@@ -66,12 +66,26 @@ function add_async_param(url) {
  */
 function build_async_links() {
 
-	$('.async').each(function(i) {
+	setup_async_callbacks($('.async'), function(data, code) {
+		var d = $('#dialog_window');
+		d.html('<p>' + data.content.page_data.content + '</p>');
+		d.dialog('option', 'title', data.content.page_data.title);
+	});
+}
+
+
+/*
+ * setup_async_callbacks
+ *		set onclick events with a callback for the selector.
+ */
+function setup_async_callbacks(selector, success_func) {
+	selector.each(function(i) {
 		var elem = $(this);
 		elem.click(function(event) { 
 			event.preventDefault();
 
 			var d = $('#dialog_window');
+			// TODO: Move into CSS
 			d.dialog({'width': 500, 'minHeight': 400});
 			d.html('Loading ...');
 
@@ -79,10 +93,7 @@ function build_async_links() {
 			$.ajax({
 				url: add_async_param($(this).attr('href')), 
 				dataType: 'json',
-				success: function(data, code) {
-					d.html('<p>' + data.content.page_data.content + '</p>');
-					d.dialog('option', 'title', data.content.page_data.title);
-				},
+				success: success_func,
 				error: function(data, status, error) {
 					d.dialog('close');
 					handle_error(data);
@@ -94,7 +105,13 @@ function build_async_links() {
 
 
 function update_user_block() {
-	$('#user_block').load('/auth_status');
+	$('#user_block').load('/auth_status', function() {
+		setup_async_callbacks($('.async_frame'), function(data, code) {
+			var d = $('#dialog_window');
+			d.html(data.content.body);
+			d.dialog('option', 'title', data.content.title);
+		});
+	});
 }
 
 

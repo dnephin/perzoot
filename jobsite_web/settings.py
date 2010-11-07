@@ -45,6 +45,7 @@ OAUTH_ACCESS_SETTINGS = {
 			'provider_scope':'',
 			'callback': 'jobsite_web.jobsite_main.oauth_callbacks.linked_in',
 		},
+		'friendly_name': 'LinkedIn',
 	},
 }
 
@@ -56,7 +57,7 @@ SITE_ID = 1
 USE_I18N = True
 USE_L10N = True
 
-MEDIA_ROOT = PROJECT_ROOT + '/media/'
+MEDIA_ROOT = os.path.normpath(PROJECT_ROOT + '/../media/')
 MEDIA_URL = '/m/'
 ADMIN_MEDIA_PREFIX = '/media_admin/'
 SECRET_KEY = '129e12jnakfm23rjf90JIKN@uf4niq2n3fk129jfkn9jf9jrf2300;.'
