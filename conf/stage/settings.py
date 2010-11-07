@@ -43,7 +43,7 @@ OAUTH_ACCESS_SETTINGS = {
 			'access_token': 'https://api.linkedin.com/uas/oauth/accessToken',
 			'authorize': 'https://api.linkedin.com/uas/oauth/authorize',
 			'provider_scope':'',
-			'callback': 'jobsite_web.jobsite_main.oauth_callbacks.linked_in',
+			'callback': 'jobsite_main.oauth_callbacks.linked_in',
 		},
 	},
 }
@@ -60,7 +60,7 @@ MEDIA_ROOT = PROJECT_ROOT + '/media/'
 MEDIA_URL = '/m/'
 ADMIN_MEDIA_PREFIX = '/media_admin/'
 SECRET_KEY = '129e12jnakfm23rjf90JIKN@uf4niq2n3fk129jfkn9jf9jrf2300;.'
-ROOT_URLCONF = 'jobsite_web.urls'
+ROOT_URLCONF = 'urls'
 SESSION_COOKIE_AGE = 6 * 7 * 24 * 60 * 60 	# 6 weeks
 
 TEMPLATE_LOADERS = (
@@ -93,7 +93,7 @@ INSTALLED_APPS = (
 	'django.contrib.sessions',
 	'django.contrib.sites',
 	'django.contrib.admin',
-	'jobsite_web.jobsite_main',
+	'jobsite_main',
 	'oauth_access',
 )
 

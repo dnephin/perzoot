@@ -38,13 +38,13 @@ esac
 
 
 # Copy apache config into sites
-cp $CONF_DIR/$1.conf $HTTPD_SITES
-cp $CONF_DIR/django.wsgi $HTTPD_SITES
+cp $CONF_DIR/$2.conf $HTTPD_SITES
+cp $CONF_DIR/django.wsgi $DEPLOY_ENV/
 
 # Copy code
-rsync --delete --exclude=.git --exclude=*.pyc --exclude=*.swp $1/jobsite_web $DEPLOY_ENV/jobsite_web
+rsync -a --delete --exclude=.git --exclude=*.pyc --exclude=*.swp $1/jobsite_web $DEPLOY_ENV/
 # Copy media
-rsync --delete --exclude=.git --exclude=*.pyc --exclude=*.swp $1/ $DEPLOY_ENV/jobsite_web
+rsync -a --delete --exclude=.git --exclude=*.pyc --exclude=*.swp $1/media $DEPLOY_ENV/
 
 # Copy settings and url
 cp $CONF_DIR/settings.py $DEPLOY_ENV/jobsite_web/

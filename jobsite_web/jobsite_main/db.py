@@ -4,7 +4,7 @@
  Database abstraction layer.
 """
 
-from jobsite_web.jobsite_main.models import *
+from jobsite_main.models import *
 from django.core.exceptions import ObjectDoesNotExist
 import logging
 
