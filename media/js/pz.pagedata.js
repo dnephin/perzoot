@@ -41,7 +41,6 @@ function check_page_data_has_changed() {
 	}
 
 	update_page(timestamp, get_page_data());
-	$('#status').append('Update now');
 }
 
 
@@ -88,12 +87,12 @@ function perform_search(form_data, append) {
 	}
 
 	$.ajax({
-		url: '/search?' + form_data,
+		url: add_async_param('/search?' + form_data),
 		dataType: 'json',
 		success: function(data) {
 			listing = new EJS(
 					{text: "<div><h3><%= title %></h3><p><%= city %>, <%= date %></p>"});
-			$.each(data.content.results, function(i, p) {
+			$.each(data.content.search_results.results, function(i, p) {
 				$('#results').append(listing.render(p));
 			});
 			GLOBAL_FETCHING_PAGE = false;

@@ -24,3 +24,8 @@ class JobSearchForm(Form):
 		if not start:
 			return 0
 		return start
+
+
+	# TODO: we dont need this data yet, stubbed
+	def __json__(self):
+		return {}

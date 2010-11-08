@@ -21,15 +21,11 @@ function track_outbound(id) {
 // TODO: 
 // http://code.google.com/apis/analytics/docs/tracking/eventTrackerGuide.html#Categories
 
-function ga_track() {
-	_gat._getTrackerByName()._trackPageview();
-}
 
-
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-19341877-1']);
-  _gaq.push(['_setDomainName', '.perzoot.com']);
-  _gaq.push(['_trackPageview']);
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-19341877-1']);
+_gaq.push(['_setDomainName', '.perzoot.com']);
+_gaq.push(['_trackPageview']);
 
   (function() {
     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
@@ -37,6 +33,10 @@ function ga_track() {
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 
+
+function ga_track() {
+	_gat._getTrackerByName()._trackPageview();
+}
 
 function handle_error(data) {
 	var e = $('#dialog_error');

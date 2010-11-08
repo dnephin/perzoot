@@ -9,6 +9,7 @@ $(document).ready(function() {
 	setInterval('check_page_data_has_changed()', 1000);
 	$(window).scroll(handle_search_scroll)
 	set_search_keybind();
+	search();
 
 });
 </script>
@@ -23,10 +24,10 @@ $(document).ready(function() {
 </ul>
 </form>
 
-<center>
-<a href="#" title="what one" class="tt_link">one</a>
-<a href="#" title="what two" class="tt_link">two</a></center>
 
+<div id="results">
+
+</div>
 
 
 
