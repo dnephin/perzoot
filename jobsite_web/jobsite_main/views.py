@@ -15,11 +15,8 @@ from django.conf import settings
 
 from jobsite_main.forms import JobSearchForm
 from jobsite_main.search import Search 
-from jobsite_main.util import DjangoJSONEncoder
 from jobsite_main.db import *
-from jobsite_main.helpers import service_friendly_name
-
-import simplejson
+from jobsite_main.util import service_friendly_name, to_json
 
 
 
@@ -48,8 +45,7 @@ def json_response(request, code=OK, data=None):
 		http_obj = HttpResponseServerError
 		resp['content'] = 'Server error.'
 
-	return http_obj(simplejson.dumps(resp, cls=DjangoJSONEncoder), 
-			mimetype="application/json")
+	return http_obj(to_json(resp), mimetype="application/json")
 
 
 def handle_response(request, context={}, template=None, code=OK):
@@ -98,6 +94,7 @@ def search(request):
 				template='search.html', code=INPUT)
 
 	resp = Search().search(form)
+	save_search(request, form)
 
 	return handle_response(request, 
 			{'search_form': form, 'search_results': resp}, 'search.html')

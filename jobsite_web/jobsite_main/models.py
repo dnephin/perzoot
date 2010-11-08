@@ -77,4 +77,7 @@ class SearchEvent(Model):
 	tstamp =  DateTimeField(auto_now_add=True)
 	terms =   CharField(max_length=250)
 	full_string = CharField(max_length=1000)
-	
+
+
+	def __str__(self):
+		return "Search [%s|%s] %s" % (self.user_id, self.tstamp, self.terms)

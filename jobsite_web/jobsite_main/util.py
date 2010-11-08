@@ -5,6 +5,7 @@
 import simplejson
 import solr
 from datetime import datetime
+from django.conf import settings
 
 
 class DjangoJSONEncoder(simplejson.JSONEncoder):
@@ -28,3 +29,17 @@ class DjangoJSONEncoder(simplejson.JSONEncoder):
 		else:
 			return simplejson.JSONEncoder.default(self, o);
 
+
+
+
+def service_friendly_name(service):
+	"""
+	Return the human readable name of a service from settings.
+	"""
+	return settings.OAUTH_ACCESS_SETTINGS[service].get(
+			'friendly_name', service)
+
+
+def to_json(obj):
+	""" Encode the obj as a JSON string. """
+	return simplejson.dumps(obj, cls=DjangoJSONEncoder)

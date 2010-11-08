@@ -26,6 +26,5 @@ class JobSearchForm(Form):
 		return start
 
 
-	# TODO: we dont need this data yet, stubbed
 	def __json__(self):
-		return {}
+		return self.cleaned_data

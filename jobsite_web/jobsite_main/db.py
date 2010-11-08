@@ -5,7 +5,9 @@
 """
 
 from jobsite_main.models import *
+from jobsite_main.util import to_json
 from django.core.exceptions import ObjectDoesNotExist
+import simplejson
 import logging
 
 log = logging.getLogger('DB')
@@ -35,3 +37,14 @@ def load_static_page(page_name):
 		return False
 	return page
 
+
+def save_search(request, search_form):
+	" Save a search event. "
+
+	s = SearchEvent(
+		session = request.session.session_key,
+		user_id = request.user,
+		terms = search_form.cleaned_data.get('keywords'),
+		full_string = to_json(search_form)
+	)
+	s.save()
