@@ -31,6 +31,16 @@ body {
 
 #user_block {
 	text-align: right;
+	margin: 3px 0 0 0;
+}
+
+#user_block IMG {
+	vertical-align: text-top;
+}
+
+#user_block A {
+	margin: 0 2px;
+	text-decoration: none;
 }
 
 /* Main
@@ -185,19 +195,14 @@ a.menu_link:hover {
 
 
 
-.tooltip{
+.tooltip {
 	position:absolute;
 	z-index:999;
 	left: -9999px;
-	background-color:#dedede;
-	padding:5px;
-	border:1px solid #fff;
-	width:250px;
 }
 
 .tooltip p{
-   margin:0;
-	padding:0;
+	margin:0;
 	color:#fff;
 	background-color:#222;
 	padding:2px 7px;

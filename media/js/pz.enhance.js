@@ -34,12 +34,14 @@ function build_tooltips() {
 			tooltip.css({'opacity': 0.8, 'display': 'none'}).fadeIn(400);
 		});
 		elem.mousemove(function(event) {
-			var top = $(event.target).position()['top'] - tooltip.outerHeight();
-			var left = event.pageX - tooltip.width() / 2;
+			var target = $(event.target);
+			var top = target.position().top - tooltip.outerHeight();
+			top = (top > 0) ? top : tooltip.height() + 5;
+			var left = target.position().left - tooltip.width() / 2 + target.width() / 2;
 			left = (left > 0) ? left : 2;
 			tooltip.css({'left': left, 'top': top});
 		});
-		elem.mouseout(tooltip, function() {
+		elem.mouseout(function() {
 			tooltip.fadeOut(400);
 		});
 	});
@@ -111,6 +113,7 @@ function update_user_block() {
 			d.html(data.content.body);
 			d.dialog('option', 'title', data.content.title);
 		});
+		build_tooltips();
 	});
 }
 

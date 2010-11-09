@@ -4,10 +4,12 @@
 		<a href="{% url logout %}" id="logout" onClick="logout(this)">logout</a>
 	{% else %}
 		Sign in: 
-		<a class="async_frame" href="{% url auth_wrapper 'linkedin' %}">in</a>
-		<a class="async_frame" href="{% url auth_wrapper 'facebook' %}">fb</a>
-		<a class="async_frame" href="{% url auth_wrapper 'openid' %}">oi</a>
-		| <a class="async_frame" href="#">login</a>
-		| <a class="async_frame" href="#">register</a>
-
+		<a class="async_frame tt_link" href="{% url auth_wrapper 'linkedin' %}"
+			title="Login with LinkedIn"><img src="/m/img/oauthlogos/linkedin.gif" /></a>
+		<a class="async_frame tt_link" href="{% url auth_wrapper 'facebook' %}"
+			title="Login with Facebook"><img src="/m/img/oauthlogos/facebook.gif" /></a>
+		<a class="async_frame tt_link" href="{% url auth_wrapper 'openid' %}"
+			title="Login with OpenId"><img src="/m/img/oauthlogos/openid.gif" /></a>
+		| <a class="async_frame tt_link" title="Login using your perzoot account" href="#">login</a>
+		| <a class="async_frame tt_link" title="Register for a new account on perzoot" href="#">register</a>
 	{% endif %}
