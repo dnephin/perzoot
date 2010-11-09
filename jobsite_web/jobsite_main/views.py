@@ -26,10 +26,10 @@ log = logging.getLogger('View')
 #		Helpers	
 ###############################################################################
 
-OK='ok'
-ERROR='error'
-NOTFOUND='notfound'
-INPUT='input'
+OK			= 'ok'
+ERROR		= 'error'
+NOTFOUND	= 'notfound'
+INPUT		= 'input'
 
 def json_response(request, code=OK, data=None):
 	" Format the json response "
