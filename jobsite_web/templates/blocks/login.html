@@ -1,0 +1,31 @@
+<div>
+
+	{% if form.errors %}
+	<div class="error">
+		{{ form.non_field_errors }}
+		{% for field in form %}
+			{% if field.errors %}
+				{{ field.label }}
+				{{ field.errors }}
+			{% endif %}
+		{% endfor %}
+	</div>
+	{% endif %}
+
+	<form id="login_form" method="GET" action="{% url login %}"
+		onsubmit="handle_login(this)">
+		<fieldset>
+			<legend>Login</legend>
+	
+			{% for field in form %}
+				<p>
+				{{ field.label_tag }}: {{ field }}
+				</p>
+			{% endfor %}
+
+			<input type="submit" value="Login" />
+			<input type="hidden" name="submit" value="1" />
+		</fieldset>
+	</form>
+
+</div>

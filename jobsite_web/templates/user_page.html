@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block document_head %}
+	<script type="text/javascript" src="/m/js/pz.userpage.js" ></script>
+{% endblock %}
+
+{% block content %}
+
+	<div><a href="{% url jobsite_main.views.search %}">&lt;&lt; Return to search</a></div>
+
+	
+	<div id="user_tabs">
+		<ul>
+			<li><a href="#user_details"><span>Profile</span></a></li>
+			<li><a href="#accounts"><span>Linked Accounts</span></a></li>
+		</ul>
+
+		<div id="user_details">
+
+		</div>
+
+		<div id="accounts">
+
+		</div>
+	</div>
+
+
+	<hr />
+
+{% endblock %}

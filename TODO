@@ -1,7 +1,6 @@
 
- - Add oauth
- - Setup dev server
- - Integrate search results page
- - Extend autocomplete widget to show the list when input is focused
+- input+select days box
+- search page style
+- Add more oauth
 
- - Improve logging with a django logging mechanism
+- Improve logging with a django logging mechanism

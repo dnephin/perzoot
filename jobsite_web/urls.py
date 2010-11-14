@@ -32,8 +32,11 @@ urlpatterns = patterns('',
 	(r'^m/(?P<path>.*)$', 'django.views.static.serve',
 	        {'document_root': settings.MEDIA_ROOT}),
 
-	# Auth
+	# User/Auth
 	(r'^logout', jobsite_main.views.logout, {}, 'logout'),
+	(r'^login', jobsite_main.views.login, {}, 'login'),
+	(r'^register', jobsite_main.views.register, {}, 'register'),
+	(r'^user', jobsite_main.views.user_view, {}, 'user_view'),
 	(r'^auth_status', jobsite_main.views.handle_auth_block, {}, 'auth_status'),
 	(r'^auth/(?P<service>\w+)', jobsite_main.views.auth_frame_wrapper, {}, 'auth_wrapper'),
 

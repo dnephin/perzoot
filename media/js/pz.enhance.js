@@ -105,7 +105,10 @@ function setup_async_callbacks(selector, success_func) {
 	});
 }
 
-
+/*
+ * update_user_block
+ *		Called to update the html contents of the user_block section.
+ */
 function update_user_block() {
 	$('#user_block').load('/auth_status', function() {
 		setup_async_callbacks($('.async_frame'), function(data, code) {
@@ -114,10 +117,29 @@ function update_user_block() {
 			d.dialog('option', 'title', data.content.title);
 		});
 		build_tooltips();
+
+		// build login/register links
+		setup_async_callbacks($('#login_link'), function(data, code) {
+			var d = $('#dialog_window');
+			d.html(data.content);
+			d.dialog('option', 'title', 'Login');
+			// TODO: focus login box
+		});
+		setup_async_callbacks($('#register_link'), function(data, code) {
+			var d = $('#dialog_window');
+			d.html(data.content.body);
+			d.dialog('option', 'title', 'Register');
+			// TODO: focus first field
+		});
+
+
 	});
 }
 
 
+/*
+ * Log the user out
+ */
 function logout(elem) {
 
 	event.preventDefault();
@@ -127,6 +149,37 @@ function logout(elem) {
 			'success': update_user_block, 
 	});
 }
+
+
+var INPUT	= 'input';
+var OK 		= 'ok';
+var LOGIN	= 'login';
+
+
+/*
+ * Handle the login form submission
+ */
+function handle_login(elem) {
+	event.preventDefault();
+	$.ajax({
+		'url': add_async_param($(elem).attr('action') + '?' + $(elem).serialize()),
+		'success': function(data, code) {
+			var d = $('#dialog_window');
+			// Login problem
+			if (data.code == INPUT) {
+				d.html(data.content);
+				return;
+			}
+
+			// Success
+			d.dialog('close');
+			update_user_block();
+		},
+	});
+
+}
+
+
 
 
 function default_doc_ready() {

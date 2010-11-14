@@ -26,14 +26,20 @@ class UserEvent(Model):
 	tstamp =  DateTimeField(auto_now_add=True)
 
 
+class SearchEvent(Model):
+	"""
+	A search that was performed for a user.
+	"""
 
-class LinkedAccount(Model):
-	"""
-	Record of an open ID account linked to their user account.
-	"""
-	# TODO: more details here
-	user = ForeignKey(User)
-	linked_account_name = CharField(max_length=25)
+	session = CharField(max_length=40, db_index=True)
+	user_id = ForeignKey(User, null=True)
+	tstamp =  DateTimeField(auto_now_add=True)
+	terms =   CharField(max_length=250)
+	full_string = CharField(max_length=1000)
+
+
+	def __str__(self):
+		return "Search [%s|%s] %s" % (self.user_id, self.tstamp, self.terms)
 
 
 
@@ -67,17 +73,3 @@ class SitePage(Model):
 			'content': self.content }
 
 
-class SearchEvent(Model):
-	"""
-	A search that was performed for a user.
-	"""
-
-	session = CharField(max_length=40, db_index=True)
-	user_id = ForeignKey(User, null=True)
-	tstamp =  DateTimeField(auto_now_add=True)
-	terms =   CharField(max_length=250)
-	full_string = CharField(max_length=1000)
-
-
-	def __str__(self):
-		return "Search [%s|%s] %s" % (self.user_id, self.tstamp, self.terms)

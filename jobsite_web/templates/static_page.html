@@ -2,10 +2,14 @@
 
 
 {% block content %}
-<div class="prepend-1 span-22 last prepend-top">
-<h1> {{ page_data.title }} </h1>
 
-{{ page_data.content|safe }}
+	<div><a href="{% url jobsite_main.views.search %}">&lt;&lt; Return to search</a></div>
 
-</div>
+	<div class="prepend-1 span-22 last prepend-top">
+		<h1> {{ page_data.title }} </h1>
+
+		{{ page_data.content|safe }}
+
+	</div>
+
 {% endblock %}
