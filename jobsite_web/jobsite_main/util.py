@@ -5,7 +5,9 @@
 import simplejson
 import solr
 from datetime import datetime
+
 from django.conf import settings
+from django.contrib.auth import get_backends
 
 
 class DjangoJSONEncoder(simplejson.JSONEncoder):
@@ -43,3 +45,17 @@ def service_friendly_name(service):
 def to_json(obj):
 	""" Encode the obj as a JSON string. """
 	return simplejson.dumps(obj, cls=DjangoJSONEncoder)
+
+
+
+def auto_authenticate(user):
+	"""
+	Authenticate a user without a password.  This method is a substitute for 
+	django.contrib.auth.authenticate.  It sets the users backend without
+	requiring a password.  This is being used for OAuth and forcing login
+	after registration.
+	"""
+	for backend in get_backends():
+		if backend.get_user(user.id):
+			user.backend = "%s.%s" % (backend.__module__, backend.__class__.__name__)
+			return user

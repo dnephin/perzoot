@@ -5,11 +5,8 @@
 
 
 
-
-
-
 function field_success(status_elem, text) {
-	status_elem.fadeIn(10);
+	status_elem.clearQueue().fadeIn(10);
 	status_elem.removeClass('info error');
 	status_elem.addClass('success');
 	status_elem.html(text);
@@ -17,7 +14,7 @@ function field_success(status_elem, text) {
 }
 
 function field_error(status_elem, text) {
-	status_elem.fadeIn(10);
+	status_elem.clearQueue().fadeIn(10);
 	status_elem.removeClass('info success');
 	status_elem.addClass('error');
 	status_elem.html(text);
@@ -66,11 +63,10 @@ function handle_field(elem) {
 		dataType: 'json',
 		success: function(data, code) {
 			if (data.code == INPUT) {
-				field_error(status, data.content);
+				field_error(status, data.content[0]);
 				return;
 			}
 			field_success(status, 'Update successful');
-			// TODO: update the field on the page
 		},
 		error: function(data, code) {
 			field_error(status, 'Server Error');

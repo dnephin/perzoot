@@ -20,7 +20,7 @@ from django.forms import ValidationError
 from jobsite_main.forms import JobSearchForm, UserForm
 from jobsite_main.search import Search 
 from jobsite_main.db import *
-from jobsite_main.util import service_friendly_name, to_json
+from jobsite_main.util import service_friendly_name, to_json, auto_authenticate
 
 
 
@@ -222,8 +222,7 @@ def user_field_update(request):
 	except ValidationError, e:
 		return json_response(request, INPUT, e.message_dict[field])
 
-	# TODO: update object
-	#user.save()
+	user.save()
 	
 	return json_response(request)
 	
@@ -255,4 +254,21 @@ def register(request):
 	"""
 	Display the registration form, and save the user.
 	"""
+
+	if is_async(request):
+		if request.GET.get('submit', False):
+			form = UserForm(data=request.GET)
+			if form.is_valid():
+				user = form.save()
+				auto_authenticate(user)
+				django_login(request, user)
+				return json_response(request)
+		else:
+			form = UserForm()
+			
+		return json_response(request, code=INPUT, data=
+					render_to_string('blocks/register.html', {'form': form}))
+	
+
+	# TODO: register without javascript
 

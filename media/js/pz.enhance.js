@@ -127,7 +127,7 @@ function update_user_block() {
 		});
 		setup_async_callbacks($('#register_link'), function(data, code) {
 			var d = $('#dialog_window');
-			d.html(data.content.body);
+			d.html(data.content);
 			d.dialog('option', 'title', 'Register');
 			// TODO: focus first field
 		});
@@ -157,15 +157,15 @@ var LOGIN	= 'login';
 
 
 /*
- * Handle the login form submission
+ * Handle the login and register form submission
  */
-function handle_login(elem) {
+function handle_user_account_action(elem) {
 	event.preventDefault();
 	$.ajax({
 		'url': add_async_param($(elem).attr('action') + '?' + $(elem).serialize()),
 		'success': function(data, code) {
 			var d = $('#dialog_window');
-			// Login problem
+			// problem
 			if (data.code == INPUT) {
 				d.html(data.content);
 				return;
@@ -176,10 +176,7 @@ function handle_login(elem) {
 			update_user_block();
 		},
 	});
-
 }
-
-
 
 
 function default_doc_ready() {

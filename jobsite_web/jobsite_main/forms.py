@@ -38,6 +38,12 @@ class JobSearchForm(Form):
 
 
 class UserForm(UserCreationForm):
+	"""
+	Form for registering and changing account details.
+	"""
+
+	error_css_class = 'error'
+	required_css_class = 'required'
 
 	def __init__(self, *args, **kwargs):
 		"""
@@ -55,4 +61,13 @@ class UserForm(UserCreationForm):
 	class Meta:
 		model = User
 		fields = ['first_name', 'last_name', 'email']
+
+
+	def save(self, commit=True):
+		user = super(UserForm, self).save(commit=False)
+		user.username = self.cleaned_data['username']
+		if commit:
+			user.save()
+		return user
+		
 

@@ -5,8 +5,9 @@
 from oauth_access.callback import AuthenticationCallback, Callback
 from django.contrib.auth import login
 from django.contrib.auth.models import User
-
 from oauth_access.utils.anyetree import etree
+
+from jobsite_main.util import auto_authenticate
 
 
 def linked_in(request, access, token):
@@ -53,13 +54,11 @@ class LinkedIn(Callback):
 		user.first_name = user_data.first
 		user.last_name = user_data.last
 		user.save()
-		# TODO: assumes default backend, should check settings
-		user.backend = "django.contrib.auth.backends.ModelBackend"
+		auto_authenticate(user)
 		login(request, user)
 		return user
 
 	def handle_unauthenticated_user(self, request, user, access, token, user_data):
-		# TODO: assumes default backend, should check settings
-		user.backend = "django.contrib.auth.backends.ModelBackend"
+		auto_authenticate(user)
 		login(request, user)
 
