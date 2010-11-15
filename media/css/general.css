@@ -46,18 +46,12 @@ body {
 /* Main
 -------------------------------------------------- */
 #searchbox {
-	/* width: 700px; */
 	margin: 60px auto;
 	text-align: center;
 }
 #index_search_form {
 	margin-bottom: 40px;
 	padding: 10px;
-}
-fieldset {
-	border: 0;
-	padding: 0;
-	margin: 0;
 }
 .center {
 	text-align: center;

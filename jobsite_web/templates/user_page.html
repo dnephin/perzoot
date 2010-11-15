@@ -6,16 +6,38 @@
 
 {% block content %}
 
-	<div><a href="{% url jobsite_main.views.search %}">&lt;&lt; Return to search</a></div>
+	<div class="append-bottom"><a href="{% url jobsite_main.views.search %}">&lt;&lt; Return to search</a></div>
 
 	
 	<div id="user_tabs">
 		<ul>
-			<li><a href="#user_details"><span>Profile</span></a></li>
+			<li><a href="#user_details"><span>Account</span></a></li>
+			<li><a href="#pref"><span>Preferences</span></a></li>
 			<li><a href="#accounts"><span>Linked Accounts</span></a></li>
 		</ul>
 
 		<div id="user_details">
+			<p>Update your account settings.  </p>
+
+			<form id="account_form" 
+					fieldaction="{% url user_field_update %}">
+				<fieldset>
+					{% for field in user_form %}
+						<p class="user_field">
+						{{ field.label_tag }}: {{ field }}
+						<span class="status" id="status_{{field.html_name}}"></span>
+						<br />
+						<span class="help_text">{{ field.help_text }}</span>
+						</p>
+					{% endfor %}
+
+					<input type="button" value="Done" />
+				</fieldset>
+			</form>
+
+		</div>
+
+		<div id="pref">
 
 		</div>
 

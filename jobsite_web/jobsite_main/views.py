@@ -11,11 +11,13 @@ from django.template import RequestContext
 from django.http import HttpResponse, HttpResponseNotFound
 from django.http import HttpResponseServerError
 from django.contrib.auth import logout as django_logout, login as django_login
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import AuthenticationForm 
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
+from django.forms import ValidationError
 
-from jobsite_main.forms import JobSearchForm
+from jobsite_main.forms import JobSearchForm, UserForm
 from jobsite_main.search import Search 
 from jobsite_main.db import *
 from jobsite_main.util import service_friendly_name, to_json
@@ -188,8 +190,43 @@ def user_view(request):
 	"""
 	Display the user view page that lets users update their profile.
 	"""
+	user_form = UserForm(instance=request.user)
 	return render_to_response('user_page.html', context_instance=RequestContext(
-			request))
+			request, {'user_form': user_form}))
+
+
+@login_required
+def user_field_update(request):
+	"""
+	Validate, and update an individual account setting.
+	"""
+	if (request.method != 'GET' or not request.GET.get('field') or
+			not request.GET.get('value')):
+		return json_response(request, code=ERROR)
+
+	field = request.GET.get('field')
+	value = request.GET.get('value')
+	user = request.user
+
+	if not hasattr(user, field):
+		return json_response(request, ERROR)
+		
+	# special case for password, has to be set using this method to hash it
+	if field == 'password':
+		user.set_password(value)
+	else:
+		setattr(user, field, value)
+
+	try:
+		user.clean_fields()
+	except ValidationError, e:
+		return json_response(request, INPUT, e.message_dict[field])
+
+	# TODO: update object
+	#user.save()
+	
+	return json_response(request)
+	
 
 
 def login(request):

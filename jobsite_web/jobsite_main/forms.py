@@ -1,4 +1,11 @@
+"""
+	Forms
+"""
+
 from django.forms import *
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+
 
 
 class JobSearchForm(Form):
@@ -28,3 +35,24 @@ class JobSearchForm(Form):
 
 	def __json__(self):
 		return self.cleaned_data
+
+
+class UserForm(UserCreationForm):
+
+	def __init__(self, *args, **kwargs):
+		"""
+		Set default value for form fields that aren't directly mapped to the model.
+		"""
+		instance = kwargs.get('instance')
+		if instance:
+			initial = kwargs.get('initial') or {}
+			if not initial.get('username'):
+				initial['username'] = instance.username
+			kwargs['initial'] = initial
+
+		super(UserForm, self).__init__(*args, **kwargs)
+
+	class Meta:
+		model = User
+		fields = ['first_name', 'last_name', 'email']
+
