@@ -1,22 +1,103 @@
 {% extends "base.html" %}
 
 {% block document_head %}
+	
+	<link rel="stylesheet" type="text/css" href="/m/css/search.css" />
 
-<script type="text/javascript">
-$(document).ready(function() {
+	<script type="text/javascript">
+	$(document).ready(function() {
 
-	default_doc_ready();
-	setInterval('check_page_data_has_changed()', 1000);
-	$(window).scroll(handle_search_scroll)
-	set_search_keybind();
-	search();
-
-});
-</script>
+		default_doc_ready();
+		setInterval('check_page_data_has_changed()', 1000);
+		$(window).scroll(handle_search_scroll)
+		set_search_keybind();
+		search();
+	});
+	</script>
 
 {% endblock %}
 
+
 {% block content %}
+	<div class="span-24 center last">
+
+	<div class="sidebar_section">
+		<div class="section_head" id="top"><h5><span>Categories</span><span class="arrow arrow-down"></span></h5></div> 
+		<div class="section_body">
+			<ul class="plain">
+				<li><input type="checkbox" checked="checked" />one</li> 
+				<li><input type="checkbox" checked="checked" />two</li> 
+				<li><input type="checkbox" checked="checked" />three</li> 
+				<li><input type="checkbox" checked="checked" />four</li> 
+				<li><input type="checkbox" checked="checked" />unknown</li>
+			</ul>
+		</div>
+	</div>
+	<div class="sidebar_section">
+		<div class="section_head"><h5>Results View</h5></div> 
+		<div class="section_body">
+			<ul>
+				<li><input type="radio" name="view" value="titles" />Titles Only</li> 
+				<li><input type="radio" name="view" value="summary" />Summary</li> 
+				<li><input type="radio" name="view" value="details" />Details</li>
+				<li><input type="radio" name="view" checked="checked" value="full"/>Full</li>
+			</ul>
+		</div>
+	</div>
+	<div class="sidebar_section">
+		<script type="text/javascript">
+			$(function() {
+				$( "#slider-range" ).slider({
+					range: true,
+					min: 0,
+					max: 30,
+					values: [ 0, 30 ],
+					slide: function( event, ui ) {
+						$( "#date-range" ).val(ui.values[ 0 ] + " - " + ui.values[ 1 ] + " days ago");
+					}
+				});
+				$( "#date-range" ).val( $( "#slider-range" ).slider( "values", 0 ) +
+					" - " + $( "#slider-range" ).slider( "values", 1 ) + " days ago");
+			});
+			</script>
+		<div class="section_head"><h5>Date Range</h5></div>
+		<div class="section_body">
+			<div class="slider">
+				<p>
+					<input type="text" id="date-range" style="border:0; color:#f6931f; font-weight:bold;" />
+				</p>
+				<div id="slider-range"></div>
+			</div>
+		</div>
+	</div>
+	<div class="sidebar_section">
+		<div class="section_head"><h5>Job Site Filter</h5></div>
+		<div class="section_body">
+			<ul>
+				<li><input type="checkbox" checked="checked" />Craigslist</li> 
+				<li><input type="checkbox" checked="checked" />Monster</li> 
+				<li><input type="checkbox" checked="checked" />Workopolis</li> 
+				<li><input type="checkbox" checked="checked" />Kijiji</li> 
+				<li><input type="checkbox" checked="checked" />Emploi Quebec</li>
+			</ul>
+		</div>
+	</div>
+	<div class="sidebar_section">
+		<div class="section_head"><h5>Other Stuff</h5></div>
+		<div class="section_body bottom">
+			<ul class="plain">
+				<li><a href="#">Donate</a> to stay ad free</li>
+				<li><a href="#">Employer resources</a></li>
+				<li><a href="#">Help</a></li>
+				<li><a href="#">Search statistics</a></li>
+				<li><a href="#">About Perzoot</a></li>
+				<li><a href="#">Report a problem</a></li>
+				<li><a href="#">Contact us</a></li>
+			</ul>
+		</div>
+	</div>
+	</div>
+
 <form action="{% url jobsite_main.views.index %}" method="GET" id="search">
 <ul>
 	{{ search_form.as_ul }}

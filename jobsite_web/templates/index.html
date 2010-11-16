@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 
 {% block document_head %}
+	<link rel="stylesheet" type="text/css" href="/m/css/index.css" />
 
-<script type="text/javascript">
-$(document).ready(function() {
-	default_doc_ready();
-	set_search_keybind();
-});
-
-</script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			default_doc_ready();
+			set_search_keybind();
+	});
+	</script>
 
 {% endblock %}
 
@@ -17,24 +17,26 @@ $(document).ready(function() {
 
 	<form id="search" action="{% url jobsite_main.views.search %}" method="GET">
 		<p> 
-			<label for="keywords"><span id="keywords_label">What kind of job are you looking for?</span></label> 
-		</p> 
-		<p>
+			<label for="keywords">
+				<span id="keywords_label">What kind of job are you looking for?</span>
+			</label><br /> 
 			{{ search_form.keywords }}	
-			<input type="submit" value="Search" id="search_button" />
-		</p>
-		<p>
-			Search for jobs in {{ search_form.city }} posted in the last
-			{{ search_form.days }} day(s) | 
-			<a href="#">More Options</a>
-
+			<input type="submit" value="Search" id="search_button" /><br />
+			Search for jobs in {{ search_form.city }} 
 		</p>
 
 	</form>
 	</div>
 
+
+	</div>
+{% endblock %}
+
+
+
+{% block page_footer %}
+
 	<div class="span-24 center last" id="menu">
-	<hr />
 	<p class="center">
 		<a class="async" href="{% url static_page 'statistics' %}">Search Statistics</a> | 
 		<a class="async" href="{% url static_page 'aboutus' %}">About Perzoot</a>  | 
@@ -42,6 +44,13 @@ $(document).ready(function() {
 		<a class="async" href="{% url static_page 'contactus' %}">Contact us</a> |
 		<a class="async" href="{% url static_page 'terms' %}">Terms of Use</a> 
 	</p>
-
+	<p>
+		<ul id="social-links">
+			<li id="facebook"><a href="#">Like us on Facebook</a></li>
+			<li id="twitter"><a href="#">Follow us on Twitter</a></li>
+		</ul>
+	</p>
 	</div>
+
+	{{ block.super }}
 {% endblock %}

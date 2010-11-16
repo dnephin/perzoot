@@ -1,0 +1,77 @@
+/*
+ * index.css - specific styles for the homepage
+ */
+
+
+
+/* Footer extras
+-------------------------------------------------- */
+
+#facebook {
+	background-image: url(/m/img/icons/facebook-24x24.png);
+	background-repeat: no-repeat;
+}
+#twitter {
+	background-image: url(/m/img/icons/twitter-24x24.png);
+	background-repeat: no-repeat;
+	
+}
+
+#social-links li {
+	display: inline-block;
+	list-style: none;
+	height: 24px;
+	margin: 10px 0;
+	padding: 0;
+}
+#social-links li a {
+	margin: 0 0 0 0px;
+	padding: 3px 6px 3px 30px;
+	position: relative;
+	top: 3px;
+}
+
+/* Middle styles
+-------------------------------------------------- */
+#search_button {
+	border: 1px solid #0F4ABE;
+	background-color: #1f77ff;
+	color: white;
+	font-size: 14pt;
+	height: 40px;
+	margin-left: 5px;
+	padding: 7px 10px;
+	width: 100px;
+}
+#search_button:hover {
+	background-color: #4BB050;
+	cursor: pointer;
+}
+#search_button:active {
+	background-color: #333;
+}
+
+#keywords_label {
+	font-size: 1.8em;
+	font-weight: normal;
+	padding-bottom: 5px;
+	white-space: nowrap;
+}
+#id_keywords {
+	color: #222;
+	font-size: 1.5em;
+	padding: 8px 10px;
+	width: 450px;
+}
+#id_days {
+	width: 30px;
+}
+
+
+
+
+#searchbox {
+	margin: 100px auto 140px auto;
+	text-align: center;
+}
+

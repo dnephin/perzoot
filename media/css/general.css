@@ -1,192 +1,82 @@
+/*
+ * Perzoot - general.css
+ *
+ * This file specifies the base style for elements, as well as the style for any
+ * items in base.html, and any commonly used styles used all over the site
+ * (such as form elements, common link styles, etc.).
+ */
+
+
+/* HTML elements base style
+-------------------------------------------------- */
 body {
-	border-top: 0px solid #000;
-}
-.container {
-	margin: 0 10%;
-	width: auto;
+	color:#222;	
+	font-family:"Helvetica Neue", Arial, Helvetica, sans-serif;
+	background: #DBE8F3;
 }
 
-/* HTML Elements
--------------------------------------------------- */
-.default_button {
-	display: block;
-	text-align: center;
-	color: black;
-	font-weight: bold;
-	border-color: #e0e0e0;
-	border-width: 0 1px 1px 0; 
-	border-style: solid;
-	width: 69px;
-	text-decoration: none;
+A:hover {
+	color: #4BB050;
 }
 
 /* Header
 -------------------------------------------------- */
-#header{
-	padding-top: 0px;
-	height: 100px;
+#header {
+	border-bottom: 1px solid #CCC;
+	background-color: #1f77ff;
+	height: 63px;
 	white-space: nowrap;
-	display: block;
 }
 
 #user_block {
 	text-align: right;
-	margin: 3px 0 0 0;
+	margin: 6px 0 0 0;
+	color: #fff;
 }
 
 #user_block IMG {
 	vertical-align: text-top;
+	border: 1px solid #fff;
+	background: #fff;
 }
 
 #user_block A {
 	margin: 0 2px;
 	text-decoration: none;
+	font-weight: bold;
+	color: #fff;
 }
 
-/* Main
+#login_link, #logout, #register_link {
+	margin: 0 0 0 10px !important;
+}
+
+
+
+/* Middle 
 -------------------------------------------------- */
-#searchbox {
-	margin: 60px auto;
-	text-align: center;
-}
-#index_search_form {
-	margin-bottom: 40px;
-	padding: 10px;
-}
-.center {
-	text-align: center;
-}
-
-#keywords_label {
-	font-size: 1.8em;
-	font-weight: normal;
-	padding-bottom: 5px;
-	white-space: nowrap;
-}
-#id_keywords {
-	color: #222;
-	font-size: 1.5em;
-	padding: 8px 10px;
-	width: 450px;
-}
-#id_days {
-	width: 40px;
-}
-#search_button {
-	border: 0;
-	background-color: #1f77ff;
-	color: white;
-	font-size: 14pt;
-	height: 40px;
-	margin-left: 5px;
-	padding: 7px 10px;
-	width: 100px;
-}
-#search_button:hover {
-	background-color: #DEDEDE;
-	color: black;
-	cursor: pointer;
-}
-#search_button:active {
-	background-color: #DEDEDE;
-}
-
-/* Autocomplete
---------------------- */
-ul.ui-autocomplete {
-	border: 1px solid #CCC;
-	background-color: #FFF;
-	width: 450px;
-}
-li.ui-menu-item {
-	list-style-type: none;
-	padding: 5px 0;
-}
-li.ui-menu-item a {
-	font-size: 1.5em;
-	text-decoration: none;
-}
-li.ui-menu-item a:hover {
-	cursor: pointer;
+#main {
+	background: #fff;
 }
 
 
 /* Footer
 -------------------------------------------------- */
-#menu {
-	margin-bottom: 40px;
+#footer {
+	border-top: 1px solid #CCC;
+	padding: 20px 0;
+	text-align: center;
+	color: #666;
 }
 
-/* Other
+
+
+/* Common look and feel styles
 -------------------------------------------------- */
-
-
-.block {display: block;}
-#id_city {
-	width: 110px;
-	padding: 0 2px;
+.container {
+	width: 950px;
+	margin: 0px auto;
 }
-ul.plain {
-	list-style: none;
-}
-.result_title {
-/*	background-color: #ccc; */
-	font-weight: bold;
-/*	background:url(images/formbg.gif) repeat-x left top; */
-}
-.result_title a {
-	font-size: 1.2em;
-	color: #222;
-}
-.sub_title {
-	line-height: 1em;
-	padding-bottom: 5px;
-}
-.little_bottom {
-	margin-bottom: 2px;
-}
-.result_close {
-	text-align: right;
-	margin-top:   -2px;
-	margin-right: -2px;
-}
-.result_close a {
-	color: black;
-	font-weight: bold;
-	text-decoration: none;
-}
-.result_close a:hover {
-	text-decoration: underline;
-}
-.result_summary {
-	text-align: justify;
-}
-.spaced_links a {
-	margin-right: 5px;
-}
-.padded-14 {
-	width:540px;
-	float:left; 
-	padding: 0 6px;
-}
-.inside-13 {width:504px;}
-.inside-1 {width:24px;}
-.right {
-	text-align: right;
-}
-.viewed {
-	background: #f0f0f0;
-}
-.menu_link {
-	padding-left: 25px;
-	padding-bottom: 3px;
-}
-a.menu_link:hover {
-	text-decoration: underline;
-}
-
-
-
 
 
 .tooltip {
@@ -195,16 +85,9 @@ a.menu_link:hover {
 	left: -9999px;
 }
 
-.tooltip p{
+.tooltip p {
 	margin:0;
 	color:#fff;
 	background-color:#222;
 	padding:2px 7px;
-	}
-
-
-/*  Dialogs */
-
-
-
-/* end dialogs */
+}

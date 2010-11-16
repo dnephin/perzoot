@@ -3,9 +3,13 @@
 
 {% block content %}
 
-	<div><a href="{% url jobsite_main.views.search %}">&lt;&lt; Return to search</a></div>
+	<div class="span-4 last append-20 prepend-top">
+		<p>
+			<a href="{% url jobsite_main.views.search %}">&lt;&lt; Return to search</a>
+		</p>
+	</div>
 
-	<div class="prepend-1 span-22 last prepend-top">
+	<div class="prepend-1 span-22 append-1 last append-bottom">
 		<h1> {{ page_data.title }} </h1>
 
 		{{ page_data.content|safe }}

@@ -20,37 +20,43 @@
 	{% block document_head %}
 	<script type="text/javascript">
 		$(document).ready(function() {
-			defualt_doc_ready();
-		};
+			default_doc_ready();
+		});
 	</script>
 	{% endblock %}
 
 </head>
 <body>
-<div class="container ">
+
+<div id="header">
+	<div class="container">
 	{% block page_header %}
 	<div class="span-16 clear">
-		<img src="/m/img/logo-3.png" />
-		<p>A different kind of job search.</p>
+		<a href="#"><img src="/m/img/logo-3.png" /></a>
 	</div>
 
 	<div class="span-8 last" id="user_block">
 	</div>
 	{% endblock %}
+	</div>
+</div>
 
-	<div id="main" class="span-24 last">
+<div id="main">
+	<div class="container">
 	{% block content %}
 		
 		{% include content_block %}
 
 	{% endblock %}
 	</div>
+</div>
 
+
+<div id="footer">
+	<div class="container">
 	{% block page_footer %}
-	<div class="span-24 small last center" id="footer">
-		<p class="bottom">This site has been made possible thanks to the following 
-		open source tools: Python, Postgresql, Apache, Django, Solr, Vim, Ubuntu, Git.
-		All trademarks and copyrights are the property of their respective owners.</p>
+	<div class="center">
+		<p class="bottom">All trademarks and copyrights are the property of their respective owners.</p>
 		<p class="bottom"><a rel="license" href="http://creativecommons.org/licenses/by/2.5/ca/">
 		<img alt="Creative Commons License" style="border-width:0; vertical-align: text-top" 
 			src="http://i.creativecommons.org/l/by/2.5/ca/80x15.png" /></a>
@@ -62,6 +68,7 @@
 			href="http://creativecommons.org/licenses/by/2.5/ca/">Creative Commons Attribution 2.5 Canada License</a>.</p>
 	</div>
 	{% endblock %}
+	</div>
 </div>
 
 <div id="dialog_window"></div>
