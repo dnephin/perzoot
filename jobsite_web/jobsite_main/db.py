@@ -41,9 +41,11 @@ def load_static_page(page_name):
 def save_search(request, search_form):
 	" Save a search event. "
 
+	user = request.user if not request.user.is_anonymous() else None
+
 	s = SearchEvent(
 		session = request.session.session_key,
-		user_id = request.user,
+		user_id = user,
 		terms = search_form.cleaned_data.get('keywords'),
 		full_string = to_json(search_form)
 	)

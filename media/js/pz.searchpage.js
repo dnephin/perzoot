@@ -67,3 +67,44 @@ function set_search_keybind() {
 		if (e.keyCode == 13) $('#search_button').click();
 	});
 }
+
+
+
+
+/*
+ * update_search
+ *		Update the fields in the search form from the form_data
+ */
+function update_search(form_data) {
+	$.each(form_data.split('&'), function(i, d) {
+		var parts = d.split('=');
+		$("#search input[name='"+parts[0]+"']").val(parts[1]);
+	});
+}
+
+/*
+ * perform_search
+ * 		Perform a search, update the page location, and display the results.
+ */
+function perform_search(form_data, append) {
+
+	if (!append) {
+		$('#results').empty();
+	}
+
+	$.ajax({
+		url: add_async_param('/search?' + form_data),
+		dataType: 'json',
+		success: function(data) {
+			listing = new EJS({url: '/m/js/templates/search_result.ejs'});
+			$.each(data.content.search_results.results, function(i, p) {
+				$('#results').append(listing.render(p));
+			});
+			GLOBAL_FETCHING_PAGE = false;
+		},
+		error: function(data) {
+			handle_error(data);
+		}
+	});
+}
+

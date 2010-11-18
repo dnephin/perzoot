@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block document_head %}
-	
+	<script type="text/javascript" src="/m/js/pz.searchpage.js"></script>
 	<link rel="stylesheet" type="text/css" href="/m/css/search.css" />
 
 	<script type="text/javascript">
@@ -11,7 +11,7 @@
 		setInterval('check_page_data_has_changed()', 1000);
 		$(window).scroll(handle_search_scroll)
 		set_search_keybind();
-		search();
+//		search();
 	});
 	</script>
 
@@ -19,10 +19,10 @@
 
 
 {% block content %}
-	<div class="span-24 center last">
 
+<div class="span-5 prepend-top">
 	<div class="sidebar_section">
-		<div class="section_head" id="top"><h5><span>Categories</span><span class="arrow arrow-down"></span></h5></div> 
+		<div class="section_head" id="top"><h5><span>Categories</span></h5></div> 
 		<div class="section_body">
 			<ul class="plain">
 				<li><input type="checkbox" checked="checked" />one</li> 
@@ -30,55 +30,6 @@
 				<li><input type="checkbox" checked="checked" />three</li> 
 				<li><input type="checkbox" checked="checked" />four</li> 
 				<li><input type="checkbox" checked="checked" />unknown</li>
-			</ul>
-		</div>
-	</div>
-	<div class="sidebar_section">
-		<div class="section_head"><h5>Results View</h5></div> 
-		<div class="section_body">
-			<ul>
-				<li><input type="radio" name="view" value="titles" />Titles Only</li> 
-				<li><input type="radio" name="view" value="summary" />Summary</li> 
-				<li><input type="radio" name="view" value="details" />Details</li>
-				<li><input type="radio" name="view" checked="checked" value="full"/>Full</li>
-			</ul>
-		</div>
-	</div>
-	<div class="sidebar_section">
-		<script type="text/javascript">
-			$(function() {
-				$( "#slider-range" ).slider({
-					range: true,
-					min: 0,
-					max: 30,
-					values: [ 0, 30 ],
-					slide: function( event, ui ) {
-						$( "#date-range" ).val(ui.values[ 0 ] + " - " + ui.values[ 1 ] + " days ago");
-					}
-				});
-				$( "#date-range" ).val( $( "#slider-range" ).slider( "values", 0 ) +
-					" - " + $( "#slider-range" ).slider( "values", 1 ) + " days ago");
-			});
-			</script>
-		<div class="section_head"><h5>Date Range</h5></div>
-		<div class="section_body">
-			<div class="slider">
-				<p>
-					<input type="text" id="date-range" style="border:0; color:#f6931f; font-weight:bold;" />
-				</p>
-				<div id="slider-range"></div>
-			</div>
-		</div>
-	</div>
-	<div class="sidebar_section">
-		<div class="section_head"><h5>Job Site Filter</h5></div>
-		<div class="section_body">
-			<ul>
-				<li><input type="checkbox" checked="checked" />Craigslist</li> 
-				<li><input type="checkbox" checked="checked" />Monster</li> 
-				<li><input type="checkbox" checked="checked" />Workopolis</li> 
-				<li><input type="checkbox" checked="checked" />Kijiji</li> 
-				<li><input type="checkbox" checked="checked" />Emploi Quebec</li>
 			</ul>
 		</div>
 	</div>
@@ -96,19 +47,101 @@
 			</ul>
 		</div>
 	</div>
+</div>
+
+<div class="span-14 prepend-top">
+
+	<div id="search_toolbar">
+	<form action="{% url jobsite_main.views.search %}" method="GET" id="search">
+		{{ search_form.keywords }}
+		<input type="submit" value="Search" id="search_button" onClick="return search()"/><br />
+		{{ search_form.days }}
+
+		Search for jobs in {{ search_form.city }} | <a href="#">More Options</a></p>
+		<p class="right">Sort by: <a href="#">Date</a> | <a href="#">Relevancy</a> | <a href="#">Distance</a></p>
+		<p class="hints">Did you mean: <a href="#">Accounting</a></p>
+	</form>
+
 	</div>
 
-<form action="{% url jobsite_main.views.index %}" method="GET" id="search">
-<ul>
-	{{ search_form.as_ul }}
-	<input type="button" value="Search" onClick="search()" id="search_button" />
-</ul>
-</form>
+	<div id="results">
+		<div class="search_result">
+			<div class="result_title"> 
+				<span class="job_title"><a href="#">Experienced line cook</a></span>  
+				<span class="result_options"><a class="result_save" href="#">+</a><a class="result_close" href="#">x</a></span>
+			</div>
+			<div>
+				<strong>Details:</strong> Food Industry, Full Time, 22/hr, <br />
+				<strong>Requirements:</strong> good communication skills, 2 years 
+				kitchen experience.
+			</div>
+			</dl>
+			<p class="result_summary">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p> 
+			<p class="result_links"> 
+				<a href="#">http://montreal.en.craigslist.org/jjj/15234234343.html</a> 
+			</p>
+			<p class="sub_title">
+			<strong>Post date:</strong> 2 days ago (Oct. 10)
+			<a class="open_above" href="#">open all above</a>
+			</p>
+		</div>
+	</div>
+</div>
 
-
-<div id="results">
+<div class="span-5 last prepend-top">
+	<div id="save_search">
+		<button type="button" id="save_button">Save this Search</button>
+	</div>
+	<div class="sidebar_section" id="search_history">
+		<div class="section_head"><h5>Search History</h5></div>
+		<div class="section_body">
+			<ul class="plain">
+				<li><a href="#">web design</a></li>
+				<li><a href="#">web designer</a></li>
+				<li><a href="#">web developer</a></li>
+				<li><a href="#">marketing</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="sidebar_section">
+		<div class="section_head"><h5>Your Favourite Postings</h5></div>
+		<div class="section_body bottom">
+			<ul class="plain"> 
+				<li><a href="#">Experienced Line Cook</a></li> 
+				<li><a href="#">Experienced Line Cook</a></li> 
+				<li><a href="#">Experienced Line Cook</a></li> 
+			</ul>
+		</div>
+	</div>
+	<ul id="social-links">
+			<li id="facebook"><a href="#">Like us on Facebook</a></li>
+			<li id="twitter"><a href="#">Follow us on Twitter</a></li>
+		</ul>
+	<ul id="features">
+		<li id="notes"><a href="#">Make notes along the way</a></li>
+		<li id="email"><a href="#">Receive email notifications</a></li>
+		<li id="track"><a href="#">Track your searches</a></li>
+		<li id="smiley"><a href="#">Find the job you want</a></li>
+	</ul>
+	<div id="about" class="hide">
+		<h3>Have Perzoot do more for you!</h3> 
+		<p>Perzoot is more than just a job search.  Use it to track the jobs you've already
+		looked at, and automatically send you new jobs that match your criteria. You can
+		also use your search results as a 'search outline'. Close any results that you do
+		not like, and then click 'open all' or 'open all above', to have all 
+		the windows opened at once.</p>
+		<p>With you every step of the way.</p>
+		<p>The jobs hunt doesn't last 5 minutes; it's often an ongoing process. Use Perzoot to track your search and find better job listing more efficiently.</p>
+		<ol>
+			<li>Find Jobs</li>
+			<li>Save Your Searches</li>
+			<li>Come Back Later</li>
+		</ol>
+	</div>
 
 </div>
+
+
 
 
 

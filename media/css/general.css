@@ -51,7 +51,9 @@ A:hover {
 	margin: 0 0 0 10px !important;
 }
 
-
+#logo_div {
+	height: 63px;
+}
 
 /* Middle 
 -------------------------------------------------- */
@@ -73,11 +75,6 @@ A:hover {
 
 /* Common look and feel styles
 -------------------------------------------------- */
-.container {
-	width: 950px;
-	margin: 0px auto;
-}
-
 
 .tooltip {
 	position:absolute;

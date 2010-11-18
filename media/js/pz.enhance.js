@@ -36,7 +36,7 @@ function build_tooltips() {
 		elem.mousemove(function(event) {
 			var target = $(event.target);
 			var top = target.position().top - tooltip.outerHeight();
-			top = (top > 0) ? top : tooltip.height() + 5;
+			top = (top > 0) ? top : tooltip.height() + 8;
 			var left = target.position().left - tooltip.width() / 2 + target.width() / 2;
 			left = (left > 0) ? left : 2;
 			tooltip.css({'left': left, 'top': top});

@@ -34,7 +34,9 @@ class JobSearchForm(Form):
 
 
 	def __json__(self):
-		return self.cleaned_data
+		if hasattr(self, 'cleaned_data'):
+			return self.cleaned_data
+		return {}
 
 
 class UserForm(UserCreationForm):
