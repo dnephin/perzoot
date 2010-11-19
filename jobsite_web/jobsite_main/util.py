@@ -19,6 +19,7 @@ class DjangoJSONEncoder(simplejson.JSONEncoder):
 	def default(self, o):
 
 		if isinstance(o, solr.Response):
+			print o.facet_counts
 			return {
 				'results': o.results,
 				'start': o.results.start,

@@ -30,6 +30,7 @@ class Search(object):
 		Perform a search.
 		"""
 		params = self.build_query(search_form.cleaned_data)
+		params.update(self.build_facets())
 		r = solr_conn.query(**params)
 		return r
 
@@ -53,6 +54,22 @@ class Search(object):
 			'rows': data.get('rows', 20),
 		}
 
+
+	def build_facets(self):
+		"""
+		Build search query facets.
+		"""
+		return {
+			'facet': 'true',
+			'facet.field': 'category',
+			'facet.field': 'city',
+			'facet.field': 'domain',
+			'facet.field': 'company',
+			'facet.sort': 'true',
+			'facet.limit': 10,
+			'facet.mincount': 2,
+			'facet.missing': 'true'
+		}
 
 
 	def handle_keywords(self, kws):
