@@ -5,6 +5,7 @@
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+
 import os
 PROJECT_ROOT = os.getcwd()
 

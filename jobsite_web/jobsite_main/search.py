@@ -15,7 +15,7 @@ log = logging.getLogger('Search')
 
 SOLR_DATE_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
 
-solr_conn = solr.SolrConnection(settings.SOLR_URL)
+solr_conn = solr.Solr(settings.SOLR_URL)
 
 
 #TODO: query with json output format
@@ -31,10 +31,9 @@ class Search(object):
 		"""
 		params = self.build_query(search_form.cleaned_data)
 		params.update(self.build_facets())
-		r = solr_conn.query(**params)
+		handler = solr.SearchHandler(solr_conn, wt='json')
+		r = handler(**params)
 		return r
-
-
 
 
 	def build_query(self, data):
@@ -48,8 +47,8 @@ class Search(object):
 
 		return {
 			'q': " AND ".join(q_parts),
+			'highlight': ['title', 'summary'],
 			'sort': self.handle_sort(data.get('sort')),
-			'sort_order': 'desc',
 			'start': data.get('start', 0),
 			'rows': data.get('rows', 20),
 		}
@@ -61,14 +60,17 @@ class Search(object):
 		"""
 		return {
 			'facet': 'true',
-			'facet.field': 'category',
-			'facet.field': 'city',
-			'facet.field': 'domain',
-			'facet.field': 'company',
-			'facet.sort': 'true',
-			'facet.limit': 10,
-			'facet.mincount': 2,
-			'facet.missing': 'true'
+			'facet_field': ['category', 'city','domain', 'company'],
+			'facet_sort': 'true',
+			'facet_limit': 10,
+			'facet_mincount': 2,
+			'facet_missing': 'true',
+			# dates
+			'facet_date': 'date',
+			'facet_date_end': 'NOW',
+			'facet_date_start': 'NOW/DAY-10DAYS',
+			'facet_date_gap': '+1DAY',
+			'facet_date_other': 'after',
 		}
 
 
@@ -91,10 +93,12 @@ class Search(object):
 		return "city: %s" % city.lower()
 
 
+	DEFAULT_SORT = 'date desc, id desc'
+
 	def handle_sort(self, sort):
 		if not sort:
-			return "date, id"
+			return self.DEFAULT_SORT
 		if sort not in ('date', 'relevency'):
 			log.warn("Unknown sort type: %s" % (sort)) 
-			return "date, id"
-		return sort
+			return self.DEFAULT_SORT
+		return '%s desc' % (sort)

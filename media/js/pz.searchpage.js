@@ -97,7 +97,7 @@ function perform_search(form_data, append) {
 		dataType: 'json',
 		success: function(data) {
 			listing = new EJS({url: '/m/js/templates/search_result.ejs'});
-			$.each(data.content.search_results.results, function(i, p) {
+			$.each(data.content.search_results.response.docs, function(i, p) {
 				$('#results').append(listing.render(p));
 			});
 			GLOBAL_FETCHING_PAGE = false;
