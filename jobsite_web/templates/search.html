@@ -7,7 +7,7 @@
 	<script type="text/javascript">
 	$(document).ready(function() {
 
-		tiles($('#left_menu'));
+		tiles($('.tile_widget'));
 		default_doc_ready();
 		setInterval('check_page_data_has_changed()', 1000);
 		$(window).scroll(handle_search_scroll)
@@ -23,29 +23,13 @@
 {% block content %}
 
 <div class="span-5 prepend-top">
-	<div id="left_menu">
-		<h3><a href="#">Sort</a></h3> 
-		<div>
-			<ul class="plain">
-				<li><a href="#">date</a></li>
-				<li><a href="#">relevancy</a></li>
-			</ul>
-		</div>
-		<h3><a href="#">Categories</a></h3> 
-		<div>
-			<ul class="plain">
-				<li><input type="checkbox" checked="checked" />one</li> 
-				<li><input type="checkbox" checked="checked" />two</li> 
-				<li><input type="checkbox" checked="checked" />three</li> 
-				<li><input type="checkbox" checked="checked" />four</li> 
-				<li><input type="checkbox" checked="checked" />unknown</li>
-			</ul>
-		</div>
-		<h3><a href="#">Links</a></h3> 
+	<div id="left_menu" class="tile_widget">
+	</div>
+	<div id="left_links" class="tile_widget">
+		<h3><a href="#">&nbsp;</a></h3> 
 		<div>
 			<ul class="plain">
 				<li><a href="#">Donate</a> to stay ad free</li>
-				<li><a href="#">Employer resources</a></li>
 				<li><a href="#">Help</a></li>
 				<li><a href="#">Search statistics</a></li>
 				<li><a href="#">About Perzoot</a></li>

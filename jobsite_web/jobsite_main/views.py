@@ -84,6 +84,40 @@ def handle_response(request, context={}, template=None, code=OK):
 			request, context))
 
 
+def format_search(sr):
+	"""
+	Format the solr response object into a view object.
+	"""
+	# TODO: highlighting
+	resp = {
+		'header': {
+			'qtime': sr['responseHeader']['QTime'],
+			'numFound': sr['response']['numFound'],
+			'start': sr['response']['start'],
+		},
+		'filters': {'date': {}},
+		'results': sr['response']['docs'],
+	}
+	
+	for field, value_list in sr['facet_counts']['facet_fields'].iteritems():
+		resp['filters'][field] = {}
+		for i in range(0, len(value_list)/2, 2):
+			name = value_list[i] or 'missing'
+			resp['filters'][field][name] = value_list[i+1]
+
+	for date, value in sr['facet_counts']['facet_dates']['date'].iteritems():
+		if date.find('T00:00:00Z') < 0:
+			continue
+		# TODO: format date
+		resp['filters']['date'][date] = value
+
+	# TODO: format date in docs
+	# TODO: format details in docs
+
+	return resp
+		
+
+
 ###############################################################################
 #		Actions
 ###############################################################################
@@ -115,7 +149,8 @@ def search(request):
 	save_search(request, form)
 
 	return handle_response(request, 
-			{'search_form': form, 'search_results': resp}, 'search.html')
+			{'search_form': form, 'search_results': format_search(resp)},
+			'search.html')
 
 
 

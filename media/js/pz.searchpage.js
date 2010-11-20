@@ -70,7 +70,6 @@ function set_search_keybind() {
 
 
 
-
 /*
  * update_search
  *		Update the fields in the search form from the form_data
@@ -96,10 +95,21 @@ function perform_search(form_data, append) {
 		url: add_async_param('/search?' + form_data),
 		dataType: 'json',
 		success: function(data) {
+			// Build search results
 			listing = new EJS({url: '/m/js/templates/search_result.ejs'});
-			$.each(data.content.search_results.response.docs, function(i, p) {
+			$.each(data.content.search_results.results, function(i, p) {
 				$('#results').append(listing.render(p));
 			});
+			
+			// Build search filters
+			var filters = "";
+			var filter_template = new EJS({url: '/m/js/templates/search_filter.ejs'});
+			$.each(data.content.search_results.filters, function(title, content) {
+				filters += filter_template.render({'title': title, 'content': content})
+			});
+			$('#left_menu').html(filters);
+			tiles($('#left_menu'));
+
 			GLOBAL_FETCHING_PAGE = false;
 		},
 		error: function(data) {

@@ -31,7 +31,7 @@ class Search(object):
 		"""
 		params = self.build_query(search_form.cleaned_data)
 		params.update(self.build_facets())
-		handler = solr.SearchHandler(solr_conn, wt='json')
+		handler = solr.SearchHandler(solr_conn, wt='python')
 		r = handler(**params)
 		return r
 
@@ -60,7 +60,7 @@ class Search(object):
 		"""
 		return {
 			'facet': 'true',
-			'facet_field': ['category', 'city','domain', 'company'],
+			'facet_field': ['category', 'city', 'domain', 'company'],
 			'facet_sort': 'true',
 			'facet_limit': 10,
 			'facet_mincount': 2,
@@ -70,7 +70,6 @@ class Search(object):
 			'facet_date_end': 'NOW',
 			'facet_date_start': 'NOW/DAY-10DAYS',
 			'facet_date_gap': '+1DAY',
-			'facet_date_other': 'after',
 		}
 
 

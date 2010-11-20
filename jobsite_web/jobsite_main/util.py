@@ -18,14 +18,7 @@ class DjangoJSONEncoder(simplejson.JSONEncoder):
 
 	def default(self, o):
 
-		if isinstance(o, solr.Response):
-			print o.facet_counts
-			return {
-				'results': o.results,
-				'start': o.results.start,
-				'numFound': o.results.numFound,
-				}
-		elif isinstance(o, datetime):
+		if isinstance(o, datetime):
 			return o.strftime('%Y-%m-%dT%H-%M-%S')
 		elif hasattr(o, '__json__'):
 			return o.__json__()
