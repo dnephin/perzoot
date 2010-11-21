@@ -45,7 +45,7 @@ class SearchEvent(Model):
 	def __json__(self):
 		return {
 			'id': self.id,
-			'date': self.tstamp,
+			'date': self.tstamp.strftime("%b %d"),
 			'terms': self.terms,
 			'saved': self.saved,
 		}

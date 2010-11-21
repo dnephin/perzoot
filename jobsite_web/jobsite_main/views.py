@@ -18,10 +18,12 @@ from django.conf import settings
 from django.forms import ValidationError
 
 from jobsite_main.forms import JobSearchForm, UserForm
-from jobsite_main.search import Search 
+from jobsite_main.search import Search, SOLR_DATE_FORMAT
 from jobsite_main import db
 from jobsite_main.util import service_friendly_name, to_json, auto_authenticate
 from jobsite_main.statics import *
+
+from datetime import datetime
 
 
 log = logging.getLogger('View')
@@ -87,7 +89,7 @@ def format_search(sr):
 			'start': sr['response']['start'],
 		},
 		'filters': {'Date': {}},
-		'results': sr['response']['docs'],
+		'results': [],
 	}
 	
 	for field, value_list in sr['facet_counts']['facet_fields'].iteritems():
@@ -100,15 +102,55 @@ def format_search(sr):
 	for date, value in sr['facet_counts']['facet_dates']['date'].iteritems():
 		if date.find('T00:00:00Z') < 0:
 			continue
-		# TODO: format date
-		resp['filters']['Date'][date] = value
+		resp['filters']['Date'][format_date(date)] = value
 
-	# TODO: format date in docs
-	# TODO: format details in docs
+	for doc in sr['response']['docs']:
+		new_doc = {
+			'id': doc['id'],
+			'title': doc['title'],
+			'url':   doc['url'],
+			'details': build_details(doc),
+			'summary': doc['summary'],
+			'date': format_date(doc['date']),
+			'source': doc['domain'],
+		}
+		resp['results'].append(new_doc)
 
 	log.debug('Search response: %s' % (resp))
 	return resp
 		
+def format_date(date_string):
+	"""
+	Convert a date string (in solr default format) to a standard
+	visual representation.
+	"""
+	return datetime.strptime(date_string, SOLR_DATE_FORMAT
+			).strftime('%b %d')
+
+
+FORMAT_MAP = {
+	'salary': lambda s: "$%s/yr" % (s),
+	'wage':   lambda s: "$%s/hr" % (s),
+	'recruiter': lambda s: "recruiter" if s else "",
+}
+
+def build_details(doc):
+	"""
+	Build the details string from a solr document.
+	"""
+	detail_list = []
+	for key in ('category', 'industry', 'company', 'location', 'type', 
+			'salary', 'wage', 'email', 'phone', 'level', 'recruiter'):
+		if key not in doc:
+			continue
+
+		if key in FORMAT_MAP:
+			value = FORMAT_MAP[key](doc[key])
+		else:
+			value = doc[key]
+		detail_list.append(value)
+	return ",".join(detail_list)
+
 
 
 ###############################################################################
