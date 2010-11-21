@@ -1,4 +1,12 @@
 
+Facets:
+http://www.lucidimagination.com/Community/Hear-from-the-Experts/Articles/Faceted-Search-Solr
+http://wiki.apache.org/solr/SolrFacetingOverview
+
+Suggestions /Spelling:
+http://wiki.apache.org/solr/Suggester
+http://wiki.apache.org/solr/SpellCheckComponent
+
 
 __ Required packages __
 

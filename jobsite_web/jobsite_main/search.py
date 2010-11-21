@@ -18,11 +18,18 @@ SOLR_DATE_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
 solr_conn = solr.Solr(settings.SOLR_URL)
 
 
-#TODO: query with json output format
 class Search(object):
 	"""
 	 Perform a search from a django form.
 	"""
+
+
+	def retrieve_titles(self, ids):
+		"""
+		Retrieve a set of posting titles for the ids.
+		"""
+		handler = solr.SearchHandler(solr_conn, wt='python')
+		return handler(fl=['id', 'title'], q="id: (%s)" % (" OR ".join(map(str, ids))))
 	
 
 	def search(self, search_form):

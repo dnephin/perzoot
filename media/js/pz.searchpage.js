@@ -6,6 +6,7 @@
 
 var GLOBAL_FETCHING_PAGE = false;
 var CONST_NUM_RESULTS = 20;
+var GLOBAL_SEARCH_EVENT;
 
 
 /*
@@ -115,6 +116,11 @@ function perform_search(form_data, append) {
 			// update history
 			update_search_history();
 
+			// Add event handlers
+			build_result_handlers();
+
+			GLOBAL_SEARCH_EVENT = data.content.search_event;
+
 			GLOBAL_FETCHING_PAGE = false;
 		},
 		error: handle_error,	
@@ -126,35 +132,30 @@ function perform_search(form_data, append) {
  * Update the search history block
  */
 function update_search_history() {
-	$.ajax({
-		url: URL_SEARCH_HISTORY,
-		dataType: 'json',
-		success: function(data) {
-			var list = new EJS({url: '/m/js/templates/search_list.ejs'});
-
-			var elem = $('#search_history');
-			elem.next().remove();
-			elem.replaceWith(list.render(
-				{'title': elem.find('a').html(), 'id': elem.attr('id'),
-				 'content': data.content.list
-				 }));
-
-			tiles($('#search_meta'));
-		},
-		error: handle_error,
-	});
+	right_tile_helper(URL_SEARCH_HISTORY, '#search_history');
 }
 
 /*
  * Update the saved search list
  */
 function update_saved_search() {
+	right_tile_helper(URL_SEARCH_SAVED, '#saved_searches');
+}
+
+/*
+ * Update the favorite postings block
+ */
+function update_favorite_postings() {
+	right_tile_helper(URL_FAV_POSTINGS, '#favorite_posts');
+}
+
+function right_tile_helper(url, div_id) {
 	$.ajax({
-		url: URL_SEARCH_SAVED,
+		url: url,
 		dataType: 'json',
 		success: function(data) {
 			var list = new EJS({url: '/m/js/templates/search_list.ejs'});
-			var elem = $('#saved_searches');
+			var elem = $(div_id);
 
 			if (data.content.list.length < 1) {
 				return;
@@ -170,10 +171,7 @@ function update_saved_search() {
 		},
 		error: handle_error,
 	});
-
 }
-
-
 
 /* 
  * Save the current search.
@@ -181,7 +179,7 @@ function update_saved_search() {
 function save_search(elem) {
 
 	$.ajax({
-		url: URL_SAVE_SEARCH,
+		url: URL_SAVE_SEARCH + '?id=' + GLOBAL_SEARCH_EVENT,
 		dataType: 'json',
 		success: function() { 
 			update_saved_search();
@@ -191,3 +189,48 @@ function save_search(elem) {
 	return false;
 }
 
+
+/*
+ * Add event handlers to elements in the search results.
+ */
+function build_result_handlers() {
+
+	$('.search_result').each(function(i, e) {
+
+		var id = $(e).attr('post_id');
+		$(e).find('.result_save').each(function() {
+			$(this).click(function() { 
+				track_event('save', id);
+				update_favorite_postings();
+			});
+		});
+		$(e).find('.result_close').each(function() {
+			$(this).click(function() { 
+				track_event('remove', id);
+				$('#result_' + id).hide();
+			});
+		});
+	
+		// TODO: outbound tracking links
+		// TODO: open all above links
+		
+	});
+}
+
+
+
+/*
+ * Track a user event.
+ */
+function track_event(name, id, callback) {
+
+	var url = URL_TRACK_EVENT.replace('/name/', "/" + name + "/")
+		.replace('/0', "/" + id);
+
+	$.ajax({
+		url: url,
+		dataType: 'json',
+		success: callback,
+		error: handle_error,
+	});
+}

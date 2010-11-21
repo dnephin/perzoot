@@ -187,8 +187,8 @@ def search(request):
 	request.session[LAST_SEARCH_EVENT] = search_event
 
 	return handle_response(request, 
-			{'search_form': form, 'search_results': format_search(resp)},
-			'search.html')
+			{'search_form': form, 'search_results': format_search(resp),
+			 'search_event': search_event.id}, 'search.html')
 
 
 def search_history(request, saved=False):
@@ -199,15 +199,36 @@ def search_history(request, saved=False):
 			'list': db.get_search_history(request, saved)
 	})
 
+def favorite_postings(request):
+	"""
+	Retrieve the favorite postings for the user.
+	"""
+
+	posting_list = db.get_user_events(request, type='save', sorted=True, limit=10)
+	titles = Search().retrieve_titles(map(lambda u: u.posting_id, posting_list))
+
+	posting_map = dict(map(lambda p: (p.posting_id, p),posting_list))
+
+	resp = []
+	for doc in titles['response']['docs']:
+		resp.append({
+			'id': doc['id'], 
+			'terms': doc['title'],
+			'date': posting_map[doc['id']].tstamp.strftime('%b %d')
+		})
+
+	return json_response(request, data={'list': resp})
+
+	
 
 def save_search(request):
 	"""
 	Save the last search.
 	"""
-	if LAST_SEARCH_EVENT not in request.session:
+	if request.method != 'GET' or 'id' not in request.GET:
 		return json_response(request, code=ERROR)
 
-	db.save_search(request.session[LAST_SEARCH_EVENT])
+	db.save_search(int(request.GET['id']))
 
 	return json_response(request)
 
@@ -216,10 +237,10 @@ def track_event(request, event_name, posting_id):
 	"""
 	Track a user performing an event relating to a job posting.
 	"""
-	user_id = request.user.id if request.user_.is_authenticated() else None
+	user = request.user if request.user.is_authenticated() else None
 	session_id = request.session.session_key
 
-	if db.save_user_event(event_name, posting_id, user_id, session_id):
+	if db.save_user_event(event_name, posting_id, user, session_id):
 		code = OK
 	else:
 		code = ERROR

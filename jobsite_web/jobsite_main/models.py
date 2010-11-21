@@ -20,10 +20,16 @@ class UserEvent(Model):
 	)
 
 	session = CharField(max_length=40, db_index=True)
-	user_id = ForeignKey(User, null=True)
+	user = ForeignKey(User, null=True)
 	posting_id = IntegerField()
 	event =   CharField(max_length=6, choices=EVENTS)
 	tstamp =  DateTimeField(auto_now_add=True)
+
+	class Meta:
+		unique_together = ('event', 'posting_id', 'session')
+
+	def __str__(self):
+		return "UserEvent [%s|%s] %s %s" % (self.user, self.tstamp, self.event, self.posting_id)
 
 
 class SearchEvent(Model):

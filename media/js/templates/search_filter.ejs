@@ -1,7 +1,10 @@
 <h3><a href="#"><%=title%></a></h3>
 <div>
 	<ul class="plain">
-		<% $.each(content, function(k, v) { %>
+	<% 
+		$.each(content, function(k, v) { 
+			if (v < 1) return true;
+	%>
 			<li><input type="checkbox" checked="checked" /><%=k%> (<%=v%>)</li> 
 		<% }) %>
 	</ul>

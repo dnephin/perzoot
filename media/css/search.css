@@ -41,3 +41,39 @@
 	width: 80px;
 	padding: 2px;
 }
+
+/* Search Results
+-------------------------------------------------- */
+
+.search_result  {
+	border: 1px solid #CCC;
+	border-radius: 4px;
+	margin-bottom: 4px;
+	padding: 3px 10px;
+}
+
+.result_title {
+	font-weight: bold;
+}
+.result_title a {
+	font-size: 1.2em;
+}
+
+.result_options {float: right;}
+.result_options a {
+	padding: 0 5px;
+	text-decoration: none;
+	font-size: 0.8em;
+	border: 1px solid #CCC;
+	font-weight: normal;
+}
+.result_close:hover {
+	background-color: red;
+	color: white;
+}
+.result_save:hover {
+	background-color: green;
+	color: white;
+}
+
+

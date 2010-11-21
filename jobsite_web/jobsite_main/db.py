@@ -13,11 +13,12 @@ import logging
 log = logging.getLogger('DB')
 
 
-def save_user_event(event_name, posting_id, user_id, session_id):
+def save_user_event(event_name, posting_id, user, session_id):
 	"""
 	Save a user event object.
 	"""
-	ue = UserEvent(session_id, user_id, posting_id, event_name)
+	ue = UserEvent(session=session_id, user=user, 
+			posting_id=posting_id, event=event_name)
 	try:
 		ue.save()
 	except BaseException, e:
@@ -53,12 +54,9 @@ def save_search_event(request, search_form):
 	return s
 
 
-def save_search(event):
+def save_search(event_id):
 	" Update a search as saved. "
-	event.saved = True
-	print event
-	print event.saved
-	event.save()
+	SearchEvent.objects.filter(id=event_id).update(saved=True)
 
 
 def get_search_history(request, saved=False):
@@ -75,3 +73,31 @@ def get_search_history(request, saved=False):
 	
 	searches = SearchEvent.objects.filter(**selector).order_by('-tstamp')[:10]
 	return searches
+
+
+def get_user_events(request, type=None, ids=None, sorted=False, limit=None):
+	"""
+	Retrieve a list of user events for a user.
+	"""
+	user = request.user if request.user.is_authenticated() else None
+
+	if user:
+		selector = {'user': user}
+	else:
+		selector = {'session': request.session.session_key}
+
+	if type:
+		selector['event'] = type
+
+	if ids:
+		selector['posting_id__in'] = ids
+
+	query = UserEvent.objects.filter(**selector)
+
+	if sorted:
+		query = query.order_by('-tstamp')
+	
+	if limit:
+		query = query[:limit]
+
+	return query

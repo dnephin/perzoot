@@ -13,6 +13,7 @@
 		$(window).scroll(handle_search_scroll)
 		set_search_keybind();
 		update_saved_search();
+		update_favorite_postings();
 //		search();
 	});
 
@@ -80,11 +81,13 @@
 		<h3 id="saved_searches" class="tile_default_closed">
 			<a href="#">Saved Searches</a></h3>
 		<div>
+			<p>No saved searches.</p>
 		</div>
 
 		<h3 id="favorite_posts" class="tile_default_closed">
 			<a href="#">Your Favourite Postings</a></h3>
 		<div>
+			<p>No favorite postings.</p>
 		</div>
 
 		<h3><a href="#">&nbsp;</a></h3>
