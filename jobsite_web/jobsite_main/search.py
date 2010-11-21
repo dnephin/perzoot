@@ -60,7 +60,7 @@ class Search(object):
 		"""
 		return {
 			'facet': 'true',
-			'facet_field': ['category', 'city', 'domain', 'company'],
+			'facet_field': ['category', 'domain', 'company'],
 			'facet_sort': 'true',
 			'facet_limit': 10,
 			'facet_mincount': 2,

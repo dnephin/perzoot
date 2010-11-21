@@ -38,7 +38,7 @@ def load_static_page(page_name):
 	return page
 
 
-def save_search(request, search_form):
+def save_search_event(request, search_form):
 	" Save a search event. "
 
 	user = request.user if not request.user.is_anonymous() else None
@@ -50,3 +50,28 @@ def save_search(request, search_form):
 		full_string = to_json(search_form)
 	)
 	s.save()
+	return s
+
+
+def save_search(event):
+	" Update a search as saved. "
+	event.saved = True
+	print event
+	print event.saved
+	event.save()
+
+
+def get_search_history(request, saved=False):
+	" Retrieve the search history for this user, or for their session. "
+
+	user = request.user if not request.user.is_anonymous() else None
+	if user:
+		selector = {'user_id': user}
+	else:
+		selector = {'session': request.session.session_key}
+
+	if saved:
+		selector['saved'] = True
+	
+	searches = SearchEvent.objects.filter(**selector).order_by('-tstamp')[:10]
+	return searches

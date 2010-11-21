@@ -19,9 +19,9 @@ from django.forms import ValidationError
 
 from jobsite_main.forms import JobSearchForm, UserForm
 from jobsite_main.search import Search 
-from jobsite_main.db import *
+from jobsite_main import db
 from jobsite_main.util import service_friendly_name, to_json, auto_authenticate
-
+from jobsite_main.statics import *
 
 
 log = logging.getLogger('View')
@@ -29,17 +29,6 @@ log = logging.getLogger('View')
 ###############################################################################
 #		Helpers	
 ###############################################################################
-
-# The login request was successful (2xx)
-OK			= 'ok'
-# The request was successful but the data submitted was incorrect (2xx)
-INPUT		= 'input'
-# The request was successful but the action requires a login (2xx)
-LOGIN		= 'login'
-# A requested object could not be found (4xx)
-NOTFOUND	= 'notfound'
-# There was a server side error (5xx)
-ERROR		= 'error'
 
 
 def is_async(request):
@@ -95,11 +84,12 @@ def format_search(sr):
 			'numFound': sr['response']['numFound'],
 			'start': sr['response']['start'],
 		},
-		'filters': {'date': {}},
+		'filters': {'Date': {}},
 		'results': sr['response']['docs'],
 	}
 	
 	for field, value_list in sr['facet_counts']['facet_fields'].iteritems():
+		field = field.capitalize()
 		resp['filters'][field] = {}
 		for i in range(0, len(value_list)/2, 2):
 			name = value_list[i] or 'missing'
@@ -109,7 +99,7 @@ def format_search(sr):
 		if date.find('T00:00:00Z') < 0:
 			continue
 		# TODO: format date
-		resp['filters']['date'][date] = value
+		resp['filters']['Date'][date] = value
 
 	# TODO: format date in docs
 	# TODO: format details in docs
@@ -139,6 +129,8 @@ def search(request):
 	"""
 	Perform a search and return the data as JSON.
 	"""
+	# TODO: retreive saved search if param is set
+
 	form = JobSearchForm(request.GET)
 	if not form.is_valid():
 		# TODO: check for existing session and populate the form that way
@@ -146,12 +138,33 @@ def search(request):
 				template='search.html', code=INPUT)
 
 	resp = Search().search(form)
-	save_search(request, form)
+	search_event = db.save_search_event(request, form)
+	request.session[LAST_SEARCH_EVENT] = search_event
 
 	return handle_response(request, 
 			{'search_form': form, 'search_results': format_search(resp)},
 			'search.html')
 
+
+def search_history(request, saved=False):
+	"""
+	Retrieve the search history.
+	"""
+	return json_response(request, data={
+			'list': db.get_search_history(request, saved)
+	})
+
+
+def save_search(request):
+	"""
+	Save the last search.
+	"""
+	if LAST_SEARCH_EVENT not in request.session:
+		return json_response(request, code=ERROR)
+
+	db.save_search(request.session[LAST_SEARCH_EVENT])
+
+	return json_response(request)
 
 
 def track_event(request, event_name, posting_id):
@@ -173,7 +186,7 @@ def static_page(request, page_name):
 	"""
 	Retrieve the contents for a (relatively) static page.
 	"""
-	page = load_static_page(page_name)
+	page = db.load_static_page(page_name)
 	if not page:
 		return handle_response(request, code=NOTFOUND)
 

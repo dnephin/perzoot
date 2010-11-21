@@ -34,12 +34,21 @@ class SearchEvent(Model):
 	session = CharField(max_length=40, db_index=True)
 	user_id = ForeignKey(User, null=True)
 	tstamp =  DateTimeField(auto_now_add=True)
-	terms =   CharField(max_length=250)
-	full_string = CharField(max_length=1000)
+	terms =   CharField(max_length=255)
+	full_string = CharField(max_length=2000)
+	saved =	  BooleanField(default=False)
 
 
 	def __str__(self):
 		return "Search [%s|%s] %s" % (self.user_id, self.tstamp, self.terms)
+
+	def __json__(self):
+		return {
+			'id': self.id,
+			'date': self.tstamp,
+			'terms': self.terms,
+			'saved': self.saved,
+		}
 
 
 

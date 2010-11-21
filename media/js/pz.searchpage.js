@@ -92,9 +92,11 @@ function perform_search(form_data, append) {
 	}
 
 	$.ajax({
-		url: add_async_param('/search?' + form_data),
+		url: add_async_param(URL_SEARCH + '?' + form_data),
 		dataType: 'json',
 		success: function(data) {
+			// TODO: Handle 0 results
+
 			// Build search results
 			listing = new EJS({url: '/m/js/templates/search_result.ejs'});
 			$.each(data.content.search_results.results, function(i, p) {
@@ -110,11 +112,82 @@ function perform_search(form_data, append) {
 			$('#left_menu').html(filters);
 			tiles($('#left_menu'));
 
+			// update history
+			update_search_history();
+
 			GLOBAL_FETCHING_PAGE = false;
 		},
-		error: function(data) {
-			handle_error(data);
-		}
+		error: handle_error,	
 	});
+}
+
+
+/*
+ * Update the search history block
+ */
+function update_search_history() {
+	$.ajax({
+		url: URL_SEARCH_HISTORY,
+		dataType: 'json',
+		success: function(data) {
+			var list = new EJS({url: '/m/js/templates/search_list.ejs'});
+
+			var elem = $('#search_history');
+			elem.next().remove();
+			elem.replaceWith(list.render(
+				{'title': elem.find('a').html(), 'id': elem.attr('id'),
+				 'content': data.content.list
+				 }));
+
+			tiles($('#search_meta'));
+		},
+		error: handle_error,
+	});
+}
+
+/*
+ * Update the saved search list
+ */
+function update_saved_search() {
+	$.ajax({
+		url: URL_SEARCH_SAVED,
+		dataType: 'json',
+		success: function(data) {
+			var list = new EJS({url: '/m/js/templates/search_list.ejs'});
+			var elem = $('#saved_searches');
+
+			if (data.content.list.length < 1) {
+				return;
+			}
+			
+			elem.next().remove();
+			elem.replaceWith(list.render(
+				{'title': elem.find('a').html(), 'id': elem.attr('id'),
+				 'content': data.content.list
+				 }));
+
+			tiles($('#search_meta'));
+		},
+		error: handle_error,
+	});
+
+}
+
+
+
+/* 
+ * Save the current search.
+ */
+function save_search(elem) {
+
+	$.ajax({
+		url: URL_SAVE_SEARCH,
+		dataType: 'json',
+		success: function() { 
+			update_saved_search();
+		},
+		error: handle_error,
+	});
+	return false;
 }
 

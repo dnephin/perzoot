@@ -95,3 +95,15 @@ Ul.plain {
 	margin: 0;
 	padding: 0;
 }
+
+.button {
+	border: 1px solid #0F4ABE;
+	background-color: #1f77ff;
+	color: #FFF;
+	font-weight: bold;
+	padding: 3px;
+}
+.button:hover {
+	background-color: #4BB050;
+	cursor: pointer;
+}

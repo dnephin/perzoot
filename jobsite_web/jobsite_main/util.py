@@ -8,6 +8,7 @@ from datetime import datetime
 
 from django.conf import settings
 from django.contrib.auth import get_backends
+from django.db.models.query import QuerySet
 
 
 class DjangoJSONEncoder(simplejson.JSONEncoder):
@@ -20,6 +21,8 @@ class DjangoJSONEncoder(simplejson.JSONEncoder):
 
 		if isinstance(o, datetime):
 			return o.strftime('%Y-%m-%dT%H-%M-%S')
+		if isinstance(o, QuerySet):
+			return list(o)
 		elif hasattr(o, '__json__'):
 			return o.__json__()
 		else:

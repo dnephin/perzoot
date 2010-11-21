@@ -12,3 +12,4 @@
 var URL_SEARCH = "{% url jobsite_main.views.search %}";
 var URL_SEARCH_HISTORY = "{% url search_history %}";
 var URL_SEARCH_SAVED = "{% url saved_searches %}";
+var URL_SAVE_SEARCH = "{% url jobsite_main.views.save_search %}"; 

@@ -4,11 +4,14 @@
  */
 
 /*
- * Turn the selector element(s) into an open accordian widget.
+ * Turn the selector element(s) into an open accordian widget.  This widget
+ * expects tags layed out the same way as an accordian.
+ *
+ * Supports h3.tile_default_closed to set a section to be closed by default. 
  */
 function tiles(selector) {
 	selector.addClass("ui-accordion ui-widget ui-helper-reset ui-accordion-icons")
-	.find("h3")
+	.find("h3:not(.ui-accordion-header)")
 		.addClass("ui-accordion-header ui-helper-reset ui-corner-top")
 		.addClass("ui-accordion-header-active ui-state-active ")
 		.prepend('<span class="ui-icon ui-icon-triangle-1-s"/>')
@@ -30,5 +33,8 @@ function tiles(selector) {
 			.addClass("ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom")
 			.addClass("ui-accordian-content-active")
 			.show();
+
+	// close any sections that are set to default close and are currently active.
+	selector.find('h3.tile_default_closed.ui-state-active').trigger('click');
 }
 
