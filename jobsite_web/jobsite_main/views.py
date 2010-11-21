@@ -76,6 +76,8 @@ def handle_response(request, context={}, template=None, code=OK):
 def format_search(sr):
 	"""
 	Format the solr response object into a view object.
+
+	sr - a solr response formated as python dict (wt=python).
 	"""
 	# TODO: highlighting
 	resp = {
@@ -104,6 +106,7 @@ def format_search(sr):
 	# TODO: format date in docs
 	# TODO: format details in docs
 
+	log.debug('Search response: %s' % (resp))
 	return resp
 		
 

@@ -31,6 +31,7 @@ class Search(object):
 		"""
 		params = self.build_query(search_form.cleaned_data)
 		params.update(self.build_facets())
+		params.update(self.build_highlighting())
 		handler = solr.SearchHandler(solr_conn, wt='python')
 		r = handler(**params)
 		return r
@@ -47,7 +48,6 @@ class Search(object):
 
 		return {
 			'q': " AND ".join(q_parts),
-			'highlight': ['title', 'summary'],
 			'sort': self.handle_sort(data.get('sort')),
 			'start': data.get('start', 0),
 			'rows': data.get('rows', 20),
@@ -56,7 +56,7 @@ class Search(object):
 
 	def build_facets(self):
 		"""
-		Build search query facets.
+		Build search query facets parameters.
 		"""
 		return {
 			'facet': 'true',
@@ -71,6 +71,16 @@ class Search(object):
 			'facet_date_start': 'NOW/DAY-10DAYS',
 			'facet_date_gap': '+1DAY',
 		}
+
+
+	def build_highlighting(self):
+		"""
+		Build the highlighting query parameteres.
+		"""
+		return {
+			'hl': 'true',
+			'hl_fl': ['summary', 'title'],
+			}
 
 
 	def handle_keywords(self, kws):
