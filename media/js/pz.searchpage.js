@@ -26,14 +26,15 @@ function build_form_data() {
  * search
  *		Called onSubmit of the search form.
  */
-function search() {
+function search(event) {
+	event.preventDefault();
+
 	GLOBAL_FETCHING_PAGE = true;
 	var form_data = build_form_data();
 	perform_search(form_data);
 	set_page_data(form_data);
 
 	ga_track();
-	return false;
 }
 
 
@@ -60,15 +61,6 @@ function handle_search_scroll(event) {
 		ga_track();
 	}
 }
-
-
-function set_search_keybind() {
-	// Set keybinds
-	$('#search input').keypress(function(e) { 
-		if (e.keyCode == 13) $('#search_button').click();
-	});
-}
-
 
 
 /*
@@ -113,14 +105,14 @@ function perform_search(form_data, append) {
 			$('#left_menu').html(filters);
 			tiles($('#left_menu'));
 
-			// update history
+			// updates
 			update_search_history();
+			update_result_view();
 
 			// Add event handlers
 			build_result_handlers();
 
 			GLOBAL_SEARCH_EVENT = data.content.search_event;
-
 			GLOBAL_FETCHING_PAGE = false;
 		},
 		error: handle_error,	
@@ -198,17 +190,15 @@ function build_result_handlers() {
 	$('.search_result').each(function(i, e) {
 
 		var id = $(e).attr('post_id');
-		$(e).find('.result_save').each(function() {
-			$(this).click(function() { 
-				track_event('save', id);
-				update_favorite_postings();
-			});
+		$(e).find('.result_save').click(function() {
+			event.preventDefault();
+			track_event('save', id);
+			update_favorite_postings();
 		});
-		$(e).find('.result_close').each(function() {
-			$(this).click(function() { 
-				track_event('remove', id);
-				$('#result_' + id).hide();
-			});
+		$(e).find('.result_close').click(function() { 
+			event.preventDefault();
+			track_event('remove', id);
+			$('#result_' + id).remove();
 		});
 	
 		// TODO: outbound tracking links
@@ -216,7 +206,6 @@ function build_result_handlers() {
 		
 	});
 }
-
 
 
 /*
@@ -233,4 +222,36 @@ function track_event(name, id, callback) {
 		success: callback,
 		error: handle_error,
 	});
+}
+
+
+/*
+ * Update the search results to show only those DIV for this view.
+ */
+function update_result_view() {
+	if (event) event.preventDefault();
+
+	var view = $('#view_buttons INPUT:checked').attr('id');
+/*	if (!view) {
+		$('#full_view').attr('checked', 'checked');
+		return;
+	}
+*/
+
+	if (view == 'full_view') {
+		$('.search_result DIV').show();
+		return;
+	}
+
+	if (view == 'summary_view') {
+		$('.search_result DIV').show();
+		$('.search_result .result_details').hide();
+		return;
+	}
+
+	if (view == 'minimal_view') {
+		$('.search_result DIV').hide();
+		$('.search_result .result_title').show();
+		return;	
+	}
 }

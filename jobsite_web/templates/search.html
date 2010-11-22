@@ -11,10 +11,20 @@
 		default_doc_ready();
 		setInterval('check_page_data_has_changed()', 1000);
 		$(window).scroll(handle_search_scroll)
-		set_search_keybind();
 		update_saved_search();
 		update_favorite_postings();
 //		search();
+
+		$('#sort_buttons').buttonset();
+		$('#view_buttons').buttonset();
+		$('#hl_buttons').buttonset();
+
+		// handle search
+		$('#search').submit(search);
+
+		$('#view_buttons INPUT').each(function () {
+			$(this).click(update_result_view);
+		});
 	});
 
 	</script>
@@ -47,20 +57,29 @@
 	<div id="search_toolbar">
 	<form action="{% url jobsite_main.views.search %}" method="GET" id="search">
 		{{ search_form.keywords }}
-		<input type="submit" value="Search" id="search_button" onClick="return search()"/><br />
-
-		
-		Search for jobs in {{ search_form.city }} posted in the last {{ search_form.days }} days | 
-		<a href="#">More Options</a>
+		<input type="submit" value="Search" id="search_button" class="button" />
+		<input type="button" class="button" id="save_button" value="Save"
+			onclick="return save_search(this)" /><br />
+		jobs in {{ search_form.city }} posted in the last {{ search_form.days }} days
 	</form>
-	<p>
-		Sort: <a href="#">Relevancy</a>, <a href="#">Date</a> |
-		View: <a href="#">Full</a>, <a href="#">Summary</a>, <a href="#">Minimal</a> |
-		Hightlight: <a href="#">On</a>, <a href="#">Off</a>
-	</p>
-	<div id="save_search">
-		<button type="button" class="button" id="save_button"
-		onclick="return save_search(this)">Save this Search</button>
+	<hr />
+	<div>
+		<span id="sort_buttons">
+		Sort: 
+			<input type="radio" id="relevancy" name="sort"/><label for="relevancy">Relevancy</label>
+			<input type="radio" id="date" name="sort"/><label for="date">Date</label>
+		</span>
+		<span id="view_buttons">
+		View: 
+			<input type="radio" id="full_view" name="view"/><label for="full_view">Full</label>
+			<input type="radio" id="summary_view" name="view"/><label for="summary_view">Summary</label>
+			<input type="radio" id="minimal_view" name="view"/><label for="minimal_view">Minimal</label>
+		</span>
+		<span id="hl_buttons">
+		Hightlight: 
+			<input type="radio" id="hl_on" name="highlight"/><label for="hl_on">On</label>
+			<input type="radio" id="hl_off" name="highlight"/><label for="hl_off">Off</label>
+		</span>
 	</div>
 
 <!--		<p class="hints">Did you mean: <a href="#">Accounting</a></p> -->

@@ -30,8 +30,9 @@ A:hover {
 
 #user_block {
 	text-align: right;
-	margin: 6px 0 0 0;
+	margin: 6px 10px 0 0;
 	color: #fff;
+	width: 290px;
 }
 
 #user_block IMG {
