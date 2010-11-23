@@ -15,7 +15,7 @@ var GLOBAL_SEARCH_EVENT;
  */
 function build_form_data() {
 	var params = {};
-	$('#search input[type!=hidden]').each(function (i, t) {
+	$('#search INPUT:not(.ignore)').each(function (i, t) {
 		params[t.name] = t.value;
 	});
 	return $.param(params)
@@ -27,7 +27,7 @@ function build_form_data() {
  *		Called onSubmit of the search form.
  */
 function search(event) {
-	event.preventDefault();
+	if (event) event.preventDefault();
 
 	GLOBAL_FETCHING_PAGE = true;
 	var form_data = build_form_data();
@@ -65,7 +65,8 @@ function handle_search_scroll(event) {
 
 /*
  * update_search
- *		Update the fields in the search form from the form_data
+ *		Update the fields in the search form from the form_data.
+ *		This is called from pz.pagedata.js update_page
  */
 function update_search(form_data) {
 	$.each(form_data.split('&'), function(i, d) {
@@ -108,6 +109,7 @@ function perform_search(form_data, append) {
 			// updates
 			update_search_history();
 			update_result_view();
+			update_sort();
 
 			// Add event handlers
 			build_result_handlers();
@@ -119,6 +121,24 @@ function perform_search(form_data, append) {
 	});
 }
 
+
+
+/*
+ * Update the sort buttons.
+ */
+function update_sort()  {
+	var sort = $('#id_sort').val() || 'date';
+	$('#sort_buttons #' + sort).attr('checked', true);
+	$('#sort_buttons').buttonset('refresh');
+}
+
+/*
+ * Perform the search again, with a different sort.
+ */
+function resort_search() {
+	$('#id_sort').val($(this).attr('id'));
+	$('#search').submit();
+}
 
 /*
  * Update the search history block
@@ -229,15 +249,16 @@ function track_event(name, id, callback) {
  * Update the search results to show only those DIV for this view.
  */
 function update_result_view() {
-	if (event) event.preventDefault();
 
 	var view = $('#view_buttons INPUT:checked').attr('id');
-/*	if (!view) {
+	// Set full view as default, is nothing is set
+	if (!view) {
 		$('#full_view').attr('checked', 'checked');
+		$('#view_buttons').buttonset('refresh');
 		return;
 	}
-*/
-
+		
+	$('#view_buttons').buttonset('refresh');
 	if (view == 'full_view') {
 		$('.search_result DIV').show();
 		return;

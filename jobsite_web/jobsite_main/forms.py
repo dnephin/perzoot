@@ -13,11 +13,17 @@ class JobSearchForm(Form):
 	Basic job search form.
 	"""
 
+	SORT_CHOICES = (
+		('date', 'date'),
+		('relevancy', 'relevancy'),
+	)
+
 	keywords = 	CharField(max_length=255)
 	days =		IntegerField(initial=3)
 	city = 		CharField(max_length=200, initial='Montreal')
 	start =		IntegerField(widget=HiddenInput, initial=0, required=False)
 	rows = 		IntegerField(widget=HiddenInput, initial=20, required=False)
+	sort = 		ChoiceField(choices=SORT_CHOICES, required=False)
 
 
 	def clean_rows(self):

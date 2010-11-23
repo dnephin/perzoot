@@ -13,7 +13,7 @@
 		$(window).scroll(handle_search_scroll)
 		update_saved_search();
 		update_favorite_postings();
-//		search();
+		search();
 
 		$('#sort_buttons').buttonset();
 		$('#view_buttons').buttonset();
@@ -24,6 +24,9 @@
 
 		$('#view_buttons INPUT').each(function () {
 			$(this).click(update_result_view);
+		});
+		$('#sort_buttons INPUT').each(function () {
+			$(this).click(resort_search);
 		});
 	});
 
@@ -57,10 +60,11 @@
 	<div id="search_toolbar">
 	<form action="{% url jobsite_main.views.search %}" method="GET" id="search">
 		{{ search_form.keywords }}
-		<input type="submit" value="Search" id="search_button" class="button" />
-		<input type="button" class="button" id="save_button" value="Save"
+		<input type="submit" value="Search" id="search_button" class="button ignore" />
+		<input type="button" class="button ignore" id="save_button" value="Save"
 			onclick="return save_search(this)" /><br />
 		jobs in {{ search_form.city }} posted in the last {{ search_form.days }} days
+		<input type="hidden" name="sort" id="id_sort" value="" />
 	</form>
 	<hr />
 	<div>

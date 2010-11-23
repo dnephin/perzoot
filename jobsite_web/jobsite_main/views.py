@@ -186,9 +186,12 @@ def search(request):
 	search_event = db.save_search_event(request, form)
 	request.session[LAST_SEARCH_EVENT] = search_event
 
-	return handle_response(request, 
-			{'search_form': form, 'search_results': format_search(resp),
-			 'search_event': search_event.id}, 'search.html')
+	return handle_response(request, {
+			'search_form': form, 
+			'search_results': format_search(resp),
+			'search_event': search_event.id,
+			'search_type': form.cleaned_data.get('sort', 'date'),
+			}, 'search.html')
 
 
 def search_history(request, saved=False):

@@ -51,7 +51,8 @@ urlpatterns = patterns('',
 			{}, 'auth_wrapper'),
 
 	# Misc
-	(r'^js_statics.js$', direct_to_template, {'template': 'js_statics.js'}),
+	(r'^js_statics.js$', direct_to_template, {'template': 'js_statics.js',
+			'mimetype': 'text/javascript'}),
 
 	# OAuth
     (r'^oauth/', include(oauth_access.urls)),
