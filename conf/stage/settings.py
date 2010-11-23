@@ -8,6 +8,8 @@ TEMPLATE_DEBUG = DEBUG
 import os
 PROJECT_ROOT = '/var/pz_stage/jobsite_web/'
 
+import logging.config
+logging.config.fileConfig('%s/logging.conf' % PROJECT_ROOT)
 
 # Solr
 SOLR_URL = 'http://localhost:8080/solr'
