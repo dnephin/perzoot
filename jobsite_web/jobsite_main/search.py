@@ -112,9 +112,11 @@ class Search(object):
 	DEFAULT_SORT = 'date desc, id desc'
 
 	def handle_sort(self, sort):
-		if not sort:
+		if not sort or sort == 'date':
 			return self.DEFAULT_SORT
-		if sort not in ('date', 'relevency'):
+		if sort == 'relevancy':
+			# TODO: build function string
+			pass
+		else:
 			log.warn("Unknown sort type: %s" % (sort)) 
-			return self.DEFAULT_SORT
-		return '%s desc' % (sort)
+		return self.DEFAULT_SORT

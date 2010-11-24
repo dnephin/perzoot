@@ -16,11 +16,14 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.forms import ValidationError
+from django.shortcuts import redirect
+from django.core.urlresolvers import reverse
 
 from jobsite_main.forms import JobSearchForm, UserForm
 from jobsite_main.search import Search, SOLR_DATE_FORMAT
 from jobsite_main import db
 from jobsite_main.util import service_friendly_name, to_json, auto_authenticate
+from jobsite_main.util import from_json 
 from jobsite_main.statics import *
 
 from datetime import datetime
@@ -160,6 +163,17 @@ def build_details(doc):
 
 def index(request):
 	"""
+	If no searches exist for this session or user, redirect to main
+	otherwise post to search with last search populated.
+	"""
+	last_search = db.get_search_history(request, limit=1)
+	if last_search:
+		return redirect(reverse('jobsite_main.views.search'))
+	return redirect(reverse('jobsite_main.views.main'))
+
+
+def main(request):
+	"""
 	 Default landing page.  Contains a basic search form.
 	"""
 	# TODO: set session data to force the cookie (do i need to?)
@@ -172,17 +186,30 @@ def index(request):
 
 def search(request):
 	"""
-	Perform a search and return the data as JSON.
+	Perform a search and return the data as JSON.  
 	"""
-	# TODO: retreive saved search if param is set
 
-	form = JobSearchForm(request.GET)
+	# CHECK current request (GET or POST) for data
+	# CHECK search history for last search data
+	# DEFAULT to none
+	form_data = request.GET if request.method == "GET" else request.POST
+	if not form_data:
+		last_search = db.get_search_history(request, limit=1)
+		if len(last_search) > 0:
+			form = JobSearchForm(from_json(last_search[0].full_string))
+		else:
+			form = JobSearchForm()
+	else:
+		form = JobSearchForm(form_data)
+
 	if not form.is_valid():
-		# TODO: check for existing session and populate the form that way
 		return handle_response(request, {'search_form': form}, 
 				template='search.html', code=INPUT)
 
+	print form.cleaned_data['sort']
 	resp = Search().search(form)
+	# TODO: restrict saving of search on some conditions (such as repeating a
+	# previous search, or filtering)
 	search_event = db.save_search_event(request, form)
 	request.session[LAST_SEARCH_EVENT] = search_event
 

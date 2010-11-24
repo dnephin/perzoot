@@ -57,7 +57,6 @@ class SearchEvent(Model):
 		}
 
 
-
 class SitePage(Model):
 	"""
 	The text of a 'static' page stored by version and date.  This enables

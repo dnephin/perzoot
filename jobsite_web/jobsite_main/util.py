@@ -26,9 +26,19 @@ class DjangoJSONEncoder(simplejson.JSONEncoder):
 		elif hasattr(o, '__json__'):
 			return o.__json__()
 		else:
-			return simplejson.JSONEncoder.default(self, o);
+			return simplejson.JSONEncoder.default(self, o)
 
 
+class DjangoJSONDecoder(simplejson.JSONDecoder):
+	"""
+	A JSON decoder which has been extended to decode objects by
+	calling their __form_json__ method.
+	"""
+
+	def default(self, o):
+		if hasattr(o, '__from_json__'):
+			return o.__from_json__
+		return simplejson.JSONDecoder.default(self, o)
 
 
 def service_friendly_name(service):
@@ -43,6 +53,10 @@ def to_json(obj):
 	""" Encode the obj as a JSON string. """
 	return simplejson.dumps(obj, cls=DjangoJSONEncoder)
 
+
+def from_json(obj):
+	""" Decode the JSON string to python obj """
+	return simplejson.loads(obj, cls=DjangoJSONDecoder)
 
 
 def auto_authenticate(user):

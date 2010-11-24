@@ -14,7 +14,7 @@
 {% block content %}
 	<div class="span-24 center last" id="searchbox">
 
-	<form id="search" action="{% url jobsite_main.views.search %}" method="GET">
+	<form id="search" action="{% url jobsite_main.views.search %}" method="POST">
 		<p> 
 			<label for="keywords">
 				<span id="keywords_label">What kind of job are you looking for?</span>

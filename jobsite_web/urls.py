@@ -18,8 +18,9 @@ admin.autodiscover()
 urlpatterns = patterns('',
 
 	# Pages
-	(r'^$', jobsite_main.views.index),
-	(r'^search$', jobsite_main.views.search),
+	(r'^$', 'jobsite_main.views.index'),
+	(r'^main$', 'jobsite_main.views.main'),
+	(r'^search$', 'jobsite_main.views.search'),
 
 	# Static pages
 	url(r'^page/(?P<page_name>\w+)', jobsite_main.views.static_page,

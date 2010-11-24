@@ -90,6 +90,7 @@ function perform_search(form_data, append) {
 		dataType: 'json',
 		success: function(data) {
 			// TODO: Handle 0 results
+			// TODO: handle input code
 
 			// Build search results
 			listing = new EJS({url: '/m/js/templates/search_result.ejs'});
