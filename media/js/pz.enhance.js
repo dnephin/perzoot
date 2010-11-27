@@ -20,9 +20,10 @@ function build_input_select() {
  *		Create tooltip elements for all elements with the tt_link class.
  *		Tooltips appear above the target element.
  */
-function build_tooltips() {
+function build_tooltips(selector) {
 
-	$('.tt_link').each(function(i) {
+	var target = selector || $('body');
+	target.find('.tt_link').each(function(i) {
 		var elem = $(this);
 		$('body').append(
 			'<div class="tooltip" id="tooltip_'+i+'"><p>' + 
@@ -35,7 +36,7 @@ function build_tooltips() {
 		});
 		elem.mousemove(function(event) {
 			var target = $(event.target);
-			var top = target.position().top - tooltip.outerHeight();
+			var top = target.position().top - tooltip.outerHeight() - 4;
 			top = (top > 0) ? top : tooltip.height() + 8;
 			var left = target.position().left - tooltip.width() / 2 + target.width() / 2;
 			left = (left > 0) ? left : 2;
@@ -43,6 +44,9 @@ function build_tooltips() {
 		});
 		elem.mouseout(function() {
 			tooltip.fadeOut(400);
+		});
+		elem.click(function() {
+			tooltip.fadeOut(100);
 		});
 	});
 
@@ -116,7 +120,7 @@ function update_user_block() {
 			d.html(data.content.body);
 			d.dialog('option', 'title', data.content.title);
 		});
-		build_tooltips();
+		build_tooltips($('#user_block'));
 
 		// build login/register links
 		setup_async_callbacks($('#login_link'), function(data, code) {

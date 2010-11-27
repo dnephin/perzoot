@@ -111,6 +111,7 @@ function perform_search(form_data, append) {
 			update_search_history();
 			update_result_view();
 			update_sort();
+			build_tooltips($('#results'));
 
 			// Add event handlers
 			build_result_handlers();
@@ -170,7 +171,7 @@ function right_tile_helper(url, div_id) {
 			var list = new EJS({url: '/m/js/templates/search_list.ejs'});
 			var elem = $(div_id);
 
-			if (data.content.list.length < 1) {
+			if (!data.content.list || data.content.list.length < 1) {
 				return;
 			}
 			
@@ -241,7 +242,7 @@ function track_event(name, id, callback) {
 		url: url,
 		dataType: 'json',
 		success: callback,
-		error: handle_error,
+/*		error: handle_error, */
 	});
 }
 

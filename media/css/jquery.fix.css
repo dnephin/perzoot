@@ -1,11 +1,7 @@
-
-.ui-button .ui-button-text {
-	font-size: 0.9em;
+.ui-widget UL,  .ui-wdiget A {
+	color: #555;
 }
 
-.ui-buttonset {
-	margin-right: 20px;
-}
 
 /* search filters */
 .ui-accordion .ui-accordion-content UL.plain LI {
@@ -42,4 +38,37 @@
 .ui-tabs .ui-tabs-nav .ui-tabs-selected {
 	border: 1px solid #CCC;
 	border-bottom: 0;
+}
+
+/* UI buttons
+-------------------------------------------------- */
+.ui-buttonset .ui-state-default {
+	background: #fff;
+	border: 1px solid #CCC;
+}
+
+.ui-buttonset .ui-state-active {
+	background: #1F77FF;
+	border: 1px solid #0F4ABE;
+	color: white;
+}
+
+.ui-buttonset .ui-state-hover {
+	border-color: #0F4ABE;
+}
+
+.ui-buttonset .ui-button {
+	font-size :0.9em;
+}
+
+.ui-buttonset .ui-button SPAN {
+	padding: 3px 5px;
+}
+
+.ui-button .ui-button-text {
+	font-size: 0.9em;
+}
+
+.ui-buttonset {
+	margin-right: 20px;
 }

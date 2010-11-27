@@ -84,10 +84,11 @@ A:hover {
 }
 
 .tooltip p {
-	margin:0;
-	color:#fff;
-	background-color:#222;
-	padding:2px 7px;
+	margin: 0;
+	color: #fff;
+	background-color: #222;
+	padding: 2px 7px;
+	border-radius: 3px;
 }
 
 
