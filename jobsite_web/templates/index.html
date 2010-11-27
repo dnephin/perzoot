@@ -21,7 +21,8 @@
 			</label><br /> 
 			{{ search_form.keywords }}	
 			<input type="submit" value="Search" id="search_button" /><br />
-			Search for jobs in {{ search_form.city }} 
+			Search for jobs in {{ search_form.city }}
+			{% csrf_token %}
 		</p>
 
 	</form>

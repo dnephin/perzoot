@@ -96,4 +96,8 @@
 	color: white;
 }
 
-
+/* Search Filters and Left Column
+-------------------------------------------------- */
+#left_links {
+	text-align: right;
+}

@@ -235,6 +235,8 @@ def favorite_postings(request):
 	"""
 
 	posting_list = db.get_user_events(request, type='save', sorted=True, limit=10)
+	if len(posting_list) < 1:
+		return json_response(request, data={'list': None})
 	titles = Search().retrieve_titles(map(lambda u: u.posting_id, posting_list))
 
 	posting_map = dict(map(lambda p: (p.posting_id, p),posting_list))
