@@ -59,7 +59,7 @@ def save_search(event_id):
 	SearchEvent.objects.filter(id=event_id).update(saved=True)
 
 
-def get_search_history(request, saved=False, limit=10):
+def get_search_history(request, saved=False, ids=None, limit=10):
 	" Retrieve the search history for this user, or for their session. "
 
 	user = request.user if not request.user.is_anonymous() else None
@@ -70,6 +70,8 @@ def get_search_history(request, saved=False, limit=10):
 
 	if saved:
 		selector['saved'] = True
+
+	# TODO: id param
 	
 	searches = SearchEvent.objects.filter(**selector).order_by('-tstamp')[:limit]
 	return searches

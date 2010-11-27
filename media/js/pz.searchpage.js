@@ -106,6 +106,14 @@ function perform_search(form_data, append) {
 			});
 			$('#left_menu').html(filters);
 			tiles($('#left_menu'));
+			$('#left_menu .filter').each(function (i) {
+				$(this).change(function () {
+					// TODO: add hidden field to search form
+					// TODO: clear searches of that type from listing
+					// TODO: remove this element and replace with a link to remove this filtering
+				});
+			});
+			// TODO: add elements for removed filters and add hiden fields to search form
 
 			// updates
 			update_search_history();

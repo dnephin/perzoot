@@ -2,7 +2,7 @@
 <div>
 	<ul class="plain">
 		<% $.each(content, function(i, item) { %>
-			<li><a href="#" class="closeable_item"><%=item.terms%></a> <%=item.date%></li> 
+			<li><a href="<%=URL_SEARCH%>?event=<%=item.id%>" class="closeable_item"><%=item.terms%></a> <%=item.date%></li> 
 		<% }) %>
 	</ul>
 </div>

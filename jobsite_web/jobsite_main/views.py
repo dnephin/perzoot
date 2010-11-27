@@ -188,6 +188,9 @@ def search(request):
 	"""
 	Perform a search and return the data as JSON.  
 	"""
+	
+	# TODO: check for event param
+	#last_search = db.get_search_history(request, limit=1)
 
 	# CHECK current request (GET or POST) for data
 	# CHECK search history for last search data
@@ -206,7 +209,6 @@ def search(request):
 		return handle_response(request, {'search_form': form}, 
 				template='search.html', code=INPUT)
 
-	print form.cleaned_data['sort']
 	resp = Search().search(form)
 	# TODO: restrict saving of search on some conditions (such as repeating a
 	# previous search, or filtering)
