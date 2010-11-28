@@ -39,6 +39,10 @@ class Search(object):
 		params = self.build_query(search_form.cleaned_data)
 		params.update(self.build_facets())
 		params.update(self.build_highlighting())
+
+		params['sort'] = self.handle_sort(search_form.cleaned_data.get('sort')),
+		params['qf'] = "title^2 body"
+
 		handler = solr.SearchHandler(solr_conn, wt='python')
 		r = handler(**params)
 		return r
@@ -55,7 +59,6 @@ class Search(object):
 
 		return {
 			'q': " AND ".join(q_parts),
-			'sort': self.handle_sort(data.get('sort')),
 			'start': data.get('start', 0),
 			'rows': data.get('rows', 20),
 		}
@@ -94,7 +97,8 @@ class Search(object):
 		if not kws:
 			return ""
 
-		return "body: (%s)" % " OR ".join(map(string.lower, kws.split()))
+		keywords = " OR ".join(map(string.lower, kws.split()))
+		return "body: (%s) title: (%s)" % (keywords, keywords)
 		
 
 	def handle_days(self, days):
@@ -115,8 +119,7 @@ class Search(object):
 		if not sort or sort == 'date':
 			return self.DEFAULT_SORT
 		if sort == 'relevancy':
-			# TODO: build function string
-			pass
+			return "score desc"
 		else:
 			log.warn("Unknown sort type: %s" % (sort)) 
 		return self.DEFAULT_SORT

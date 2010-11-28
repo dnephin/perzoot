@@ -29,19 +29,21 @@ function build_tooltips(selector) {
 		var tt = document.createElement("div");
 		tt.className = "tooltip";
 		tt.innerHTML = "<p>" + elem.attr('title') + "</p>";
-		document.body.appendChild(tt);
+		target.find('.tooltip').remove();
+		target.append(tt);
 
 		var tooltip = $(tt);
-		tooltip.css({'opacity': 0.8, 'display': 'none'});
-		var top = elem.position().top - tooltip.outerHeight() - 4;
-		top = (top > 0) ? top : tooltip.height() + 8;
-		var left = elem.position().left - tooltip.width() / 2 + elem.width() / 2;
-		left = (left > 0) ? left : 2;
-		tooltip.css({'left': left, 'top': top});
 
 		elem.removeAttr('title')
-			.hover(function() { tooltip.fadeIn(200); }, 
-				function() { tooltip.fadeOut(10); })
+			.hover(function() { 
+				tooltip.css({'opacity': 0.8, 'display': 'none'});
+				var top = elem.position().top - tooltip.outerHeight() - 4;
+				top = (top > 0) ? top : tooltip.height() + 8;
+				var left = elem.position().left - tooltip.width() / 2 + elem.width() / 2;
+				left = (left > 0) ? left : 2;
+				tooltip.css({'left': left, 'top': top});
+				tooltip.fadeIn(200); 
+			}, function() { tooltip.fadeOut(10); })
 			.click(function() { tooltip.fadeOut(10); });
 	});
 }

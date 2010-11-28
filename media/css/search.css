@@ -74,6 +74,7 @@
 
 .result_title {
 	font-weight: bold;
+	max-width: 430px;
 }
 .result_title a {
 	font-size: 1.2em;
