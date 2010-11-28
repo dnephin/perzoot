@@ -7,6 +7,7 @@
 var GLOBAL_FETCHING_PAGE = false;
 var CONST_NUM_RESULTS = 20;
 var GLOBAL_SEARCH_EVENT;
+var GLOBAL_END_OF_RESULTS = false;
 
 
 /*
@@ -45,6 +46,7 @@ function search(event) {
 function handle_search_scroll(event) {
 
 	if (GLOBAL_FETCHING_PAGE) return;
+	if (GLOBAL_END_OF_RESULTS) return; 
 
 	var view_bottom = $(window).scrollTop() + $(window).height();
 	var document_bottom = $(document).height();
@@ -103,29 +105,14 @@ function perform_search(form_data, append, event_url) {
 			$.each(data.content.search_results.results, function(i, p) {
 				$('#results').append(listing.render(p));
 			});
-			
-			// Build search filters
-			var filters = "";
-			var filter_template = new EJS({url: '/m/js/templates/search_filter.ejs'});
-			$.each(data.content.search_results.filters, function(title, content) {
-				filters += filter_template.render({'title': title, 'content': content})
-			});
-			$('#left_menu').html(filters);
-			tiles($('#left_menu'));
-			$('#left_menu .filter').each(function (i) {
-				$(this).change(function () {
-					// TODO: add hidden field to search form
-					// TODO: clear searches of that type from listing
-					// TODO: remove this element and replace with a link to remove this filtering
-				});
-			});
-			// TODO: add elements for removed filters and add hiden fields to search form
 
 			// updates
-			update_search_history();
+			if (!append) {
+				update_search_filters(data.content.search_results.filters);
+				update_search_history();
+				update_sort();
+			}
 			update_result_view();
-			update_sort();
-			build_tooltips($('#results'));
 
 			// Add event handlers
 			build_result_handlers();
@@ -138,6 +125,10 @@ function perform_search(form_data, append, event_url) {
 				set_page_data(form_data);
 			}
 
+			// If this was an append search (page scrolling), and we didn't get any
+			// more results, then it's the end of results
+			GLOBAL_END_OF_RESULTS = (append && size(data.content.search_results.results) == 0);
+
 			GLOBAL_SEARCH_EVENT = data.content.search_event;
 			GLOBAL_FETCHING_PAGE = false;
 		},
@@ -145,6 +136,30 @@ function perform_search(form_data, append, event_url) {
 	});
 }
 
+
+/* 
+ * Update the search filters block
+ */
+function update_search_filters(filter_data) {
+
+	var filters = "";
+	var filter_template = new EJS({url: '/m/js/templates/search_filter.ejs'});
+	$.each(filter_data, function(title, content) {
+		filters += filter_template.render({'title': title, 'content': content})
+	});
+	$('#left_menu').html(filters);
+	tiles($('#left_menu'));
+
+	$('#left_menu .filter').each(function (i) {
+		$(this).change(function () {
+			// TODO: add hidden field to search form
+			// TODO: clear searches of that type from listing
+			// TODO: remove this element and replace with a link to remove this filtering
+		});
+	});
+	// TODO: add elements for removed filters and add hiden fields to search form
+
+}
 
 
 /*
@@ -241,6 +256,7 @@ function save_search(elem) {
  */
 function build_result_handlers() {
 
+	build_tooltips($('#results'));
 	$('.search_result').each(function(i, e) {
 
 		var id = $(e).attr('post_id');

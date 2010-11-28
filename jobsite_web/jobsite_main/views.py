@@ -223,6 +223,8 @@ def search(request):
 	search_event = db.save_search_event(request, form)
 	request.session[LAST_SEARCH_EVENT] = search_event
 
+	# TODO: filter out deleted postings for the user
+
 	return handle_response(request, {
 			'search_form': form, 
 			'search_results': format_search(resp),

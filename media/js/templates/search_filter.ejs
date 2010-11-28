@@ -1,4 +1,10 @@
-<h3><a href="#"><%=title%></a></h3>
+<% if (size(content) == 1) { %>
+	<h3 class="tile_default_closed">
+<% } else { %>
+	<h3>
+<% } %>
+
+<a href="#"><%=title%></a></h3>
 <div>
 	<ul class="plain">
 	<% 
