@@ -71,8 +71,9 @@ def get_search_history(request, saved=False, ids=None, limit=10):
 	if saved:
 		selector['saved'] = True
 
-	# TODO: id param
-	
+	if ids:
+		selector['id__in'] = ids
+
 	searches = SearchEvent.objects.filter(**selector).order_by('-tstamp')[:limit]
 	return searches
 

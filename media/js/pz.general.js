@@ -2,6 +2,7 @@
  * General JS, including: 
  *	Tracking and Analytics
  *	Error handling
+ *  Helper and utility functions
  */
 
 function track_outbound(id) {
@@ -43,4 +44,16 @@ function handle_error(data) {
 	e.dialog();
 	e.html('Oops! Something went wrong. We\'re on it.');
 }
+
+/*
+ * Get the size of the object (aka associative array).
+ */
+function size(obj) {
+	var size = 0, key;
+	for (key in obj) {
+		if (obj.hasOwnProperty(key)) size++;
+	}
+	return size;
+}
+
 

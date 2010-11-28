@@ -186,24 +186,32 @@ def main(request):
 
 def search(request):
 	"""
-	Perform a search and return the data as JSON.  
-	"""
-	
-	# TODO: check for event param
-	#last_search = db.get_search_history(request, limit=1)
+	Perform a search and return the data as JSON. 
 
-	# CHECK current request (GET or POST) for data
-	# CHECK search history for last search data
-	# DEFAULT to none
-	form_data = request.GET if request.method == "GET" else request.POST
-	if not form_data:
+	The data for the search even can be retrieve in 3 ways, in this order:
+	 - if the 'event' param is present, retrieve that event and use that for data
+	 - if there is GET or POST data, use that for data
+	 - if there is a previous search, retreive it, and use that for data
+	"""
+
+	form = None
+	if request.method == "GET" and 'event' in request.GET:
+		search_event = db.get_search_history(request, ids=[request.GET['event']])[:1]
+		if search_event:
+			form = JobSearchForm(from_json(search_event[0].full_string))
+
+	if not form:
+		form_data = request.GET if request.method == "GET" else request.POST
+		if form_data:
+			form = JobSearchForm(form_data)
+
+	if not form:
 		last_search = db.get_search_history(request, limit=1)
-		if len(last_search) > 0:
+		if last_search:
 			form = JobSearchForm(from_json(last_search[0].full_string))
-		else:
-			form = JobSearchForm()
-	else:
-		form = JobSearchForm(form_data)
+
+	if not form:
+		form = JobSearchForm()
 
 	if not form.is_valid():
 		return handle_response(request, {'search_form': form}, 

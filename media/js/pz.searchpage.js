@@ -79,14 +79,20 @@ function update_search(form_data) {
  * perform_search
  * 		Perform a search, update the page location, and display the results.
  */
-function perform_search(form_data, append) {
+function perform_search(form_data, append, event_url) {
 
 	if (!append) {
 		$('#results').empty();
 	}
 
+	if (!event_url) {
+		url = URL_SEARCH + '?' + form_data;
+	} else {
+		url = event_url;
+	}
+
 	$.ajax({
-		url: add_async_param(URL_SEARCH + '?' + form_data),
+		url: add_async_param(url),
 		dataType: 'json',
 		success: function(data) {
 			// TODO: Handle 0 results
@@ -124,6 +130,14 @@ function perform_search(form_data, append) {
 			// Add event handlers
 			build_result_handlers();
 
+			// If this search was from retrieving an event, then update the form
+			// and page data
+			if (event_url) {
+				update_search($.param(data.content.search_form));
+				var form_data = build_form_data();
+				set_page_data(form_data);
+			}
+
 			GLOBAL_SEARCH_EVENT = data.content.search_event;
 			GLOBAL_FETCHING_PAGE = false;
 		},
@@ -154,24 +168,25 @@ function resort_search() {
  * Update the search history block
  */
 function update_search_history() {
-	right_tile_helper(URL_SEARCH_HISTORY, '#search_history');
+	right_tile_helper(URL_SEARCH_HISTORY, '#search_history', URL_SEARCH);
 }
 
 /*
  * Update the saved search list
  */
 function update_saved_search() {
-	right_tile_helper(URL_SEARCH_SAVED, '#saved_searches');
+	right_tile_helper(URL_SEARCH_SAVED, '#saved_searches', URL_SEARCH);
 }
 
 /*
  * Update the favorite postings block
  */
 function update_favorite_postings() {
-	right_tile_helper(URL_FAV_POSTINGS, '#favorite_posts');
+	// TODO: outbound url for click_url 
+	right_tile_helper(URL_FAV_POSTINGS, '#favorite_posts', null);
 }
 
-function right_tile_helper(url, div_id) {
+function right_tile_helper(url, div_id, click_url) {
 	$.ajax({
 		url: url,
 		dataType: 'json',
@@ -186,10 +201,19 @@ function right_tile_helper(url, div_id) {
 			elem.next().remove();
 			elem.replaceWith(list.render(
 				{'title': elem.find('a').html(), 'id': elem.attr('id'),
-				 'content': data.content.list
+				 'content': data.content.list, 'click_url': click_url
 				 }));
 
 			tiles($('#search_meta'));
+
+			// add onClick
+			$(div_id).next().find('.search_link').each(function () {
+				$(this).click(function (event) {
+					event.preventDefault();
+					perform_search(null, false, $(this).attr('href'));
+				});
+			});
+
 		},
 		error: handle_error,
 	});
