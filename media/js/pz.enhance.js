@@ -32,25 +32,17 @@ function build_tooltips(selector) {
 		document.body.appendChild(tt);
 
 		var tooltip = $(tt);
+		tooltip.css({'opacity': 0.8, 'display': 'none'});
+		var top = elem.position().top - tooltip.outerHeight() - 4;
+		top = (top > 0) ? top : tooltip.height() + 8;
+		var left = elem.position().left - tooltip.width() / 2 + elem.width() / 2;
+		left = (left > 0) ? left : 2;
+		tooltip.css({'left': left, 'top': top});
 
-		elem.removeAttr('title');
-		elem.mouseover(function() {
-			tooltip.css({'opacity': 0.8, 'display': 'none'}).fadeIn(400);
-		});
-		elem.mousemove(function(event) {
-			var target = $(event.target);
-			var top = target.position().top - tooltip.outerHeight() - 4;
-			top = (top > 0) ? top : tooltip.height() + 8;
-			var left = target.position().left - tooltip.width() / 2 + target.width() / 2;
-			left = (left > 0) ? left : 2;
-			tooltip.css({'left': left, 'top': top});
-		});
-		elem.mouseout(function() {
-			tooltip.fadeOut(400);
-		});
-		elem.click(function() {
-			tooltip.fadeOut(100);
-		});
+		elem.removeAttr('title')
+			.hover(function() { tooltip.fadeIn(200); }, 
+				function() { tooltip.fadeOut(10); })
+			.click(function() { tooltip.fadeOut(10); });
 	});
 }
 

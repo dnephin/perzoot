@@ -40,9 +40,13 @@ class JobSearchForm(Form):
 
 
 	def __json__(self):
+		data = {}
 		if hasattr(self, 'cleaned_data'):
-			return self.cleaned_data
-		return {}
+			data.update(self.cleaned_data)
+
+		if hasattr(self, 'errors'):
+			data['errors'] = self.errors
+		return data
 
 
 class UserForm(UserCreationForm):

@@ -42,7 +42,11 @@ function ga_track() {
 function handle_error(data) {
 	var e = $('#dialog_error');
 	e.dialog();
-	e.html('Oops! Something went wrong. We\'re on it.');
+	e.html(
+		new EJS({url: '/m/js/templates/form_error.ejs'})
+		.render({'field': 'Oops!', 'error_list': ['Something went wrong. ' +
+			'We\'re terribly sorry, and we\'re working on fixing it now.']}));
+	e.dialog('option', 'title', 'Error');
 }
 
 /*

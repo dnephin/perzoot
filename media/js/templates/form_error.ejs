@@ -1,0 +1,9 @@
+<div class="ui-widget">
+	<div class="ui-state-error ui-corner-all">
+		<span class="ui-icon ui-icon-alert"></span>
+		<strong><%=field%></strong>: 
+		<% $.each(error_list, function(i, e) { %>
+			<%=e%> 
+		<% }); %>
+	</div>
+</div>

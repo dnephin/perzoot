@@ -79,21 +79,9 @@
 	font-size: 1.2em;
 }
 
-.result_options {float: right;}
-.result_options a {
-	padding: 0 5px;
-	text-decoration: none;
-	font-size: 0.8em;
-	border: 1px solid #CCC;
-	font-weight: normal;
-}
-.result_close:hover {
-	background-color: red;
-	color: white;
-}
-.result_save:hover {
-	background-color: green;
-	color: white;
+.search_result .result_options {
+	float: right;
+	margin: 0 -8px 0 0;
 }
 
 /* Search Filters and Left Column

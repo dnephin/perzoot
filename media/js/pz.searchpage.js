@@ -106,8 +106,20 @@ function perform_search(form_data, append, event_url) {
  * initial page load.
  */
 function handle_search_response(data, append, event_url) {
-	// TODO: Handle 0 results
-	// TODO: handle input code
+	// handle input code
+	if (data.code == INPUT) {
+		var e = $('#dialog_error');
+
+		var errors = "";
+		var error_template = new EJS({url: '/m/js/templates/form_error.ejs'});
+		$.each(data.content.search_form.errors, function(f, error_list) {
+			errors += error_template.render({'field': f , 'error_list': error_list});
+		});
+		e.dialog();
+		e.html(errors);
+		e.dialog('option', 'title', 'Error');
+		return;
+	};
 
 	// Build search results
 	listing = new EJS({url: '/m/js/templates/search_result.ejs'});
@@ -280,6 +292,11 @@ function build_result_handlers() {
 		// TODO: open all above links
 		
 	});
+
+	$('.search_result .result_save')
+	.button({icons: { primary: "ui-icon-circle-plus" }, text: false});
+	$('.search_result .result_close')
+	.button({icons: { primary: "ui-icon-circle-close" }, text: false});
 }
 
 
