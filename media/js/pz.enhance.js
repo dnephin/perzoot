@@ -25,10 +25,13 @@ function build_tooltips(selector) {
 	var target = selector || $('body');
 	target.find('.tt_link').each(function(i) {
 		var elem = $(this);
-		$('body').append(
-			'<div class="tooltip" id="tooltip_'+i+'"><p>' + 
-			elem.attr('title') + '</p></div>');
-		var tooltip = $('#tooltip_'+i);
+
+		var tt = document.createElement("div");
+		tt.className = "tooltip";
+		tt.innerHTML = "<p>" + elem.attr('title') + "</p>";
+		document.body.appendChild(tt);
+
+		var tooltip = $(tt);
 
 		elem.removeAttr('title');
 		elem.mouseover(function() {
@@ -49,7 +52,6 @@ function build_tooltips(selector) {
 			tooltip.fadeOut(100);
 		});
 	});
-
 }
 
 /*
