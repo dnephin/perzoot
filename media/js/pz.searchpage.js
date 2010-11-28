@@ -51,8 +51,6 @@ function handle_search_scroll(event) {
 	var view_bottom = $(window).scrollTop() + $(window).height();
 	var document_bottom = $(document).height();
 
-	// TODO: stop when results are complete.
-
 	if (view_bottom + 150 > document_bottom) {
 		GLOBAL_FETCHING_PAGE = true;
 		var start = $('#results').children().length;
@@ -97,45 +95,52 @@ function perform_search(form_data, append, event_url) {
 		url: add_async_param(url),
 		dataType: 'json',
 		success: function(data) {
-			// TODO: Handle 0 results
-			// TODO: handle input code
-
-			// Build search results
-			listing = new EJS({url: '/m/js/templates/search_result.ejs'});
-			$.each(data.content.search_results.results, function(i, p) {
-				$('#results').append(listing.render(p));
-			});
-
-			// updates
-			if (!append) {
-				update_search_filters(data.content.search_results.filters);
-				update_search_history();
-				update_sort();
-			}
-			update_result_view();
-
-			// Add event handlers
-			build_result_handlers();
-
-			// If this search was from retrieving an event, then update the form
-			// and page data
-			if (event_url) {
-				update_search($.param(data.content.search_form));
-				var form_data = build_form_data();
-				set_page_data(form_data);
-			}
-
-			// If this was an append search (page scrolling), and we didn't get any
-			// more results, then it's the end of results
-			GLOBAL_END_OF_RESULTS = (append && size(data.content.search_results.results) == 0);
-
-			GLOBAL_SEARCH_EVENT = data.content.search_event;
-			GLOBAL_FETCHING_PAGE = false;
+			handle_search_response(data, append, event_url)
 		},
 		error: handle_error,	
 	});
 }
 
+/*
+ * Handles the response of the search by updating the page.  Also called on an
+ * initial page load.
+ */
+function handle_search_response(data, append, event_url) {
+	// TODO: Handle 0 results
+	// TODO: handle input code
+
+	// Build search results
+	listing = new EJS({url: '/m/js/templates/search_result.ejs'});
+	$.each(data.content.search_results.results, function(i, p) {
+		$('#results').append(listing.render(p));
+	});
+
+	// updates
+	if (!append) {
+		update_search_filters(data.content.search_results.filters);
+		update_search_history();
+		update_sort();
+	}
+	update_result_view();
+
+	// Add event handlers
+	build_result_handlers();
+
+	// If this search was from retrieving an event, then update the form
+	// and page data
+	if (event_url) {
+		update_search($.param(data.content.search_form));
+		var form_data = build_form_data();
+		set_page_data(form_data);
+	}
+
+	// If this was an append search (page scrolling), and we didn't get any
+	// more results, then it's the end of results
+	GLOBAL_END_OF_RESULTS = (append && size(data.content.search_results.results) == 0);
+
+	GLOBAL_SEARCH_EVENT = data.content.search_event;
+	GLOBAL_FETCHING_PAGE = false;
+}
 
 /* 
  * Update the search filters block

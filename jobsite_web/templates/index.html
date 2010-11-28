@@ -22,6 +22,7 @@
 			{{ search_form.keywords }}	
 			<input type="submit" value="Search" id="search_button" /><br />
 			Search for jobs in {{ search_form.city }}
+			<input type="hidden" name="days" value="60" />
 			{% csrf_token %}
 		</p>
 

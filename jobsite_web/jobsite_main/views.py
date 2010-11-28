@@ -60,10 +60,15 @@ def json_response(request, code=OK, data=None):
 	return http_obj(to_json(resp), mimetype="application/json")
 
 
-def handle_response(request, context={}, template=None, code=OK):
+def handle_response(request, context={}, template=None, code=OK, 
+		json_encode=False):
 	"""
 	 Handle the response by returned a full HTML page with header, or
 	 just the AJAX data, if the request was an AJAX request.
+
+	 json_encode - ignored if this is an async request. Otherwise if set to
+	 		True, the context will be json encoded and added to the context
+			under the 'content' key.
 	"""
 	if is_async(request):
 		return json_response(request, code, context)
@@ -73,6 +78,9 @@ def handle_response(request, context={}, template=None, code=OK):
 
 	if code == ERROR:
 		return HttpResponseServerError()
+
+	if json_encode:
+		context.update({'content': to_json(context)})
 
 	return render_to_response(template, context_instance=RequestContext(
 			request, context))
@@ -229,8 +237,7 @@ def search(request):
 			'search_form': form, 
 			'search_results': format_search(resp),
 			'search_event': search_event.id,
-			'search_type': form.cleaned_data.get('sort', 'date'),
-			}, 'search.html')
+			}, 'search.html', json_encode=True)
 
 
 def search_history(request, saved=False):
