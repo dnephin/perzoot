@@ -29,7 +29,7 @@ function build_tooltips(selector) {
 		var tt = document.createElement("div");
 		tt.className = "tooltip";
 		tt.innerHTML = "<p>" + elem.attr('title') + "</p>";
-		target.find('.tooltip').remove();
+//		target.find('.tooltip').remove();
 		target.append(tt);
 
 		var tooltip = $(tt);

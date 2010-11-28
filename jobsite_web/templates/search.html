@@ -30,7 +30,7 @@
 
 		// if page_data is blank, this should be an initial page load 
 		if (!get_timestamp_data().length) {
-			var data = {'code': OK, 'content': {{ content|safe }} };
+			var data = {'code': OK, 'content': {{ content|default:"''"|safe }} };
 			handle_search_response(data);
 			var form_data = build_form_data();
 			set_page_data(form_data);
