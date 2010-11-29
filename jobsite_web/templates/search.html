@@ -70,6 +70,9 @@
 			onclick="return save_search(this)" /><br />
 		jobs in {{ search_form.city }} posted in the last {{ search_form.days }} days
 		<input type="hidden" name="sort" id="id_sort" value="" />
+		{{ search_form.filter_category }}
+		{{ search_form.filter_domain }}
+		{{ search_form.filter_company }}
 	</form>
 	<hr />
 	<div>

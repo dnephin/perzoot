@@ -92,7 +92,6 @@ def format_search(sr):
 
 	sr - a solr response formated as python dict (wt=python).
 	"""
-	# TODO: highlighting
 	resp = {
 		'header': {
 			'qtime': sr['responseHeader']['QTime'],

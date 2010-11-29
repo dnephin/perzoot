@@ -23,6 +23,8 @@ class Search(object):
 	 Perform a search from a django form.
 	"""
 
+	SEARCH_FACETS = ('category', 'domain', 'company')
+
 
 	def retrieve_titles(self, ids):
 		"""
@@ -38,7 +40,6 @@ class Search(object):
 		"""
 		params = self.build_query(search_form.cleaned_data)
 		params.update(self.build_facets())
-		params.update(self.build_highlighting())
 
 		params['sort'] = self.handle_sort(search_form.cleaned_data.get('sort')),
 		params['qf'] = "title^2 body"
@@ -56,6 +57,10 @@ class Search(object):
 		q_parts.append(self.handle_keywords(data.get('keywords')))
 		q_parts.append(self.handle_days(data.get('days')))
 		q_parts.append(self.handle_city(data.get('city')))
+		for filter in self.SEARCH_FACETS: 
+			part = self.handle_filter(filter, data.get('filter_' + filter))
+			if part:
+				q_parts.append(part)
 
 		return {
 			'q': " AND ".join(q_parts),
@@ -70,7 +75,7 @@ class Search(object):
 		"""
 		return {
 			'facet': 'true',
-			'facet_field': ['category', 'domain', 'company'],
+			'facet_field': self.SEARCH_FACETS, 
 			'facet_sort': 'true',
 			'facet_limit': 10,
 			'facet_mincount': 2,
@@ -83,15 +88,12 @@ class Search(object):
 		}
 
 
-	def build_highlighting(self):
-		"""
-		Build the highlighting query parameteres.
-		"""
-		return {
-			'hl': 'true',
-			'hl_fl': ['summary', 'title'],
-			}
 
+	def handle_filter(self, filter, values):
+		if not values:
+			return ""
+
+		return "-%s: (%s)" % (filter, " OR ".join(map(lambda v: '"%s"' % v, values)))
 
 	def handle_keywords(self, kws):
 		if not kws:
@@ -113,7 +115,7 @@ class Search(object):
 		return "city: %s" % city.lower()
 
 
-	DEFAULT_SORT = 'date desc, id desc'
+	DEFAULT_SORT = 'date desc, score desc'
 
 	def handle_sort(self, sort):
 		if not sort or sort == 'date':

@@ -90,3 +90,9 @@
 #left_links {
 	text-align: right;
 }
+
+.remove_filter {
+	padding-left: 20px;
+	line-height: 1.6em;
+	color: #555;
+}

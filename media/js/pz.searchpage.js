@@ -71,7 +71,7 @@ function handle_search_scroll(event) {
 function update_search(form_data) {
 	$.each(form_data.split('&'), function(i, d) {
 		var parts = d.split('=');
-		$("#search input[name='"+parts[0]+"']").val(parts[1]);
+		$("#search input[name='"+parts[0]+"']").val(unescape(parts[1]));
 	});
 }
 
@@ -169,13 +169,68 @@ function update_search_filters(filter_data) {
 
 	$('#left_menu .filter').each(function (i) {
 		$(this).change(function () {
-			// TODO: add hidden field to search form
-			// TODO: clear searches of that type from listing
-			// TODO: remove this element and replace with a link to remove this filtering
+			// add hidden field to search form
+			update_filter_field($(this).attr('filter_type'), $(this).attr('name'));
+			$(this).parent().remove();
+			search();
 		});
 	});
-	// TODO: add elements for removed filters and add hiden fields to search form
+	// add elements for removed filters and add hidden fields to search form
+	$('#search input[name^="filter_"]').each(function () {
+		var filter_type = $(this).attr('name').split('_')[1];
+		$.each($(this).val().split('|'), function(i, v) {
+			$('#list_' + filter_type).append(
+				'<li><a href="#" title="Remove this filter" ' +
+				'class="remove_filter" value="' + v + '" filter_type="' + 
+				filter_type + '">' + v + '</a></li>'
+			);
+		});
+	});
+	// Add javascript to remove the remove_filters
+	$('.remove_filter').click(function (event) {
+		if (event) event.preventDefault();
+		remove_filter(this);
+	});
 
+	// TODO: this does not display in the correct place
+	//build_tooltips($('#left_menu'));
+
+}
+
+/*
+ * Remove this exclusion filter from the search parameters.
+ */
+function remove_filter(elem) {
+
+	var type = $(elem).attr('filter_type');
+	var field = $('#search input[name="filter_'+type+'"]');
+	if (!field.length) return;
+
+	var values = (field.val().length) ? field.val().split("|") : [];
+	var new_values = [];
+	for (i in values) {
+		if (values[i] == $(elem).attr('value'))
+			continue;
+		new_values.push(values[i]);
+	}
+	field.val(new_values.join("|"));
+	$(this).parent().remove();
+	search();
+}
+
+/*
+ * Add or Update a hidden field in the search form for the filter.
+ */
+function update_filter_field(filter_type, value) {
+
+	var field = $('#search input[name="filter_'+filter_type+'"]');
+	if (field.val().length) {
+		var values = field.val().split("|");
+		values.push(value);
+		field.val(values.join("|"));
+		return;
+	}
+	field.val(value);
 }
 
 

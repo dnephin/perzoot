@@ -1,12 +1,7 @@
-<% if (size(content) == 1) { %>
-	<h3 class="tile_default_closed">
-<% } else { %>
-	<h3>
-<% } %>
 
-<a href="#"><%=title%></a></h3>
+<h3><a href="#"><%=title%></a></h3>
 <div>
-	<ul class="plain">
+	<ul class="plain" id="list_<%=title.toLowerCase()%>">
 	<% 
 		$.each(content, function(k, v) { 
 			if (v < 1) return true;
