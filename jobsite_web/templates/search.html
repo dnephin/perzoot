@@ -21,12 +21,9 @@
 		// handle search
 		$('#search').submit(search);
 
-		$('#view_buttons INPUT').each(function () {
-			$(this).click(update_result_view);
-		});
-		$('#sort_buttons INPUT').each(function () {
-			$(this).click(resort_search);
-		});
+		$('#view_buttons INPUT').click(update_result_view);
+		$('#sort_buttons INPUT').click(resort_search);
+		$('#hl_buttons INPUT').click(highlight_toggle);
 
 		// if page_data is blank, this should be an initial page load 
 		if (!get_timestamp_data().length) {

@@ -162,6 +162,9 @@ def build_details(doc):
 			value = FORMAT_MAP[key](doc[key])
 		else:
 			value = doc[key]
+
+		if not value:
+			continue
 		detail_list.append(value)
 	return ",".join(detail_list)
 

@@ -71,8 +71,12 @@ function handle_search_scroll(event) {
 function update_search(form_data) {
 	$.each(form_data.split('&'), function(i, d) {
 		var parts = d.split('=');
-		$("#search input[name='"+parts[0]+"']").val(unescape(parts[1]));
+		$("#search input[name='"+parts[0]+"']").val(format_value(parts[1]));
 	});
+}
+
+function format_value(value) {
+	return unescape(value).replace('+', ' ');
 }
 
 /*
@@ -134,6 +138,7 @@ function handle_search_response(data, append, event_url) {
 		update_sort();
 	}
 	update_result_view();
+	highlight_toggle();
 
 	// Add event handlers
 	build_result_handlers();
@@ -401,5 +406,37 @@ function update_result_view() {
 		$('.search_result DIV').hide();
 		$('.search_result .result_title').show();
 		return;	
+	}
+}
+
+
+/*
+ * Toggle highlight of search results.
+ */
+function highlight_toggle() {
+	var state = $('#hl_buttons INPUT:checked').attr('id');
+
+	// Set off as default, is nothing is set
+	if (!state) {
+		$('#hl_off').attr('checked', 'checked');
+		$('#hl_buttons').buttonset('refresh');
+		return;
+	}
+		
+	var selector = $('.result_details,.result_summary');
+
+	$('#hl_buttons').buttonset('refresh');
+	if (state == 'hl_on') {
+		// TODO: handle quotes around terms
+		var terms = $('#id_keywords').val().split(' ');
+		for (i in terms) {
+			selector.highlight(terms[i]);
+		}
+		return;
+	}
+
+	if (state == 'hl_off') {
+		selector.removeHighlight();
+		return;
 	}
 }
