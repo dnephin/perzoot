@@ -98,21 +98,25 @@ def format_search(sr):
 			'numFound': sr['response']['numFound'],
 			'start': sr['response']['start'],
 		},
-		'filters': {'Date': {}},
+		'filters': [],
 		'results': [],
 	}
-	
+
 	for field, value_list in sr['facet_counts']['facet_fields'].iteritems():
 		field = field.capitalize()
-		resp['filters'][field] = {}
-		for i in range(0, len(value_list)/2, 2):
+		field_data = []
+		for i in range(0, len(value_list), 2):
 			name = value_list[i] or 'missing'
-			resp['filters'][field][name] = value_list[i+1]
-
+			field_data.append((name, value_list[i+1]))
+		resp['filters'].append((field, field_data))
+		
+	field_data = []
 	for date, value in sr['facet_counts']['facet_dates']['date'].iteritems():
 		if date.find('T00:00:00Z') < 0:
 			continue
-		resp['filters']['Date'][format_date(date)] = value
+		field_data.append((format_date(date), value))
+
+	resp['filters'].append(('Date', field_data))
 
 	for doc in sr['response']['docs']:
 		new_doc = {

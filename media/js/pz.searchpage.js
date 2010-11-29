@@ -161,8 +161,8 @@ function update_search_filters(filter_data) {
 
 	var filters = "";
 	var filter_template = new EJS({url: '/m/js/templates/search_filter.ejs'});
-	$.each(filter_data, function(title, content) {
-		filters += filter_template.render({'title': title, 'content': content})
+	$.each(filter_data, function(i, content) {
+		filters += filter_template.render({'title': content[0], 'content': content[1]})
 	});
 	$('#left_menu').html(filters);
 	tiles($('#left_menu'));

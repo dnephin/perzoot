@@ -93,6 +93,7 @@ class Search(object):
 		if not values:
 			return ""
 
+		# TODO: handle missing param translated to missing value (ie: require a value)
 		return "-%s: (%s)" % (filter, " OR ".join(map(lambda v: '"%s"' % v, values)))
 
 	def handle_keywords(self, kws):

@@ -3,12 +3,14 @@
 <div>
 	<ul class="plain" id="list_<%=title.toLowerCase()%>">
 	<% 
-		$.each(content, function(k, v) { 
-			if (v < 1) return true;
+		$.each(content, function(i, v) { 
+			var name = v[0];
+			var value = v[1];
+			if (value < 1) return true;
 	%>
 			<li>
 				<input type="checkbox" class="filter" filter_type="<%=title.toLowerCase()%>" 
-					checked="checked" name="<%=k%>" /><%=k%> (<%=v%>)
+					checked="checked" name="<%=name%>" /><%=name%> (<%=value%>)
 			</li> 
 		<% }) %>
 	</ul>
