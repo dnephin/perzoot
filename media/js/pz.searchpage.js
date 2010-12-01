@@ -274,7 +274,6 @@ function update_saved_search() {
  * Update the favorite postings block
  */
 function update_favorite_postings() {
-	// TODO: outbound url for click_url 
 	right_tile_helper(URL_FAV_POSTINGS, '#favorite_posts', null);
 }
 

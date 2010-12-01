@@ -43,6 +43,9 @@ class SearchEvent(Model):
 	terms =   CharField(max_length=255)
 	full_string = CharField(max_length=2000)
 	saved =	  BooleanField(default=False)
+	# search_type
+	# filters
+	# sort
 
 
 	def __str__(self):

@@ -72,6 +72,7 @@ class JobSearchForm(Form):
 		('relevancy', 'relevancy'),
 	)
 
+	search_event =	IntegerField(widget=HiddenInput, required=False)
 	keywords = 	CharField(max_length=255)
 	days =		IntegerField(initial=3)
 	city = 		CharField(max_length=200, initial='Montreal')

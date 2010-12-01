@@ -14,5 +14,17 @@ NOTFOUND	= 'notfound'
 # There was a server side error (5xx)
 ERROR		= 'error'
 
-# Name of the value in the session that stores the id of the last search event
-LAST_SEARCH_EVENT = 'last_search_event'
+
+
+### Types of searches
+
+# This search was performed with no filters, and new terms
+CLEAN_SEARCH		= "clean_search"
+# This search was performed to retrieve additional results
+NEXT_PAGE_SEARCH	= "next_page_search"
+# This search was performed by changing filters
+FILTERED_SEARCH		= "filtered_search"
+# This search was performed by changing sort
+RESORT_SEARCH		= "resort_search"
+# This search was performed from a saved search
+SEARCH_EVENT_SEARCH	= "search_event_search"

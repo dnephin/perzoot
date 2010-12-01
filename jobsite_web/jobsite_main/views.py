@@ -21,7 +21,7 @@ from django.core.urlresolvers import reverse
 
 from jobsite_main.forms import JobSearchForm, UserForm
 from jobsite_main.search import Search, SOLR_DATE_FORMAT
-from jobsite_main import db
+from jobsite_main import db, business
 from jobsite_main.util import service_friendly_name, to_json, auto_authenticate
 from jobsite_main.util import from_json 
 from jobsite_main.statics import *
@@ -30,6 +30,7 @@ from datetime import datetime
 
 
 log = logging.getLogger('View')
+search_log = logging.getLogger('SearchEeventLog')
 
 ###############################################################################
 #		Helpers	
@@ -231,13 +232,20 @@ def search(request):
 		return handle_response(request, {'search_form': form}, 
 				template='search.html', code=INPUT)
 
+	search_type = business.get_search_type(request, form)
+
 	resp = Search().search(form)
+
 	# TODO: restrict saving of search on some conditions (such as repeating a
-	# previous search, or filtering)
+	# previous search, or filtering). Also update the search if there is already
+	# an event id
 	search_event = db.save_search_event(request, form)
-	request.session[LAST_SEARCH_EVENT] = search_event
+
 
 	# TODO: filter out deleted postings for the user
+
+	search_log.info("%s:%d %s" % (
+			search_type, search_event.id, form.cleaned_data))
 
 	return handle_response(request, {
 			'search_form': form, 
