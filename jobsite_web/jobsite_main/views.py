@@ -271,7 +271,8 @@ def favorite_postings(request):
 		resp.append({
 			'id': doc['id'], 
 			'terms': doc['title'],
-			'date': posting_map[doc['id']].tstamp.strftime('%b %d')
+			'date': posting_map[doc['id']].tstamp.strftime('%b %d'),
+			'url': doc['url'],
 		})
 
 	return json_response(request, data={'list': resp})

@@ -51,6 +51,11 @@
 	font-weight: bold;
 }
 
+#search_messages {
+	max-height: 50px;
+	overflow: auto;
+}
+
 /* Search Results
 -------------------------------------------------- */
 

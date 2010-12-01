@@ -279,6 +279,7 @@ function update_favorite_postings() {
 }
 
 function right_tile_helper(url, div_id, click_url) {
+	var dynamic_click_url = (click_url == null);
 	$.ajax({
 		url: url,
 		dataType: 'json',
@@ -293,7 +294,8 @@ function right_tile_helper(url, div_id, click_url) {
 			elem.next().remove();
 			elem.replaceWith(list.render(
 				{'title': elem.find('a').html(), 'id': elem.attr('id'),
-				 'content': data.content.list, 'click_url': click_url
+				 'content': data.content.list, 'click_url': click_url,
+				 'dynamic_click_url': dynamic_click_url
 				 }));
 
 			tiles($('#search_meta'));
