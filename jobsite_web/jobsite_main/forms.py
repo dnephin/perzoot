@@ -2,10 +2,13 @@
 	Forms
 """
 
+import itertools
 from django.forms import *
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.core import validators
+
+from jobsite_main.models import SearchEvent, SearchFilter
 
 
 class SearchFilterWidget(HiddenInput):
@@ -62,27 +65,31 @@ class SearchFilterField(Field):
 
 
 
-class JobSearchForm(Form):
+class JobSearchForm(ModelForm):
 	"""
 	Basic job search form.
 	"""
 
-	SORT_CHOICES = (
-		('date', 'date'),
-		('relevancy', 'relevancy'),
-	)
+	class Meta:
+		model = SearchEvent
+		fields = ('keywords', 'days', 'city', 'sort')
 
-	search_event =	IntegerField(widget=HiddenInput, required=False)
-	keywords = 	CharField(max_length=255)
+	search_event =		IntegerField(widget=HiddenInput, required=False)
 	days =		IntegerField(initial=3)
 	city = 		CharField(max_length=200, initial='Montreal')
 	start =		IntegerField(widget=HiddenInput, initial=0, required=False)
 	rows = 		IntegerField(widget=HiddenInput, initial=20, required=False)
-	sort = 		ChoiceField(choices=SORT_CHOICES, required=False)
+	sort = 		ChoiceField(choices=SearchEvent.SORT_CHOICES, required=False)
 	filter_date = 		SearchFilterField()
 	filter_category =	SearchFilterField()
 	filter_domain = 	SearchFilterField()
 	filter_company = 	SearchFilterField()
+
+
+	def __init__(self, *args, **kwargs):
+		super(JobSearchForm, self).__init__(*args, **kwargs)
+		if 'instance' in kwargs:
+			self.load_filters(kwargs['instance'])
 
 
 	def clean_rows(self):
@@ -103,9 +110,62 @@ class JobSearchForm(Form):
 		if hasattr(self, 'cleaned_data'):
 			data.update(self.cleaned_data)
 
+		# Update filters values to pipe separated list
+		for filter in SearchFilter.FILTER_CHOICES:
+			filter_name = 'filter_' + filter[0]
+			if filter_name in data:
+				data[filter_name] = "|".join(data[filter_name])
+			else:
+				data[filter_name] = ""
+
 		if hasattr(self, 'errors'):
 			data['errors'] = self.errors
 		return data
+
+
+	def save(self, commit=False):
+		"""
+		Setup the SearchEvent object to save it.
+		"""
+		event = super(JobSearchForm, self).save(commit=False)
+		event.id = self.cleaned_data.get('search_event', None)
+		return event
+
+	def save_filters(self, event):
+		"""
+		Save the search filters for this search.  This must be called after 
+		the search event has already been saved.
+		"""
+		for filter in SearchFilter.FILTER_CHOICES:
+			for filter_value in self.cleaned_data.get('filter_' + filter[0], []):
+				event.searchfilter_set.create(
+					filter_type =  filter[0], filter_value = filter_value
+				)
+
+	def load_filters(self, model):
+		"""
+		Load filters from the model.
+		"""
+		for filter in model.searchfilter_set.all():
+			filter_name = 'filter_' + filter.filter_type
+
+			if filter_name not in self.initial:
+				self.initial[filter_name] = []
+
+			self.initial[filter_name].append(filter.filter_value)
+
+
+	def is_valid(self, skip_bound_check=False):
+		"""
+		Returns True if the form has no errors. Otherwise, False. If errors are
+		being ignored, returns False.
+		"""
+		if skip_bound_check:
+			# if we're skipping bound check, and the form is bound then no data
+			# will be in cleaned_data. So we need to populate it
+			self.cleaned_data = self.initial
+			return not bool(self.errors)
+		return super(JobSearchForm, self).is_valid()
 
 
 class UserForm(UserCreationForm):

@@ -39,19 +39,19 @@ def load_static_page(page_name):
 	return page
 
 
-def save_search_event(request, search_form):
+def save_search_event(request, search_form, search_type):
 	" Save a search event. "
 
 	user = request.user if not request.user.is_anonymous() else None
 
-	s = SearchEvent(
-		session = request.session.session_key,
-		user_id = user,
-		terms = search_form.cleaned_data.get('keywords'),
-		full_string = to_json(search_form)
-	)
-	s.save()
-	return s
+	event = search_form.save(commit=False)
+	event.session = request.session.session_key
+	event.user = user
+	event.search_type = search_type
+
+	event.save()
+	search_form.save_filters(event)
+	return event
 
 
 def save_search(event_id):
@@ -64,7 +64,7 @@ def get_search_history(request, saved=False, ids=None, limit=10):
 
 	user = request.user if not request.user.is_anonymous() else None
 	if user:
-		selector = {'user_id': user}
+		selector = {'user': user}
 	else:
 		selector = {'session': request.session.session_key}
 

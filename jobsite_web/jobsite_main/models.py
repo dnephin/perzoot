@@ -37,27 +37,56 @@ class SearchEvent(Model):
 	A search that was performed for a user.
 	"""
 
-	session = CharField(max_length=40, db_index=True)
-	user_id = ForeignKey(User, null=True)
-	tstamp =  DateTimeField(auto_now_add=True)
-	terms =   CharField(max_length=255)
-	full_string = CharField(max_length=2000)
-	saved =	  BooleanField(default=False)
-	# search_type
-	# filters
-	# sort
+	SORT_CHOICES = (
+		('date', 'date'),
+		('relevancy', 'relevancy'),
+	)
+
+	session = 	CharField(max_length=40, db_index=True)
+	user =		ForeignKey(User, null=True)
+	tstamp =	DateTimeField(auto_now_add=True)
+	saved =		BooleanField(default=False)
+	search_type =	CharField(max_length=50)
+
+	keywords =	CharField(max_length=255)
+	days = 		IntegerField()
+	city =		CharField(max_length=200)
+	sort = 		CharField(choices=SORT_CHOICES, max_length=20, null=True)
 
 
 	def __str__(self):
 		return "Search [%s|%s] %s" % (self.user_id, self.tstamp, self.terms)
 
+	# TODO: add filters and extra params
 	def __json__(self):
 		return {
 			'id': self.id,
 			'date': self.tstamp.strftime("%b %d"),
-			'terms': self.terms,
+			'keywords': self.keywords,
 			'saved': self.saved,
 		}
+
+
+class SearchFilter(Model):
+	"""
+	A Filter that was used on a search event.
+	"""
+
+	FILTER_CHOICES = (
+		('date', 'date'),
+		('category', 'category'),
+		('domain', 'domain'),
+		('company', 'company')
+	)
+
+	search_event =	ForeignKey(SearchEvent)
+	filter_type =	CharField(choices=FILTER_CHOICES, max_length=20)
+	filter_value = 	CharField(max_length=250)
+
+
+	def __str__(self):
+		return "SearchFilter[%s] %s = %s" % (self.search_id, 
+				self.filter_type, self.filter_value)
 
 
 class SitePage(Model):

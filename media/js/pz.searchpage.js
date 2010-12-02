@@ -131,6 +131,14 @@ function handle_search_response(data, append, event_url) {
 		$('#results').append(listing.render(p));
 	});
 
+	// If this search was from retrieving an event, then update the form
+	// and page data
+	if (event_url) {
+		update_search($.param(data.content.search_form));
+		var form_data = build_form_data();
+		set_page_data(form_data);
+	}
+
 	// updates
 	if (!append) {
 		update_search_filters(data.content.search_results.filters);
@@ -143,13 +151,6 @@ function handle_search_response(data, append, event_url) {
 	// Add event handlers
 	build_result_handlers();
 
-	// If this search was from retrieving an event, then update the form
-	// and page data
-	if (event_url) {
-		update_search($.param(data.content.search_form));
-		var form_data = build_form_data();
-		set_page_data(form_data);
-	}
 
 	// If this was an append search (page scrolling), and we didn't get any
 	// more results, then it's the end of results

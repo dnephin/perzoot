@@ -210,10 +210,12 @@ def search(request):
 	"""
 
 	form = None
+	from_model = False
 	if request.method == "GET" and 'event' in request.GET:
 		search_event = db.get_search_history(request, ids=[request.GET['event']])[:1]
 		if search_event:
-			form = JobSearchForm(from_json(search_event[0].full_string))
+			form = JobSearchForm(instance=search_event[0])
+			from_model = search_event[0]
 
 	if not form:
 		form_data = request.GET if request.method == "GET" else request.POST
@@ -223,12 +225,13 @@ def search(request):
 	if not form:
 		last_search = db.get_search_history(request, limit=1)
 		if last_search:
-			form = JobSearchForm(from_json(last_search[0].full_string))
+			form = JobSearchForm(instance=last_search[0])
+			from_model = last_search[0]
 
 	if not form:
 		form = JobSearchForm()
 
-	if not form.is_valid():
+	if not form.is_valid(skip_bound_check=from_model):
 		return handle_response(request, {'search_form': form}, 
 				template='search.html', code=INPUT)
 
@@ -236,21 +239,24 @@ def search(request):
 
 	resp = Search().search(form)
 
-	# TODO: restrict saving of search on some conditions (such as repeating a
-	# previous search, or filtering). Also update the search if there is already
-	# an event id
-	search_event = db.save_search_event(request, form)
+	# restrict saving of search to only some events
+	if search_type not in (SEARCH_EVENT_SEARCH, NEXT_PAGE_SEARCH):
+		search_event = db.save_search_event(request, form, search_type)
+		search_event_id = search_event.id
+	else:
+		search_event_id = from_model.id if from_model else None
 
 
 	# TODO: filter out deleted postings for the user
 
-	search_log.info("%s:%d %s" % (
-			search_type, search_event.id, form.cleaned_data))
+	search_log.info("%s:%s %s" % (
+			search_type, search_event_id, form.cleaned_data))
 
+	print to_json(form)
 	return handle_response(request, {
 			'search_form': form, 
 			'search_results': format_search(resp),
-			'search_event': search_event.id,
+			'search_event': search_event_id,
 			}, 'search.html', json_encode=True)
 
 
@@ -270,6 +276,7 @@ def favorite_postings(request):
 	posting_list = db.get_user_events(request, type='save', sorted=True, limit=10)
 	if len(posting_list) < 1:
 		return json_response(request, data={'list': None})
+	# TODO: caching for these posts
 	titles = Search().retrieve_titles(map(lambda u: u.posting_id, posting_list))
 
 	posting_map = dict(map(lambda p: (p.posting_id, p),posting_list))
@@ -278,7 +285,7 @@ def favorite_postings(request):
 	for doc in titles['response']['docs']:
 		resp.append({
 			'id': doc['id'], 
-			'terms': doc['title'],
+			'keywords': doc['title'],
 			'date': posting_map[doc['id']].tstamp.strftime('%b %d'),
 			'url': doc['url'],
 		})
