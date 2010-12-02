@@ -27,6 +27,13 @@ def save_user_event(event_name, posting_id, user, session_id):
 	return True
 
 
+def update_action_with_user_id(session, user):
+	"""
+	Update all user events and search events with the new users user_id.
+	"""
+	UserEvent.objects.filter(session=session, user=None).update(user=user)
+	SearchEvent.objects.filter(session=session, user=None).update(user=user)
+
 def load_static_page(page_name):
 	" Load the static content page. "
 

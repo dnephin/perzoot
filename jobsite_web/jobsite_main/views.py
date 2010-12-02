@@ -425,7 +425,11 @@ def login(request):
 		if request.GET.get('submit', False):
 			form = AuthenticationForm(data=request.GET)
 			if form.is_valid():
-				django_login(request, form.get_user())
+				user = form.get_user()
+				session_id = request.session.session_key
+				django_login(request, user)
+				# update the users actions with their user_id
+				db.update_action_with_user_id(session_id, user)
 				return json_response(request)
 			
 		else:
@@ -447,8 +451,10 @@ def register(request):
 			form = UserForm(data=request.GET)
 			if form.is_valid():
 				user = form.save()
+				session_id = request.session.session_key
 				auto_authenticate(user)
 				django_login(request, user)
+				db.update_action_with_user_id(session_id, user)
 				return json_response(request)
 		else:
 			form = UserForm()
