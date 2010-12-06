@@ -14,6 +14,7 @@ import logging
 log = logging.getLogger('Search')
 
 SOLR_DATE_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
+MISSING = "missing"
 
 solr_conn = solr.Solr(settings.SOLR_URL)
 
@@ -44,6 +45,16 @@ class Search(object):
 		params['sort'] = self.handle_sort(search_form.cleaned_data.get('sort')),
 		params['qf'] = "title^2 body"
 
+		filters = []
+		for filter in self.SEARCH_FACETS:
+			filter_data = search_form.cleaned_data.get('filter_' + filter)
+			if not filter_data:
+				continue
+			filters.extend(self.handle_filter(filter, filter_data))
+
+		if filters:
+			params['fq'] = filters
+
 		handler = solr.SearchHandler(solr_conn, wt='python')
 		r = handler(**params)
 		return r
@@ -57,10 +68,6 @@ class Search(object):
 		q_parts.append(self.handle_keywords(data.get('keywords')))
 		q_parts.append(self.handle_days(data.get('days')))
 		q_parts.append(self.handle_city(data.get('city')))
-		for filter in self.SEARCH_FACETS: 
-			part = self.handle_filter(filter, data.get('filter_' + filter))
-			if part:
-				q_parts.append(part)
 
 		return {
 			'q': " AND ".join(q_parts),
@@ -93,8 +100,17 @@ class Search(object):
 		if not values:
 			return ""
 
-		# TODO: handle missing param translated to missing value (ie: require a value)
-		return "-%s: (%s)" % (filter, " OR ".join(map(lambda v: '"%s"' % v, values)))
+		filter_list = []
+		value_list = []
+		for v in values:
+			if v == MISSING: 
+				filter_list.append("%s:[* TO *]" % filter)
+			else:
+				value_list.append('"%s"' % v)
+
+		if value_list:
+			filter_list.append("-%s:(%s)" % (filter, " OR ".join(value_list)))
+		return filter_list
 
 	def handle_keywords(self, kws):
 		if not kws:

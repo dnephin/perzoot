@@ -20,7 +20,7 @@ from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
 
 from jobsite_main.forms import JobSearchForm, UserForm
-from jobsite_main.search import Search, SOLR_DATE_FORMAT
+from jobsite_main.search import Search, SOLR_DATE_FORMAT, MISSING
 from jobsite_main import db, business
 from jobsite_main.util import service_friendly_name, to_json, auto_authenticate
 from jobsite_main.util import from_json 
@@ -107,7 +107,7 @@ def format_search(sr):
 		field = field.capitalize()
 		field_data = []
 		for i in range(0, len(value_list), 2):
-			name = value_list[i] or 'missing'
+			name = value_list[i] or MISSING
 			field_data.append((name, value_list[i+1]))
 		resp['filters'].append((field, field_data))
 		
