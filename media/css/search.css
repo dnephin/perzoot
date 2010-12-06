@@ -91,7 +91,7 @@
 }
 
 .search_result .result_summary {
-	height: 3em;
+	max-height: 3em;
 	overflow: hidden;
 }
 .search_result .result_summary:hover {

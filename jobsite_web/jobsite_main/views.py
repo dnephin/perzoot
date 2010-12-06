@@ -254,7 +254,6 @@ def search(request):
 	search_log.info("%s:%s %s" % (
 			search_type, search_event_id, form.cleaned_data))
 
-	print to_json(form)
 	return handle_response(request, {
 			'search_form': form, 
 			'search_results': format_search(resp),
