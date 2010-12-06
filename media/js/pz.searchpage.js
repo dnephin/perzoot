@@ -8,6 +8,7 @@ var GLOBAL_FETCHING_PAGE = false;
 var CONST_NUM_RESULTS = 20;
 var GLOBAL_SEARCH_EVENT;
 var GLOBAL_END_OF_RESULTS = false;
+var GLOBAL_SCROLL_TOP = 0;
 
 
 /*
@@ -45,6 +46,7 @@ function search(event) {
  *		and sorting.
  */
 function search_type(extra_params, append, event_url) {
+	GLOBAL_FETCHING_PAGE = true;
 	var form_data = build_form_data();
 	perform_search(form_data + extra_params, append, event_url);
 	set_page_data(form_data);
@@ -59,18 +61,58 @@ function search_type(extra_params, append, event_url) {
  */
 function handle_search_scroll(event) {
 
+	update_sidebar_location();
+
 	if (GLOBAL_FETCHING_PAGE) return;
 	if (GLOBAL_END_OF_RESULTS) return; 
 
 	var view_bottom = $(window).scrollTop() + $(window).height();
 	var document_bottom = $(document).height();
 
-	if (view_bottom + 150 > document_bottom) {
-		GLOBAL_FETCHING_PAGE = true;
+	if (view_bottom + 250 > document_bottom) {
 		var start = $('#results').children().length;
 		search_type("&start=" + start, true);
+		var form_data = build_form_data();
 		set_page_data(form_data + "&rows=" + (start+CONST_NUM_RESULTS));
 	}
+}
+
+/*
+ * Update the location of the search sidebars when the user scrolls down the 
+ * page.  There are two possible cases here: The sidebar is shorter then the
+ * available space and it should stick to the top, or the sidebar is taller 
+ * then the available space and it should tick to the bottom.
+ */
+function update_sidebar_location() {
+
+	var view_bottom = $(window).scrollTop() + $(window).height();
+	var doc_bottom = $('body').height();
+	var pad = 20;
+
+	var down = (GLOBAL_SCROLL_TOP < $(window).scrollTop())
+	var up = !down;
+	GLOBAL_SCROLL_TOP = $(window).scrollTop();
+
+	$('#left_bar,#right_bar').each(function() {
+		var bot = $(this).position()['top'] + $(this).height();
+		var top = $(this).position()['top'];
+		var orig_top = $(this).data('orig_top');
+		var taller = ($(this).height() > $(window).height());
+
+		// The bar is shorter then the window
+		if ($(window).scrollTop() != top && !taller &&
+			((down && bot + pad < doc_bottom) ||
+			(up && top >= orig_top))) {
+			$(this).css({position: "absolute", 
+					top: Math.max($(window).scrollTop(), orig_top),
+					left: $(this).position()['left']})
+		}
+
+		// The bar is taller then the window
+		// TODO:
+
+
+	});
 }
 
 

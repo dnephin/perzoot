@@ -10,16 +10,12 @@
 		tiles($('.tile_widget'));
 		default_doc_ready();
 		setInterval('check_page_data_has_changed()', 1000);
-		$(window).scroll(handle_search_scroll)
 		update_saved_search();
 		update_favorite_postings();
 
 		$('#sort_buttons').buttonset();
 		$('#view_buttons').buttonset();
 		$('#hl_buttons').buttonset();
-
-		// handle search
-		$('#search').submit(search);
 
 		$('#view_buttons INPUT').click(update_result_view);
 		$('#sort_buttons INPUT').click(resort_search);
@@ -32,6 +28,13 @@
 			var form_data = build_form_data();
 			set_page_data(form_data);
 		}
+
+		// Store original placement for left and right bar
+		$('#left_bar,#right_bar').each(function() {
+			$(this).data('orig_top', $(this).position()['top']);
+		});
+		$(window).scroll(handle_search_scroll);
+		$(window).resize(update_sidebar_location);
 	});
 
 	</script>
@@ -42,10 +45,12 @@
 {% block content %}
 
 <div class="span-5 prepend-top">
-	<div id="left_menu" class="tile_widget">
-	</div>
-	<div id="left_links">
-		<hr />
+
+	<div id="left_bar" class="span-5 last">
+		<div id="left_menu" class="tile_widget">
+		</div>
+		<div id="left_links">
+			<hr />
 			<ul class="plain">
 				<li><a href="#">Donate</a> to stay ad free</li>
 				<li><a href="#">Help</a></li>
@@ -54,6 +59,7 @@
 				<li><a href="#">Report a problem</a></li>
 				<li><a href="#">Contact us</a></li>
 			</ul>
+		</div>
 	</div>
 </div>
 
@@ -108,11 +114,12 @@
 </div>
 
 <div class="span-6 last prepend-top">
+
+	<div id="right_bar" class="span-6 last">
 	<div class="tile_widget" id="search_meta">
 
 		<h3 id="search_history"><a href="#">Search History</a></h3>
-		<div>
-		</div>
+		<div> </div>
 
 		<h3 id="saved_searches" class="tile_default_closed">
 			<a href="#">Saved Searches</a></h3>
@@ -128,19 +135,20 @@
 
 		<h3><a href="#">&nbsp;</a></h3>
 		<div>
-		<ul id="social-links" class="plain">
-			<li id="facebook"><a href="#">Like us on Facebook</a></li>
-			<li id="twitter"><a href="#">Follow us on Twitter</a></li>
-		</ul>
+			<ul id="social-links" class="plain">
+				<li id="facebook"><a href="#">Like us on Facebook</a></li>
+				<li id="twitter"><a href="#">Follow us on Twitter</a></li>
+			</ul>
 
-		<ul id="features" class="plain">
-			<li id="notes"><a href="#">Make notes along the way</a></li>
-			<li id="email"><a href="#">Receive email notifications</a></li>
-			<li id="track"><a href="#">Track your searches</a></li>
-			<li id="smiley"><a href="#">Find the job you want</a></li>
-		</ul>
+			<ul id="features" class="plain">
+				<li id="notes"><a href="#">Make notes along the way</a></li>
+				<li id="email"><a href="#">Receive email notifications</a></li>
+				<li id="track"><a href="#">Track your searches</a></li>
+				<li id="smiley"><a href="#">Find the job you want</a></li>
+			</ul>
 		</div>
-
+	</div>
+	</div>
 </div>
 
 
