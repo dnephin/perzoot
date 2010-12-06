@@ -90,6 +90,14 @@
 	margin: 0 -8px 0 0;
 }
 
+.search_result .result_summary {
+	height: 3em;
+	overflow: hidden;
+}
+.search_result .result_summary:hover {
+	height: auto;
+}
+
 .highlight { 
 	background-color: #cdf;
 	color: black;

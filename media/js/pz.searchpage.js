@@ -420,6 +420,7 @@ function update_result_view() {
 	if (view == 'minimal_view') {
 		$('.search_result DIV').hide();
 		$('.search_result .result_title').show();
+		$('.search_result .result_links').show();
 		return;	
 	}
 }
