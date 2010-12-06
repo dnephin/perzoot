@@ -13,7 +13,7 @@ function track_outbound(id) {
 
 	// PZ
 	$.ajax({
-		url: '/track/outbound/' + id,
+		url: '/jax/track/open/' + id,
 		success: function(data) {},
 	});
 }

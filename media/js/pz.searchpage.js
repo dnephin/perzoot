@@ -38,6 +38,20 @@ function search(event) {
 	ga_track();
 }
 
+/*
+ * search_type
+ *		Perform a search due to some user action that was not the standard
+ *		event of clicking the search button. Used for next_page, filter, 
+ *		and sorting.
+ */
+function search_type(extra_params, append, event_url) {
+	var form_data = build_form_data();
+	perform_search(form_data + extra_params, append, event_url);
+	set_page_data(form_data);
+
+	ga_track();
+}
+
 
 /*
  * handle_search_scroll
@@ -54,11 +68,8 @@ function handle_search_scroll(event) {
 	if (view_bottom + 150 > document_bottom) {
 		GLOBAL_FETCHING_PAGE = true;
 		var start = $('#results').children().length;
-		var form_data = build_form_data();
-		perform_search(form_data + "&start=" + start, true);
+		search_type("&start=" + start, true);
 		set_page_data(form_data + "&rows=" + (start+CONST_NUM_RESULTS));
-
-		ga_track();
 	}
 }
 
@@ -82,6 +93,8 @@ function format_value(value) {
 /*
  * perform_search
  * 		Perform a search, update the page location, and display the results.
+ *		This function should most likely not be called directly, use search or
+ *		search_type instead so that analytics and page_data are updated.
  */
 function perform_search(form_data, append, event_url) {
 
@@ -178,7 +191,7 @@ function update_search_filters(filter_data) {
 			// add hidden field to search form
 			update_filter_field($(this).attr('filter_type'), $(this).attr('name'));
 			$(this).parent().remove();
-			search();
+			search_type('&otp_filter=1')
 		});
 	});
 	// add elements for removed filters and add hidden fields to search form
@@ -221,7 +234,7 @@ function remove_filter(elem) {
 	}
 	field.val(new_values.join("|"));
 	$(this).parent().remove();
-	search();
+	search_type('&otp_filter=1')
 }
 
 /*
@@ -254,7 +267,7 @@ function update_sort()  {
  */
 function resort_search() {
 	$('#id_sort').val($(this).attr('id'));
-	$('#search').submit();
+	search_type('&otp_sort=1')
 }
 
 /*

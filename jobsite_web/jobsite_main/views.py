@@ -249,6 +249,7 @@ def search(request):
 
 
 	# TODO: filter out deleted postings for the user
+	# TODO: add identifiers for visited/favorited postings for the user
 
 	search_log.info("%s:%s %s" % (
 			search_type, search_event_id, form.cleaned_data))
