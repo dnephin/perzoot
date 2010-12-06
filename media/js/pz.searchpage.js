@@ -339,12 +339,12 @@ function build_result_handlers() {
 	$('.search_result').each(function(i, e) {
 
 		var id = $(e).attr('post_id');
-		$(e).find('.result_save').click(function() {
+		$(e).find('.result_save').click(function(event) {
 			event.preventDefault();
 			track_event('save', id);
 			update_favorite_postings();
 		});
-		$(e).find('.result_close').click(function() { 
+		$(e).find('.result_close').click(function(event) { 
 			event.preventDefault();
 			track_event('remove', id);
 			$('#result_' + id).remove();

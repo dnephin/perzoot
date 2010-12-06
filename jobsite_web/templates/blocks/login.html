@@ -13,7 +13,7 @@
 	{% endif %}
 
 	<form id="login_form" method="GET" action="{% url login %}"
-		onsubmit="handle_user_account_action(this)">
+		onsubmit="return handle_user_account_action(this)">
 		<fieldset>
 			<legend>Login</legend>
 	

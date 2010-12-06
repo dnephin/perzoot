@@ -18,7 +18,7 @@
 	{% endif %}
 
 	<form id="register_form" method="GET" action="{% url register %}"
-		onsubmit="handle_user_account_action(this)">
+		onsubmit="return handle_user_account_action(this)">
 		<fieldset>
 			<legend>Register</legend>
 	

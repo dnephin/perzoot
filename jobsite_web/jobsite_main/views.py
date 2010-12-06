@@ -191,7 +191,8 @@ def main(request):
 	"""
 	 Default landing page.  Contains a basic search form.
 	"""
-	# TODO: set session data to force the cookie (do i need to?)
+	# This is required to force some browsers to send the cookie header
+	request.session['welcome'] = 1
 	# TODO: Set city in city field of form
 	form = JobSearchForm()
 	return render_to_response('index.html', 

@@ -141,13 +141,12 @@ function update_user_block() {
  * Log the user out
  */
 function logout(elem) {
-
-	event.preventDefault();
 	$('#user_block').html();
 	$.ajax({
 			'url': $(elem).attr('href'), 
 			'success': update_user_block, 
 	});
+	return false;
 }
 
 
@@ -160,7 +159,6 @@ var LOGIN	= 'login';
  * Handle the login and register form submission
  */
 function handle_user_account_action(elem) {
-	event.preventDefault();
 	$.ajax({
 		'url': add_async_param($(elem).attr('action') + '?' + $(elem).serialize()),
 		'success': function(data, code) {
@@ -176,6 +174,7 @@ function handle_user_account_action(elem) {
 			update_user_block();
 		},
 	});
+	return false;
 }
 
 

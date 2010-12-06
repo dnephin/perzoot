@@ -3,7 +3,7 @@
 		<a href="{% url user_view %}" title="Update your account settings." 
 			class="tt_link" id="user_view">{{ user.username }}{% if user.first_name %} 
 			({{ user.first_name }} {{user.last_name}}) {% endif %}</a>  
-		<a href="{% url logout %}" id="logout" onClick="logout(this)">logout</a>
+		<a href="{% url logout %}" id="logout" onClick="return logout(this)">logout</a>
 	{% else %}
 		Sign in: 
 		<a class="async_frame tt_link" href="{% url auth_wrapper 'linkedin' %}"
