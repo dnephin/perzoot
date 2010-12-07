@@ -99,19 +99,22 @@ function update_sidebar_location() {
 		var orig_top = $(this).data('orig_top');
 		var taller = ($(this).height() > $(window).height());
 
+
 		// The bar is shorter then the window
 		if ($(window).scrollTop() != top && !taller &&
-			((down && bot + pad < doc_bottom) ||
-			(up && top >= orig_top))) {
+				((down && bot + pad < doc_bottom) ||
+				(up && top >= orig_top))) {
 			$(this).css({position: "absolute", 
-					top: Math.max($(window).scrollTop(), orig_top),
-					left: $(this).position()['left']})
+					top: Math.max($(window).scrollTop(), orig_top)});
 		}
 
 		// The bar is taller then the window
-		// TODO:
-
-
+		if (taller &&
+				((down && bot < doc_bottom && bot < view_bottom) ||
+				(up && top >= orig_top ))) {
+			$(this).css({position: "absolute", 
+					top: Math.max(view_bottom - $(this).height(), orig_top)});
+		}
 	});
 }
 

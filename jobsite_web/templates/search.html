@@ -34,7 +34,8 @@
 			$(this).data('orig_top', $(this).position()['top']);
 		});
 		$(window).scroll(handle_search_scroll);
-		$(window).resize(update_sidebar_location);
+		// TODO: Set a callback on click of tile_widget items
+		//$('.tile_widget H3.ui-accordion-header A').click(update_sidebar_location);
 	});
 
 	</script>
