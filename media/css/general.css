@@ -11,23 +11,22 @@
 -------------------------------------------------- */
 body {
 	color:#222;	
-	font-family:"Helvetica Neue", Arial, Helvetica, sans-serif;
+	font-family: "Helvetica Neue Light", Helvetica, Arial, sans-serif;
 	background: #DBE8F3;
 }
 
-A:hover {
+a:hover {
 	color: #4BB050;
 }
 
 /* Header
 -------------------------------------------------- */
 #header {
-	border-bottom: 1px solid #CCC;
+	/* border-bottom: 1px solid #CCC; */
 	background-color: #1f77ff;
 	height: 63px;
 	white-space: nowrap;
 }
-
 #user_block {
 	text-align: right;
 	margin: 6px 10px 0 0;
@@ -92,7 +91,7 @@ A:hover {
 }
 
 
-Ul.plain {
+ul.plain {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
