@@ -95,7 +95,8 @@
 	overflow: hidden;
 }
 .search_result .result_summary:hover {
-	height: auto;
+	max-height: 9em;
+	overflow: auto;
 }
 
 .highlight { 

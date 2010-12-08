@@ -3,13 +3,14 @@
 }
 
 
-/* search filters */
+/* Tile Widget (accordion)
+-------------------------------------------------- */
 .ui-accordion .ui-accordion-content UL.plain LI {
-	font-size: 0.9em;
+	font-size: 1.0em;
 }
 
 .ui-accordion .ui-accordion-content {
-	padding: 2px 6px 6px 6px;
+	padding: 2px 6px 1em 6px;
 	border-bottom: 1px solid #DDD;
 	margin-bottom: 10px;
 }
@@ -105,3 +106,4 @@ button.ui-button-icon-only .ui-button-text {
 	padding: 0;
 	margin: 0;
 }
+

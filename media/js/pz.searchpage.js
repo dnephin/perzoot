@@ -243,6 +243,8 @@ function update_search_filters(filter_data) {
 	$('#search input[name^="filter_"]').each(function () {
 		var filter_type = $(this).attr('name').split('_')[1];
 		$.each($(this).val().split('|'), function(i, v) {
+			if (!v.length) return true;
+
 			$('#list_' + filter_type).append(
 				'<li><a href="#" title="Remove this filter" ' +
 				'class="remove_filter" value="' + v + '" filter_type="' + 
