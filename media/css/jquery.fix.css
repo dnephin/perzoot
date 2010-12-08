@@ -98,8 +98,9 @@
 button.ui-button-icon-only {
 	height: 1.5em;
 	width: 1.5em;
-	background: #fff;
+	background: transparent;
 	margin: 0;
+	border: 1px solid transparent;
 }
 
 button.ui-button-icon-only .ui-button-text {

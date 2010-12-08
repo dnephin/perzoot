@@ -409,8 +409,12 @@ function build_result_handlers() {
 			track_event('remove', id);
 			$('#result_' + id).remove();
 		});
-	
-		// TODO: outbound tracking links
+
+		// outbound tracking links
+		$(e).find('.job_title A,.result_links A').each(function() {
+			$(this).click( function(event) { track_outbound(event, id) } );
+		});
+
 		// TODO: open all above links
 		
 	});

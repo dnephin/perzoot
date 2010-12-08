@@ -108,6 +108,7 @@ Ul.plain {
 .button:hover {
 	background-color: #4BB050;
 	cursor: pointer;
+	border: 1px solid #2C682F;
 }
 
 /* Dialog Window

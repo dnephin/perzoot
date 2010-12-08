@@ -128,6 +128,7 @@ def format_search(sr):
 			'summary': doc['summary'],
 			'date': format_date(doc['date']),
 			'source': doc['domain'],
+			'type': None,
 		}
 		resp['results'].append(new_doc)
 
@@ -247,16 +248,18 @@ def search(request):
 	else:
 		search_event_id = from_model.id if from_model else None
 
-
-	# TODO: filter out deleted postings for the user
-	# TODO: add identifiers for visited/favorited postings for the user
+	# filter out deleted postings for the user and add identifiers for 
+	# visited/favorited postings for the user
+	search_results = format_search(resp)
+	business.suppliment_results(request, search_results)
+	# TODO: repeat search if there are no results left.
 
 	search_log.info("%s:%s %s" % (
 			search_type, search_event_id, form.cleaned_data))
 
 	return handle_response(request, {
 			'search_form': form, 
-			'search_results': format_search(resp),
+			'search_results': search_results,
 			'search_event': search_event_id,
 			}, 'search.html', json_encode=True)
 

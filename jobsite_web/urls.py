@@ -27,7 +27,7 @@ urlpatterns = patterns('',
 		name='static_page'),
 
 	# Ajax only
-	url(r'^jax/track/(?P<event_name>\w+)/(?P<posting_id>\d+)/$', 
+	url(r'^jax/track/(?P<event_name>\w+)/(?P<posting_id>\d+)$', 
 			jobsite_main.views.track_event, name='track'),
 	url(r'^jax/search/history$', jobsite_main.views.search_history, 
 			name='search_history'),

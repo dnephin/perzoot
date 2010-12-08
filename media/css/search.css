@@ -104,6 +104,24 @@
 	color: black;
 	font-weight: bold;
 }
+/* Opened */
+#results .opened_event {
+	border: 1px solid #2C682F;
+	background: #e6e6e6;
+}
+.opened_event .result_title a {
+	text-decoration: none;
+	color: #4BB050;
+	font-weight: normal;
+}
+
+/* Saved */
+#results .saved_event {
+	border: 1px solid black;
+	background: #e6e6e6;
+}
+
+
 
 /* Search Filters and Left Column
 -------------------------------------------------- */
