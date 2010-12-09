@@ -1,4 +1,4 @@
-.ui-widget UL,  .ui-wdiget A {
+.ui-widget UL,  .ui-widget A {
 	color: #555;
 }
 
@@ -22,7 +22,17 @@
 .ui-accordion .ui-accordion-header A {
 	padding: 4px 4px 4px 26px;
 }
-
+/* Accordion headers */
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited {
+	color: #999;
+}
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
+	background: none;
+	background-color: #DDD;
+}
+.ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited {
+	color: #333;
+}
 
 /* dialog */
 .ui-dialog {
@@ -44,7 +54,7 @@
 /* UI buttons
 -------------------------------------------------- */
 .ui-buttonset .ui-state-default {
-	background: #fff;
+	background: #FFF;
 	border: 1px solid #CCC;
 }
 
