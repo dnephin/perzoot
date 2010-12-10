@@ -367,6 +367,8 @@ def auth_frame_wrapper(request, service):
 	if service not in settings.OAUTH_ACCESS_SETTINGS:
 		return handle_response(request, code=NOTFOUND)
 
+
+	# TODO: change to redirect
 	if is_async(request):
 		return json_response(request, data={
 				'body': render_to_string('auth/frame.html', {'service': service}),

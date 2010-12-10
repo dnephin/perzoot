@@ -63,6 +63,19 @@ OAUTH_ACCESS_SETTINGS = {
 		},
 		'friendly_name': 'Facebook',
 	},
+	'twitter': {
+		'keys': {
+			'KEY':	  'ql6G39KDm0YmXUqchGdHw',
+			'SECRET': '03iHLaQR26z2sgOrGhWjtZEQ6CzJ2CA2eNKfvypk',
+		},
+		'endpoints': {
+			'request_token': 'http://twitter.com/oauth/request_token',
+			'access_token': 'http://twitter.com/oauth/access_token',
+			'authorize': 'http://twitter.com/oauth/authorize',
+			'callback': 'jobsite_web.jobsite_main.oauth_callbacks.twitter',
+		},
+		'friendly_name': 'Twitter',
+	},
 }
 
 

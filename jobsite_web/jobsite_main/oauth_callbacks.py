@@ -17,6 +17,10 @@ def linked_in(request, access, token):
 def facebook(request, access, token):
 	return Facebook()(request, access, token)
 
+def twitter(request, access, token):
+	return Twitter()(request, access, token)
+
+
 # TODO: move this out
 class UserData(object):
 	
@@ -92,7 +96,31 @@ class Facebook(PerzootCallback):
 		"""
 		resp = access.make_api_call('json', self.BASE_URL + '/me', token)
 	
-		print resp
 		ud = UserData(resp['id'], resp['first_name'], resp['last_name'], 
 			resp.get('email', ''))
+		return ud
+
+
+class Twitter(PerzootCallback):
+
+	BASE_URL = 'http://api.twitter.com/'
+	IDENTIFIER = "twitter"
+
+	def fetch_user_data(self, request, access, token):
+		"""
+		Perform an API call to retrieve data about the profile that was just 
+		authenticated.
+		"""
+		resp = access.make_api_call('json', self.BASE_URL + 
+				'/1/account/verify_credentials.json', token)
+
+		name_parts = resp['name'].split(' ')
+		if len(name_parts) in (0,1):
+			first = name_parts
+			last = ""
+		else:
+			last = name_parts[-1]
+			first = " ".join(name_parts[:-1])
+	
+		ud = UserData(resp['screen_name'], first, last)
 		return ud
