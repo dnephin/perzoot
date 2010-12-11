@@ -111,12 +111,19 @@ class Twitter(PerzootCallback):
 		Perform an API call to retrieve data about the profile that was just 
 		authenticated.
 		"""
+	
+		# pull the users id from the token key
+		key_parts = token.key.split('-')
+
 		resp = access.make_api_call('json', self.BASE_URL + 
-				'/1/account/verify_credentials.json', token)
+				'/1/users/show.json?user_id=%s' % (key_parts[0]), token)
 
 		name_parts = resp['name'].split(' ')
-		if len(name_parts) in (0,1):
-			first = name_parts
+		if not name_parts:
+			first = ""
+			last = ""
+		elif len(name_parts) == 1:
+			first = name_parts[0]
 			last = ""
 		else:
 			last = name_parts[-1]
