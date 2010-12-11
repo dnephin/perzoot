@@ -86,9 +86,8 @@ function setup_async_callbacks(selector, success_func) {
 		elem.click(function(event) { 
 			event.preventDefault();
 
+			open_dialog();
 			var d = $('#dialog_window');
-			// TODO: Move into CSS
-			d.dialog({'width': 500, 'minHeight': 400});
 			d.html('Loading ...');
 
 			// Fetch the content
@@ -103,6 +102,12 @@ function setup_async_callbacks(selector, success_func) {
 			});
 		});
 	});
+}
+
+
+function open_dialog() {
+	var d = $('#dialog_window');
+	d.dialog({'width': 750, 'height': 500});
 }
 
 /*

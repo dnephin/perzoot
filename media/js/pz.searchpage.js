@@ -243,6 +243,8 @@ function update_search_filters(filter_data) {
 	$('#search input[name^="filter_"]').each(function () {
 		var filter_type = $(this).attr('name').split('_')[1];
 		$.each($(this).val().split('|'), function(i, v) {
+			if (!v.length) return true;
+
 			$('#list_' + filter_type).append(
 				'<li><a href="#" title="Remove this filter" ' +
 				'class="remove_filter" value="' + v + '" filter_type="' + 
@@ -407,8 +409,12 @@ function build_result_handlers() {
 			track_event('remove', id);
 			$('#result_' + id).remove();
 		});
-	
-		// TODO: outbound tracking links
+
+		// outbound tracking links
+		$(e).find('.job_title A,.result_links A').each(function() {
+			$(this).click( function(event) { track_outbound(event, id) } );
+		});
+
 		// TODO: open all above links
 		
 	});

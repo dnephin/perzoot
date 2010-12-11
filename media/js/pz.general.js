@@ -5,17 +5,19 @@
  *  Helper and utility functions
  */
 
-function track_outbound(id) {
-	// GA
-	var tracker = _gat._getTrackerByName();
-	// TODO: add label and session id as value
-	tracker._trackEvent('outbound', 'open', undefined, undefined);
+function track_outbound(event, id) {
+	// TODO: does this need a delay to fire ?
 
 	// PZ
 	$.ajax({
 		url: '/jax/track/open/' + id,
 		success: function(data) {},
 	});
+
+	// GA
+	var tracker = _gat._getTrackerByName();
+	// TODO: add label and session id as value
+	tracker._trackEvent('outbound', 'open', undefined, undefined);
 }
 
 

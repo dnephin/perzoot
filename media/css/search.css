@@ -1,56 +1,76 @@
-
-
 /* Search toolbar 
 -------------------------------------------------- */
-
 #search_toolbar {
 	border-radius: 7px;
-	margin-bottom: 10px;
-	padding: 10px;
+	margin-bottom: 15px;
+	padding: 0px;
 }
-
-#search_button {
-	font-size: 1.2em;
-	font-weight: bold;
-	margin: 0 0 0 5px;
-	padding: 5px 10px;
-}
-#search_button:hover {
-	background-color: #4BB050;
-	cursor: pointer;
-}
-#search_button:active {
-	background-color: #333;
-}
-
 #id_keywords {
-	width: 320px;
-	padding: 5px;
+	height: 22px;
 	margin: 0 0 2px 0;
+	padding: 5px;
+	width: 320px;
 }
-
 #id_days {
 	width: 20px;
 	padding: 1px 5px;
 	font-size: 0.9em;
 }
-
 #id_city {
 	width: 80px;
 	padding: 1px 5px;
 	font-size: 0.9em;
 }
-
 #search_toolbar HR {
 	margin: 0.8em 0;
 }
-
-#save_button {
-	font-size: 1.2em;
-	padding: 5px 10px;
-	font-weight: bold;
+#buttons {
+	/* float: right; */
 }
-
+#search_button {
+	border: 1px solid #224cc4;
+	background-image: url(../img/search_sprite.png);
+	background-position: 0 0;
+	color: #F3F3F3;
+	font-family: Helvetica, Arial, sans;
+	font-size: 1.2em;
+	font-weight: bold;
+	outline: 0;
+	padding: 4px 9px;
+	-moz-border-radius: 3px;
+}
+#search_button:hover {
+	background-position: 0 -32px;
+	/* border: 1px solid #287511; */
+	color: white;
+}
+#search_button:active {
+	color: #b2cdfb;
+	background-position: 0 -64px;
+	outline: 0;
+}
+#save_button {
+	border: 1px solid #287511;
+	background-image: url(../img/save_sprite.png);
+	background-position: 0 0;
+	color: #F3F3F3;
+	font-family: Helvetica, Arial, sans;
+	font-size: 1.2em;
+	font-weight: bold;
+	outline: 0;
+	padding: 4px 9px;
+	-moz-border-radius: 3px;
+}
+#save_button:hover {
+	background-position: 0 -33px;
+	border: 1px solid #287511;
+	color: white;
+}
+#save_button:active {
+	color: #bedfbf;
+	background-position: 0 -65px;
+	outline: 0;
+}
 #search_messages {
 	max-height: 50px;
 	overflow: auto;
@@ -95,7 +115,8 @@
 	overflow: hidden;
 }
 .search_result .result_summary:hover {
-	height: auto;
+	max-height: 9em;
+	overflow: auto;
 }
 
 .highlight { 
@@ -103,6 +124,24 @@
 	color: black;
 	font-weight: bold;
 }
+/* Opened */
+#results .opened_event {
+	border: 1px solid #2C682F;
+	background: #e6e6e6;
+}
+.opened_event .result_title a {
+	text-decoration: none;
+	color: #4BB050;
+	font-weight: normal;
+}
+
+/* Saved */
+#results .saved_event {
+	border: 1px solid black;
+	background: #e6e6e6;
+}
+
+
 
 /* Search Filters and Left Column
 -------------------------------------------------- */
