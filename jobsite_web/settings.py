@@ -15,7 +15,6 @@ logging.config.fileConfig('%s/logging.conf' % PROJECT_ROOT)
 # Solr
 SOLR_URL = 'http://localhost:8080/solr'
 
-
 ADMINS = (
 	('Perzoot Admin', 'dnephin@gmail.com'),
 )
@@ -45,10 +44,36 @@ OAUTH_ACCESS_SETTINGS = {
 			'request_token': 'https://api.linkedin.com/uas/oauth/requestToken',
 			'access_token': 'https://api.linkedin.com/uas/oauth/accessToken',
 			'authorize': 'https://api.linkedin.com/uas/oauth/authorize',
-			'provider_scope':'',
 			'callback': 'jobsite_web.jobsite_main.oauth_callbacks.linked_in',
 		},
 		'friendly_name': 'LinkedIn',
+	},
+	'facebook': {
+		'keys': {
+			'KEY':	  '59e86d9a44e172307e30f77e7dfcc3c6',
+			'SECRET': '5f56cb3b273171c666b7e5e4c3c0c837',
+		},
+		'endpoints': {
+			'request_token': '',
+			'access_token': 'https://graph.facebook.com/oauth/access_token',
+			'authorize': 'https://graph.facebook.com/oauth/authorize',
+			'provider_scope': ['email'],
+			'callback': 'jobsite_web.jobsite_main.oauth_callbacks.facebook',
+		},
+		'friendly_name': 'Facebook',
+	},
+	'twitter': {
+		'keys': {
+			'KEY':	  'ql6G39KDm0YmXUqchGdHw',
+			'SECRET': '03iHLaQR26z2sgOrGhWjtZEQ6CzJ2CA2eNKfvypk',
+		},
+		'endpoints': {
+			'request_token': 'http://twitter.com/oauth/request_token',
+			'access_token': 'http://twitter.com/oauth/access_token',
+			'authorize': 'http://twitter.com/oauth/authorize',
+			'callback': 'jobsite_web.jobsite_main.oauth_callbacks.twitter',
+		},
+		'friendly_name': 'Twitter',
 	},
 }
 
@@ -64,7 +89,7 @@ MEDIA_ROOT = os.path.normpath(PROJECT_ROOT + '/../media/')
 MEDIA_URL = '/m/'
 ADMIN_MEDIA_PREFIX = '/media_admin/'
 SECRET_KEY = '129e12jnakfm23rjf90JIKN@uf4niq2n3fk129jfkn9jf9jrf2300;.'
-ROOT_URLCONF = 'jobsite_web.urls'
+ROOT_URLCONF = 'urls'
 SESSION_COOKIE_AGE = 6 * 7 * 24 * 60 * 60 	# 6 weeks
 LOGIN_URL = '/login'
 
@@ -98,7 +123,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.admin',
-	'jobsite_web.jobsite_main',
+	'jobsite_main',
 	'oauth_access',
 )
 

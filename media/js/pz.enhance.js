@@ -120,6 +120,7 @@ function update_user_block() {
 			var d = $('#dialog_window');
 			d.html(data.content.body);
 			d.dialog('option', 'title', data.content.title);
+			open_remote(data.content.service_url);
 		});
 		build_tooltips($('#user_block'));
 
@@ -142,6 +143,13 @@ function update_user_block() {
 }
 
 
+function open_remote(url) {
+	window.location.assign(url); 
+	return false;
+}
+
+
+
 /*
  * Log the user out
  */
@@ -149,7 +157,7 @@ function logout(elem) {
 	$('#user_block').html();
 	$.ajax({
 			'url': $(elem).attr('href'), 
-			'success': update_user_block, 
+			'success': function () { window.location.reload() },
 	});
 	return false;
 }
@@ -176,7 +184,7 @@ function handle_user_account_action(elem) {
 
 			// Success
 			d.dialog('close');
-			update_user_block();
+			window.location.reload()
 		},
 	});
 	return false;

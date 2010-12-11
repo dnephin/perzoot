@@ -5,6 +5,7 @@
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+
 import os
 PROJECT_ROOT = '/var/pz_stage/jobsite_web/'
 
@@ -13,7 +14,6 @@ logging.config.fileConfig('%s/logging.conf' % PROJECT_ROOT)
 
 # Solr
 SOLR_URL = 'http://localhost:8080/solr'
-
 
 ADMINS = (
 	('Perzoot Admin', 'admin@perzoot.com'),
@@ -44,9 +44,36 @@ OAUTH_ACCESS_SETTINGS = {
 			'request_token': 'https://api.linkedin.com/uas/oauth/requestToken',
 			'access_token': 'https://api.linkedin.com/uas/oauth/accessToken',
 			'authorize': 'https://api.linkedin.com/uas/oauth/authorize',
-			'provider_scope':'',
 			'callback': 'jobsite_main.oauth_callbacks.linked_in',
 		},
+		'friendly_name': 'LinkedIn',
+	},
+	'facebook': {
+		'keys': {
+			'KEY':	  '59e86d9a44e172307e30f77e7dfcc3c6',
+			'SECRET': '5f56cb3b273171c666b7e5e4c3c0c837',
+		},
+		'endpoints': {
+			'request_token': '',
+			'access_token': 'https://graph.facebook.com/oauth/access_token',
+			'authorize': 'https://graph.facebook.com/oauth/authorize',
+			'provider_scope': ['email'],
+			'callback': 'jobsite_web.jobsite_main.oauth_callbacks.facebook',
+		},
+		'friendly_name': 'Facebook',
+	},
+	'twitter': {
+		'keys': {
+			'KEY':	  'ql6G39KDm0YmXUqchGdHw',
+			'SECRET': '03iHLaQR26z2sgOrGhWjtZEQ6CzJ2CA2eNKfvypk',
+		},
+		'endpoints': {
+			'request_token': 'http://twitter.com/oauth/request_token',
+			'access_token': 'http://twitter.com/oauth/access_token',
+			'authorize': 'http://twitter.com/oauth/authorize',
+			'callback': 'jobsite_web.jobsite_main.oauth_callbacks.twitter',
+		},
+		'friendly_name': 'Twitter',
 	},
 }
 

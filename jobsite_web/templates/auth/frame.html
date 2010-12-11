@@ -1,3 +1,9 @@
 
-<iframe src="{% url oauth_access_login service %}"></iframe>
+
+<div>
+	<p>A window will open which will allow you to log in using your {{ service_name }} account.</p>
+	<p>If you do you need the window your browser may have prevented it from opening.  Please
+	<a href="#" oncLick="return open_remote('{% url oauth_access_login service %}')">click here to open the window.</a></p>
+
+</div>
 

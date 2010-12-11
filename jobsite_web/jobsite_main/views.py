@@ -9,7 +9,7 @@ from django.shortcuts import render_to_response
 from django.template.loader import render_to_string
 from django.template import RequestContext
 from django.http import HttpResponse, HttpResponseNotFound
-from django.http import HttpResponseServerError
+from django.http import HttpResponseServerError, HttpResponseRedirect
 from django.contrib.auth import logout as django_logout, login as django_login
 from django.contrib.auth.forms import AuthenticationForm 
 from django.contrib.auth.models import User
@@ -367,10 +367,16 @@ def auth_frame_wrapper(request, service):
 	if service not in settings.OAUTH_ACCESS_SETTINGS:
 		return handle_response(request, code=NOTFOUND)
 
+
+	# TODO: change to redirect
 	if is_async(request):
 		return json_response(request, data={
-				'body': render_to_string('auth/frame.html', {'service': service}),
+				'body': render_to_string('auth/frame.html', 
+					{'service': service, 
+					'service_name': service_friendly_name(service)}
+				),
 				'title': 'Login using %s' % service_friendly_name(service),
+				'service_url': reverse('oauth_access_login', args=[service]),
 			})
 
 	return handle_response(request, {'service': service}, 'auth/frame_wrapper.html')
@@ -424,31 +430,50 @@ def login(request):
 	Display the login for, and log the user in.
 	"""
 
-	if is_async(request):
-		# Login form submited
-		if request.GET.get('submit', False):
-			form = AuthenticationForm(data=request.GET)
-			if form.is_valid():
-				user = form.get_user()
-				session_id = request.session.session_key
-				django_login(request, user)
-				# update the users actions with their user_id
-				db.update_action_with_user_id(session_id, user)
+	# redirect if user is loged in
+	if request.user and not request.user.is_anonymous():
+		if is_async(request):
+			return json_response(request)
+		return HttpResponseRedirect(reverse('jobsite_main.views.main'))
+
+
+	if request.GET.get('submit', False):
+		form = AuthenticationForm(data=request.GET)
+		if form.is_valid():
+			user = form.get_user()
+			session_id = request.session.session_key
+			django_login(request, user)
+
+			# update the users actions with their user_id
+			db.update_action_with_user_id(session_id, user)
+
+			if is_async(request):
 				return json_response(request)
-			
-		else:
-			form = AuthenticationForm()
 
+			return HttpResponseRedirect(reverse('jobsite_main.views.main'))
+
+	else:
+		form = AuthenticationForm()
+
+	if is_async(request):
 		return json_response(request, code=INPUT, data=
-					render_to_string('blocks/login.html', {'form': form}))
+				render_to_string('blocks/login.html', {'form': form}))
 
-	# TODO: login without javascript
+	return handle_response(request, { 'content_block': 'blocks/login.html',
+			'form': form }, 'base.html')
+
 
 
 def register(request):
 	"""
 	Display the registration form, and save the user.
 	"""
+
+	# redirect if user is loged in
+	if request.user and not request.user.is_anonymous():
+		if is_async(request):
+			return json_response(request)
+		return HttpResponseRedirect(reverse('jobsite_main.views.main'))
 
 	if is_async(request):
 		if request.GET.get('submit', False):
@@ -466,6 +491,7 @@ def register(request):
 		return json_response(request, code=INPUT, data=
 					render_to_string('blocks/register.html', {'form': form}))
 	
-
 	# TODO: register without javascript
+	return handle_response(request, { 'content_block': 'blocks/register.html',
+			'form': form }, 'base.html')
 
