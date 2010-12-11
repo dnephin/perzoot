@@ -3,7 +3,7 @@
  Staging Environment.
 """
 
-DEBUG = True
+DEBUG = False 
 TEMPLATE_DEBUG = DEBUG
 
 import os
@@ -15,9 +15,13 @@ logging.config.fileConfig('%s/logging.conf' % PROJECT_ROOT)
 # Solr
 SOLR_URL = 'http://localhost:8080/solr'
 
+
+# Email settings
 ADMINS = (
 	('Perzoot Admin', 'admin@perzoot.com'),
 )
+SERVER_EMAIL = 'admin@stage.perzoot'
+SEND_BROKEN_LINK_EMAILS = True
 
 MANAGERS = ADMINS
 
@@ -104,8 +108,8 @@ MIDDLEWARE_CLASSES = (
 #	'django.middleware.cache.UpdateCacheMiddleware',
 
 	# Adds to Vary header
-#	'django.middleware.gzip.GZipMiddleware',
-#	'django.middleware.http.ConditionalGetMiddleware',
+	'django.middleware.gzip.GZipMiddleware',
+	'django.middleware.http.ConditionalGetMiddleware',
 	'django.contrib.sessions.middleware.SessionMiddleware',
 
 #	'django.middleware.cache.FetchFromCacheMiddleware',
