@@ -25,6 +25,8 @@ urlpatterns = patterns('',
 	# Static pages
 	url(r'^page/(?P<page_name>\w+)', jobsite_main.views.static_page,
 		name='static_page'),
+	(r'^favicon\.ico$', 'django.views.generic.simple.redirect_to', 
+		{'url': '/m/img/favicon.ico'}),
 
 	# Ajax only
 	url(r'^jax/track/(?P<event_name>\w+)/(?P<posting_id>\d+)$', 
