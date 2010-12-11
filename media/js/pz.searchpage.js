@@ -245,15 +245,17 @@ function update_search_filters(filter_data) {
 		$.each($(this).val().split('|'), function(i, v) {
 			if (!v.length) return true;
 
+			var template = new EJS({text: 
+				'<li><input type="checkbox" class="remove_filter" ' +
+				'filter_type="<%= type %>" name="<%=name%>"/><%=name%></li>'
+				});
 			$('#list_' + filter_type).append(
-				'<li><a href="#" title="Remove this filter" ' +
-				'class="remove_filter" value="' + v + '" filter_type="' + 
-				filter_type + '">' + v + '</a></li>'
+				template.render({'type': filter_type, 'name': v})
 			);
 		});
 	});
 	// Add javascript to remove the remove_filters
-	$('.remove_filter').click(function (event) {
+	$('.remove_filter').change(function (event) {
 		if (event) event.preventDefault();
 		remove_filter(this);
 	});
@@ -275,7 +277,7 @@ function remove_filter(elem) {
 	var values = (field.val().length) ? field.val().split("|") : [];
 	var new_values = [];
 	for (i in values) {
-		if (values[i] == $(elem).attr('value'))
+		if (values[i] == $(elem).attr('name'))
 			continue;
 		new_values.push(values[i]);
 	}
