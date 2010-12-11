@@ -3,3 +3,4 @@
 .hg
 .hgignore
 .hgtags
+.DS_Store
