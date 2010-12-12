@@ -11,10 +11,10 @@
 -------------------------------------------------- */
 body {
 	color:#222;	
-	font-family: "Helvetica Neue Light", Helvetica, Arial, sans-serif;
+	font-family: Helvetica, Arial, FreeSans, sans-serif;
 	background: #DBE8F3;
 }
-
+input {font-family: inherit}
 a:hover {
 	color: #4BB050;
 }
@@ -59,6 +59,7 @@ a:hover {
 -------------------------------------------------- */
 #main {
 	background: #fff;
+	min-height: 400px;
 }
 
 
