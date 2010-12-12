@@ -7,6 +7,8 @@
  */
 
 
+
+
 /* HTML elements base style
 -------------------------------------------------- */
 body {
@@ -15,8 +17,11 @@ body {
 	background: #DBE8F3;
 }
 input {font-family: inherit}
+a {
+	color: #224CC4;
+}
 a:hover {
-	color: #4BB050;
+	color: #1F77FF;
 }
 
 /* Header
@@ -28,31 +33,50 @@ a:hover {
 	white-space: nowrap;
 }
 #user_block {
-	text-align: right;
+	color: #FFF;
+	/* font-weight: bold; */
 	margin: 6px 10px 0 0;
-	color: #fff;
+	text-align: right;
 	width: 290px;
 }
 
-#user_block IMG {
+#user_block img {
 	vertical-align: text-top;
-	border: 1px solid #fff;
-	background: #fff;
+	border: 1px solid #FFF;
+	background: #FFF;
 }
-
-#user_block A {
-	margin: 0 2px;
-	text-decoration: none;
+#user_block a {
+	color: #FFF;
 	font-weight: bold;
-	color: #fff;
+	margin: 0 3px;
+	padding: 0;
+	position: relative
+	text-decoration: none;
+	vertical-align: top;
 }
-
 #login_link, #logout, #register_link {
 	margin: 0 0 0 10px !important;
 }
-
 #logo_div {
 	height: 63px;
+}
+#user_block a.oauth_logo {
+	background-image: url(../img/icons/icons.png);
+	display: inline-block;
+	height: 24px;
+	margin: 0 0 0 3px;
+	position: relative;
+	/* top: 4px; */
+	width: 24px;
+}
+#oauth_linkedin {
+	background-position: -24px -80px;
+}
+#oauth_facebook {
+	background-position: 0 -80px;
+}
+#oauth_twitter {
+	background-position: -48px -80px;
 }
 
 /* Middle 

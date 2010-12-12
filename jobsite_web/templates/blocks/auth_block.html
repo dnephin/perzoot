@@ -6,16 +6,16 @@
 		<a href="{% url logout %}" id="logout" onClick="return logout(this)">logout</a>
 	{% else %}
 		Sign in: 
-		<a class="async_frame tt_link" href="{% url auth_wrapper 'linkedin' %}"
-			title="Login with LinkedIn"><img src="/m/img/oauthlogos/linkedin.gif" /></a>
-		<a class="async_frame tt_link" href="{% url auth_wrapper 'facebook' %}"
-			title="Login with Facebook"><img src="/m/img/oauthlogos/facebook.gif" /></a>
-		<a class="async_frame tt_link" href="{% url auth_wrapper 'twitter' %}"
-			title="Login with Twitter"><img src="/m/img/oauthlogos/twitter.png" /></a>
-		<a class="async_frame tt_link" href="{% url auth_wrapper 'openid' %}"
+		<a class="async_frame tt_link oauth_logo" href="{% url auth_wrapper 'linkedin' %}"
+			title="Login with LinkedIn" id="oauth_linkedin"></a>
+		<a class="async_frame tt_link oauth_logo" href="{% url auth_wrapper 'facebook' %}"
+			title="Login with Facebook" id="oauth_facebook"></a>
+		<a class="async_frame tt_link oauth_logo" href="{% url auth_wrapper 'twitter' %}"
+			title="Login with Twitter" id="oauth_twitter"></a>
+		<a class="async_frame tt_link hide" href="{% url auth_wrapper 'openid' %}"
 			title="Login with OpenId"><img src="/m/img/oauthlogos/openid.gif" /></a>
-		 <a class="tt_link" id="login_link" title="Login using your perzoot account" 
+		<a class="tt_link" id="login_link" title="Login using your perzoot account" 
 			href="{% url login %}">login</a>
-		 <a class="tt_link" id="register_link" title="Register for a new account on perzoot" 
+		<a class="tt_link" id="register_link" title="Register for a new account on perzoot" 
 			href="{% url register %}">register</a>
 	{% endif %}

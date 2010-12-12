@@ -1,5 +1,5 @@
 .ui-widget UL,  .ui-widget a {
-	color: #555;
+	color: #333;
 }
 /* Tile Widget (accordion)
 -------------------------------------------------- */
@@ -14,10 +14,11 @@
 	border: 0;
 }
 .ui-accordion .ui-accordion-content {
-	padding: 2px 6px 1em 6px;
 	border: 1px solid #BBB;
 	border-top: none;
-	margin-bottom: 10px;
+	margin: 0 0 10px 0;
+	padding: 4px 8px;
+	top: 0;
 }
 /*
 .ui-accordion .ui-accordion-content:last-child {
@@ -31,21 +32,31 @@
 	padding: 4px 4px 4px 26px;
 }
 /* Accordion headers */
-.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited {
-	color: #999;
-}
-.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
-	background: none;
-	background-color: #D9D9D9;
-	border: 1px solid #BBB;
+
+/* Open state */
+.ui-accordion .ui-accordion-header-active {
+	border-bottom: 1px solid #BBB; 
 }
 .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited {
 	color: #333;
 }
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
+	background: none;
+	background-color: #D9D9D9;
+	background-image: url(../img/widget_sprite.png);
+	background-position: 0 0;
+	border: 1px solid #BBB;
+}
+
 /* Closed state */
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited {
+	color: #999;
+}
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
 	background: 0;
 	background-color: #F1F1F1;
+	background-image: url(../img/widget_sprite.png);
+	background-position: 0 0;
 	border: 1px solid #BBB;
 }
 

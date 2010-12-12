@@ -6,10 +6,10 @@
 	padding: 0px;
 }
 #id_keywords {
-	height: 22px;
+	height: 21px;
 	margin: 0 0 2px 0;
 	padding: 5px;
-	width: 320px;
+	width: 340px;
 	-moz-border-radius: 4px;
 }
 #id_days {
@@ -28,7 +28,7 @@
 #buttons {
 	float: right;
 }
-.button_main {
+#buttons input {
 	color: #F3F3F3;
 	font-family: Helvetica, Arial, FreeSans, sans;
 	font-size: 1.2em;
@@ -144,9 +144,19 @@ text-decoration: ;
 }
 #widget_favourites .ui-widget-content {
 	background: 0;
-	background-color: #ffffc3;
+	/* background-color: #ffffc3; */
 }
-
+#widget_favourites ul li {
+	background-image: url(../img/icons/pin.png);
+	background-repeat: no-repeat;
+	color: #999;
+	margin-bottom: 3px;
+}
+#widget_favourites ul li a {
+	color: #00AD00;
+	color: #1F77FF;
+	margin-left: 20px;
+}
 
 
 /* Search Filters and Left Column

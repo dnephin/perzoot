@@ -26,7 +26,7 @@ function tiles(selector) {
 					.toggleClass("ui-icon-triangle-1-s")
 			.end().next()	// body div
 					.toggleClass("ui-accordion-content-active")
-					.toggle();
+					.toggle("blind", 100);
 			return false;
 		})
 		.next()	// body div
