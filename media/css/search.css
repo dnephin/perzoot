@@ -1,15 +1,22 @@
 /* Search toolbar 
 -------------------------------------------------- */
 #search_toolbar {
-	border-radius: 7px;
+	border: 1px solid #BBB;
+	background-color: #EEE;
 	margin-bottom: 15px;
-	padding: 0px;
+	padding: 10px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
 }
 #id_keywords {
-	height: 22px;
+	height: 21px;
 	margin: 0 0 2px 0;
 	padding: 5px;
 	width: 320px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
 }
 #id_days {
 	width: 20px;
@@ -27,17 +34,17 @@
 #buttons {
 	float: right;
 }
-.button_main {
+#buttons input {
 	color: #F3F3F3;
 	font-family: Helvetica, Arial, FreeSans, sans;
 	font-size: 1.2em;
 	font-weight: bold;
-	height: 32px;
+	height: 28px;
 	outline: 0;
-	padding: 4px 9px;
-	border-radius: 3px;
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
+	padding: 0 10px;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
 }
 #search_button {
 	border: 1px solid #224cc4;
@@ -57,6 +64,7 @@
 	border: 1px solid #287511;
 	background-image: url(../img/save_sprite.png);
 	background-position: 0 0;
+	margin-left: 4px;
 }
 #save_button:hover {
 	background-position: 0 -33px;
@@ -75,7 +83,6 @@
 
 /* Search Results
 -------------------------------------------------- */
-
 .search_result  {
 	border: 1px solid #CCC;
 	border-radius: 4px;
@@ -84,31 +91,27 @@
 	margin-bottom: 4px;
 	padding: 3px 1.0em;
 }
-
 .search_result div {
 	margin: 0.5em 0;
 }
-
 .search_result div:first-child {
 	margin-top: 2px;
 }
 .search_result div:last-child {
 	margin-bottom: 2px;
 }
-
 .result_title {
 	font-weight: bold;
 	max-width: 430px;
 }
 .result_title a {
+	color: #1F77FF;
 	font-size: 1.2em;
 }
-
 .search_result .result_options {
 	float: right;
 	margin: 0 -8px 0 0;
 }
-
 .search_result .result_summary {
 	max-height: 3em;
 	overflow: hidden;
@@ -117,37 +120,64 @@
 	max-height: 9em;
 	overflow: auto;
 }
-
 .highlight { 
 	background-color: #cdf;
 	color: black;
 	font-weight: bold;
 }
-/* Opened */
+.result_links a {
+	color: #00AD00;
+}
+
+
+/* Opened
+--------------------- */
+.ui-widget ul {
+	color: #333;
+}
 #results .opened_event {
 	border: 1px solid #CCC;
-	background: #F1F1F1;
+	background: #F5F5F5;
+	color: #666;
 }
-.opened_event .result_title a {
-	text-decoration: ;
-	color: #4BB050;
-	font-weight: bold;
+#results .opened_event .job_title a {
+	color: #999;
 }
 
-/* Saved */
+/* Saved
+--------------------- */
 #results .saved_event {
-	border: 1px solid black;
-	background: #e6e6e6;
+	border: 1px solid #ffd67d;
+	background: #FFFFD7;
+}
+#results .saved_event .job_title a {
+	color: #ffa528;
 }
 
-
+/* Toolbars
+-------------------------------------------------- */
+#widget_history ul li, #widget_saved ul li {
+	color: #999;
+}
+#widget_history ul li a, #widget_saved ul li a {
+	color: #1F77FF;
+}
+#widget_favourites ul li {
+	background-image: url(../img/icons/pin.png);
+	background-repeat: no-repeat;
+	color: #999;
+	margin-bottom: 5px;
+}
+#widget_favourites ul li a {
+	color: #1F77FF;
+	margin-left: 20px;
+}
 
 /* Search Filters and Left Column
 -------------------------------------------------- */
 #left_links {
 	text-align: right;
 }
-
 .remove_filter {
 	padding-left: 20px;
 	line-height: 1.6em;
