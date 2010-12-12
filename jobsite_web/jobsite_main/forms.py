@@ -17,7 +17,11 @@ class SearchFilterWidget(HiddenInput):
 	"""
 
 	def _format_value(self, value):
-		return "|".join(value) if value else ""
+		if not value:
+			return ""
+		if isinstance(value, list):
+			return "|".join(value)
+		return value
 
 
 class SearchFilterField(Field):
@@ -86,12 +90,6 @@ class JobSearchForm(ModelForm):
 	filter_company = 	SearchFilterField()
 
 
-	def __init__(self, *args, **kwargs):
-		super(JobSearchForm, self).__init__(*args, **kwargs)
-		if 'instance' in kwargs:
-			self.load_filters(kwargs['instance'])
-
-
 	def clean_rows(self):
 		rows = self.cleaned_data['rows']
 		if not rows:
@@ -111,12 +109,9 @@ class JobSearchForm(ModelForm):
 			data.update(self.cleaned_data)
 
 		# Update filters values to pipe separated list
-		for filter in SearchFilter.FILTER_CHOICES:
-			filter_name = 'filter_' + filter[0]
-			if filter_name in data:
-				data[filter_name] = "|".join(data[filter_name])
-			else:
-				data[filter_name] = ""
+		for filter in itertools.ifilter(
+				lambda f: f.startswith('filter_'), data.keys()):
+			data[filter] = self.fields[filter].widget._format_value(data[filter])
 
 		if hasattr(self, 'errors'):
 			data['errors'] = self.errors
@@ -142,30 +137,27 @@ class JobSearchForm(ModelForm):
 					filter_type =  filter[0], filter_value = filter_value
 				)
 
-	def load_filters(self, model):
+	@staticmethod
+	def from_instance(model):
 		"""
-		Load filters from the model.
+		Return a JobSearchForm instance from a model instance.
 		"""
+		data = {
+			'search_event': model.id,
+			'days': model.days,
+			'city': model.city,
+			'sort': model.sort,
+			'keywords': model.keywords,
+			}
+
 		for filter in model.searchfilter_set.all():
 			filter_name = 'filter_' + filter.filter_type
 
-			if filter_name not in self.initial:
-				self.initial[filter_name] = []
+			if filter_name not in data:
+				data[filter_name] = []
 
-			self.initial[filter_name].append(filter.filter_value)
-
-
-	def is_valid(self, skip_bound_check=False):
-		"""
-		Returns True if the form has no errors. Otherwise, False. If errors are
-		being ignored, returns False.
-		"""
-		if skip_bound_check:
-			# if we're skipping bound check, and the form is bound then no data
-			# will be in cleaned_data. So we need to populate it
-			self.cleaned_data = self.initial
-			return not bool(self.errors)
-		return super(JobSearchForm, self).is_valid()
+			data[filter_name].append(filter.filter_value)
+		return JobSearchForm(data)
 
 
 class UserForm(UserCreationForm):

@@ -214,10 +214,9 @@ def search(request):
 	form = None
 	from_model = False
 	if request.method == "GET" and 'event' in request.GET:
-		search_event = db.get_search_history(request, ids=[request.GET['event']])[:1]
+		search_event = db.get_search_history(request, ids=[request.GET['event']])
 		if search_event:
-			form = JobSearchForm(instance=search_event[0])
-			from_model = search_event[0]
+			form = JobSearchForm.from_instance(search_event[0])
 
 	if not form:
 		form_data = request.GET if request.method == "GET" else request.POST
@@ -227,13 +226,12 @@ def search(request):
 	if not form:
 		last_search = db.get_search_history(request, limit=1)
 		if last_search:
-			form = JobSearchForm(instance=last_search[0])
-			from_model = last_search[0]
+			form = JobSearchForm.from_instance(last_search[0])
 
 	if not form:
 		form = JobSearchForm()
 
-	if not form.is_valid(skip_bound_check=from_model):
+	if not form.is_valid():
 		return handle_response(request, {'search_form': form}, 
 				template='search.html', code=INPUT)
 

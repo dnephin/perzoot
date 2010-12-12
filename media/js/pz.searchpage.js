@@ -36,6 +36,8 @@ function search(event) {
 	perform_search(form_data);
 	set_page_data(form_data);
 
+	// TODO: clear out search filters from old search
+
 	ga_track();
 }
 
@@ -132,7 +134,7 @@ function update_search(form_data) {
 }
 
 function format_value(value) {
-	return unescape(value).replace('+', ' ');
+	return unescape(value).replace(/\+/g, ' ');
 }
 
 /*
