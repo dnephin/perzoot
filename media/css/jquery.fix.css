@@ -144,8 +144,8 @@ button.ui-button-icon-only .ui-button-text {
 	margin: 0;
 }
 .ui-button-icon-only .ui-icon {
-	left: auto;
+	margin: 0;
+	left: 0;
+	top: 0;
 }
-.ui-button-icon-only .ui-icon, .ui-button-text-icon-primary .ui-icon, .ui-button-text-icon-secondary .ui-icon, .ui-button-text-icons .ui-icon, .ui-button-icons-only .ui-icon {
-	top: auto;
-}
+.ui-button-icon-only .ui-icon, .ui-button-text-icon-primary .ui-icon, .ui-button-text-icon-secondary .ui-icon, .ui-button-text-icons .ui-icon, .ui-button-icons-only .ui-icon { position: absolute; top:0; margin-top: -8px; }

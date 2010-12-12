@@ -6,23 +6,30 @@
  * (such as form elements, common link styles, etc.).
  */
 
+/* Colors
+--------------------------------------------------
+bright blue		#1F77FF
+				#0F4ABE
+bright green	#00AD00
+darker blue		#224CC4
+				#0055E5
+dark grey		#333
+grey			#CCC
+light grey		#F1F1F1;			
 
+*/
 
 
 /* HTML elements base style
 -------------------------------------------------- */
 body {
-	color:#222;	
+	color: #222;	
 	font-family: Helvetica, Arial, FreeSans, sans-serif;
 	background: #DBE8F3;
 }
+a {color: #0F4ABE;}
+a:hover {color: #1F77FF;}
 input {font-family: inherit}
-a {
-	color: #224CC4;
-}
-a:hover {
-	color: #1F77FF;
-}
 
 /* Header
 -------------------------------------------------- */
@@ -100,13 +107,11 @@ a:hover {
 
 /* Common look and feel styles
 -------------------------------------------------- */
-
 .tooltip {
 	position:absolute;
 	z-index:999;
 	left: -9999px;
 }
-
 .tooltip p {
 	margin: 0;
 	color: #fff;
@@ -114,14 +119,11 @@ a:hover {
 	padding: 2px 7px;
 	border-radius: 3px;
 }
-
-
 ul.plain {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
 }
-
 .button {
 	border: 1px solid #0F4ABE;
 	background-color: #1f77ff;
