@@ -80,6 +80,8 @@ def get_search_history(request, saved=False, ids=None, limit=10):
 
 	if ids:
 		selector['id__in'] = ids
+	elif isinstance(ids, list):
+		return []
 
 	searches = SearchEvent.objects.filter(**selector).order_by('-tstamp')[:limit]
 	return searches
@@ -101,6 +103,8 @@ def get_user_events(request, type=None, ids=None, sorted=False, limit=None):
 
 	if ids:
 		selector['posting_id__in'] = ids
+	elif isinstance(ids, list):
+		return []
 
 	query = UserEvent.objects.filter(**selector)
 
