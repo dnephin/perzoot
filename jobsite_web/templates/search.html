@@ -69,11 +69,11 @@
 	<div id="search_toolbar">
 	<form action="{% url jobsite_main.views.search %}" method="GET" id="search">
 		{{ search_form.keywords }}
-		<span id="buttons">
-			<input type="submit" id="search_button" class="button ignore" value="Search" />
-			<input type="button" class="button ignore" id="save_button" value="Save"
+		<div id="buttons">
+			<input type="submit" id="search_button" class="button ignore button_main" value="Search" />
+			<input type="button" id="save_button"  class="button ignore button_main" value="Save"
 			onclick="return save_search(this)" /><br />
-		</span>
+		</div>
 		<div class="search_toolbar_extra">
 			jobs in {{ search_form.city }} posted in the last {{ search_form.days }} days
 			<input type="hidden" name="sort" id="id_sort" value="" />
