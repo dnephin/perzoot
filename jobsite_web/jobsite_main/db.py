@@ -9,6 +9,7 @@ from jobsite_main.util import to_json
 from django.core.exceptions import ObjectDoesNotExist
 import simplejson
 import logging
+from datetime import datetime
 
 log = logging.getLogger('DB')
 
@@ -55,6 +56,8 @@ def save_search_event(request, search_form, search_type):
 	event.session = request.session.session_key
 	event.user = user
 	event.search_type = search_type
+	# TODO: wtf this should be set by the model
+	event.tstamp = datetime.now()
 
 	event.save()
 	search_form.save_filters(event)
