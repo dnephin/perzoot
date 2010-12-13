@@ -68,7 +68,7 @@ input {font-family: inherit}
 	height: 63px;
 }
 #user_block a.oauth_logo {
-	background-image: url(../img/icons/icons.png);
+	background-image: url(/m/img/icons/icons.png);
 	display: inline-block;
 	height: 24px;
 	margin: 0 0 0 3px;

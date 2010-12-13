@@ -35,7 +35,7 @@ urlpatterns = patterns('',
 			name='search_history'),
 	url(r'^jax/search/saved$', jobsite_main.views.search_history, 
 			{'saved': True}, name='saved_searches'),
-	url(r'^jar/search/save$', jobsite_main.views.save_search),
+	url(r'^jax/search/save$', jobsite_main.views.save_search),
 	url(r'^jax/postings/favs$', jobsite_main.views.favorite_postings),
 
 	# Dev only
