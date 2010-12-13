@@ -70,3 +70,5 @@ def auto_authenticate(user):
 		if backend.get_user(user.id):
 			user.backend = "%s.%s" % (backend.__module__, backend.__class__.__name__)
 			return user
+
+
