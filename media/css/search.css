@@ -48,7 +48,7 @@
 }
 #search_button {
 	border: 1px solid #224cc4;
-	background-image: url(../img/search_sprite.png);
+	background-image: url(/m/img/search_sprite.png);
 	background-position: 0 0;
 }
 #search_button:hover {
@@ -62,7 +62,7 @@
 }
 #save_button {
 	border: 1px solid #287511;
-	background-image: url(../img/save_sprite.png);
+	background-image: url(/m/img/save_sprite.png);
 	background-position: 0 0;
 	margin-left: 4px;
 }
@@ -163,7 +163,7 @@
 	color: #1F77FF;
 }
 #widget_favourites ul li {
-	background-image: url(../img/icons/pin.png);
+	background-image: url(/m/img/icons/pin.png);
 	background-repeat: no-repeat;
 	color: #999;
 	margin-bottom: 5px;

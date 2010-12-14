@@ -43,7 +43,7 @@
 .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
 	background: none;
 	background-color: #D9D9D9;
-	background-image: url(../img/widget_sprite.png);
+	background-image: url(/m/img/widget_sprite.png);
 	background-position: 0 0;
 	border: 1px solid #BBB;
 }
@@ -55,7 +55,7 @@
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
 	background: 0;
 	background-color: #F1F1F1;
-	background-image: url(../img/widget_sprite.png);
+	background-image: url(/m/img/widget_sprite.png);
 	background-position: 0 0;
 	border: 1px solid #BBB;
 }
@@ -89,6 +89,8 @@
 	background: #1F77FF;
 	border: 1px solid #0F4ABE;
 	color: white;
+	background-image: url(/m/img/search_sprite.png);
+	background-position: 0 0;
 }
 
 .ui-buttonset .ui-state-hover {
