@@ -407,6 +407,7 @@ function build_result_handlers() {
 			event.preventDefault();
 			track_event('save', id);
 			update_favorite_postings();
+			$(event.target).parents('.search_result').addClass('saved_event');
 		});
 		$(e).find('.result_close').click(function(event) { 
 			event.preventDefault();
@@ -423,10 +424,6 @@ function build_result_handlers() {
 		
 	});
 
-	$('.search_result .result_save')
-	.button({icons: { primary: "ui-icon-circle-plus" }, text: false});
-	$('.search_result .result_close')
-	.button({icons: { primary: "ui-icon-circle-close" }, text: false});
 }
 
 

@@ -303,7 +303,10 @@ def save_search(request):
 	if request.method != 'GET' or 'id' not in request.GET:
 		return json_response(request, code=ERROR)
 
-	db.save_search(request, int(request.GET['id']))
+	try:
+		db.save_search(request, int(request.GET['id']))
+	except ValueError:
+		return json_response(request, code=ERROR)
 
 	return json_response(request)
 
