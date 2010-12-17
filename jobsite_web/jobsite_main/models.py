@@ -21,7 +21,7 @@ class UserEvent(Model):
 
 	session = CharField(max_length=40, db_index=True)
 	user = ForeignKey(User, null=True)
-	posting_id = IntegerField()
+	posting_id = CharField(max_length=32)
 	event =   CharField(max_length=6, choices=EVENTS)
 	tstamp =  DateTimeField(auto_now_add=True)
 
