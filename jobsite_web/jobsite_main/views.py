@@ -112,12 +112,13 @@ def format_search(sr):
 		resp['filters'].append((field, field_data))
 		
 	field_data = []
-	for date, value in sr['facet_counts']['facet_dates']['date'].iteritems():
-		if date.find('T00:00:00Z') < 0:
-			continue
-		field_data.append((format_date(date), value))
+	# TODO: date filter temporarily disabled for release
+#	for date, value in sr['facet_counts']['facet_dates']['date'].iteritems():
+#		if date.find('T00:00:00Z') < 0:
+#			continue
+#		field_data.append((format_date(date), value))
 
-	resp['filters'].append(('Date', field_data))
+#	resp['filters'].append(('Date', field_data))
 
 	for doc in sr['response']['docs']:
 		new_doc = {
@@ -145,8 +146,8 @@ def format_date(date_string):
 
 
 FORMAT_MAP = {
-	'salary': lambda s: "$%s/yr" % (s),
-	'wage':   lambda s: "$%s/hr" % (s),
+#	'salary': lambda s: "$%s/yr" % (s),
+#	'wage':   lambda s: "$%s/hr" % (s),
 	'recruiter': lambda s: "recruiter" if s else "",
 }
 
