@@ -213,7 +213,6 @@ def search(request):
 	"""
 
 	form = None
-	from_model = False
 	if request.method == "GET" and 'event' in request.GET:
 		search_event = db.get_search_history(request, ids=[request.GET['event']])
 		if search_event:
@@ -245,7 +244,7 @@ def search(request):
 		search_event = db.save_search_event(request, form, search_type)
 		search_event_id = search_event.id
 	else:
-		search_event_id = from_model.id if from_model else None
+		search_event_id = form.cleaned_data.get('search_event')
 
 	# filter out deleted postings for the user and add identifiers for 
 	# visited/favorited postings for the user
