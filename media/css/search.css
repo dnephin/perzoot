@@ -4,7 +4,7 @@
 	border: 1px solid #BBB;
 	background-color: #EEE;
 	margin-bottom: 15px;
-	padding: 10px;
+	padding: 10px 10px 5px 10px;
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
 	border-radius: 4px;
@@ -17,6 +17,8 @@
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
 	border-radius: 4px;
+	display: block;
+	float: left;
 }
 #id_days {
 	width: 20px;
@@ -32,7 +34,10 @@
 	margin: 0.8em 0;
 }
 #buttons {
-	float: right;
+	width: 145px;
+	padding: 0;
+	margin: 2px 0 0 7px;
+	float: left;
 }
 #buttons input {
 	color: #F3F3F3;
@@ -45,6 +50,10 @@
 	border-radius: 4px;
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
+}
+.search_toolbar_extra {
+	clear: both;
+	margin-bottom: 3px;
 }
 #search_button {
 	border: 1px solid #224cc4;
@@ -116,7 +125,7 @@
 	background-color: transparent;
 	background-image: url(/m/img/icons/icons.png);
 	border: 0;
-	margin: 0 0 0.2em 0.2em;
+	margin: 0.2em 0 0.2em 0.2em;
 	outline: 0;
 	padding: 0;
 	height: 12px;
