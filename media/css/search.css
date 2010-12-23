@@ -28,7 +28,7 @@
 	padding: 1px 5px;
 	font-size: 0.9em;
 }
-#search_toolbar HR {
+#search_toolbar br {
 	margin: 0.8em 0;
 }
 #buttons {
@@ -92,7 +92,7 @@
 	padding: 3px 1.0em;
 }
 .search_result div {
-	margin: 0.5em 0;
+	margin: 0.1em 0 0.5em 0;
 }
 .search_result div:first-child {
 	margin-top: 2px;
@@ -110,8 +110,27 @@
 }
 .search_result .result_options {
 	float: right;
-	margin: 0 -8px 0 0;
+	margin: 0 -5px 0 0;
 }
+.result_options button {
+	background-color: transparent;
+	background-image: url(/m/img/icons/icons.png);
+	border: 0;
+	margin: 0 0 0.2em 0.2em;
+	outline: 0;
+	padding: 0;
+	height: 12px;
+	width: 12px;
+}
+.result_options button:hover {
+	cursor: pointer;
+}
+.result_save {background-position: -48px -16px;}
+.result_save:hover {background-position: -64px -16px;}
+.result_save:active {background-position: -80px -16px;}
+.result_close {background-position: -48px 0px;}
+.result_close:hover {background-position: -64px 0px;}
+.result_close:active {background-position: -80px 0px;}
 .search_result .result_summary {
 	max-height: 3em;
 	overflow: hidden;
@@ -121,31 +140,30 @@
 	overflow: auto;
 }
 .highlight { 
-	background-color: #cdf;
+	background-color: #CDF;
 	color: black;
 	font-weight: bold;
 }
 .result_links a {
 	color: #00AD00;
 }
-
-
-/* Opened
---------------------- */
+/* -- Opened -- */
 .ui-widget ul {
 	color: #333;
 }
 #results .opened_event {
 	border: 1px solid #CCC;
-	background: #F5F5F5;
+	/* background: #F5F5F5; */
 	color: #666;
 }
 #results .opened_event .job_title a {
 	color: #999;
 }
+#results .opened_event .result_links a {
+	color: #666;
+}
 
-/* Saved
---------------------- */
+/* -- Saved -- */
 #results .saved_event {
 	border: 1px solid #ffd67d;
 	background: #FFFFD7;

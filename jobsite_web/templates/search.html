@@ -48,8 +48,8 @@
 	<div id="left_bar" class="span-5 last">
 		<div id="left_menu" class="tile_widget">
 		</div>
-		<div id="left_links">
-			<hr />
+		<!-- Links hidden because moved to right sidebar -->
+		<div id="left_links" class="hide">
 			<ul class="plain">
 				<li><a href="#">Donate</a> to stay ad free</li>
 				<li><a href="#">Help</a></li>
@@ -83,7 +83,6 @@
 		</div>
 	</form>
 		<div class="search_toolbar_extra">
-			<hr />
 			<span id="sort_buttons">
 			Sort: 
 				<input type="radio" id="relevancy" name="sort"/><label for="relevancy">Relevancy</label>
@@ -146,16 +145,16 @@
 				<ul id="social-links" class="plain">
 					<li id="facebook"><a href="#">Like us on Facebook</a></li>
 					<li id="twitter"><a href="http://www.twitter.com/perzoot">Follow us on Twitter</a></li>
+					<li>&nbsp;</li>
+					<li><a href="#">Donate</a> to stay ad free</li>
+					<li><a href="#">Help</a></li>
+					<!-- <li><a class="async" href="{% url static_page 'statistics' %}">Search Statistics</a></li>  -->
+					<li><a class="async" href="{% url static_page 'aboutus' %}">About Perzoot</a></li>
+					<!-- <li><a class="async" href="{% url static_page 'reportproblem' %}">Report a problem</a></li> --> 
+					<li><a class="async" href="{% url static_page 'contactus' %}">Contact us</a></li>
+					<li><a class="async" href="{% url static_page 'terms' %}">Terms of Use</a></li>  
+					<li><a class="async" href="{% url static_page 'privacy' %}">Privacy Policy</a></li>
 				</ul>
-	
-	<!--
-				<ul id="features" class="plain">
-					<li id="notes"><a href="#">Make notes along the way</a></li>
-					<li id="email"><a href="#">Receive email notifications</a></li>
-					<li id="track"><a href="#">Track your searches</a></li>
-					<li id="smiley"><a href="#">Find the job you want</a></li>
-				</ul>
-	-->
 			</div>
 		</div>
 	</div>

@@ -15,8 +15,7 @@ darker blue		#224CC4
 				#0055E5
 dark grey		#333
 grey			#CCC
-light grey		#F1F1F1;			
-
+light grey		#F1F1F1;
 */
 
 
@@ -35,9 +34,12 @@ input {font-family: inherit}
 -------------------------------------------------- */
 #header {
 	/* border-bottom: 1px solid #CCC; */
-	background-color: #1f77ff;
-	height: 63px;
+	background-color: #1F77FF;
+	height: auto;
 	white-space: nowrap;
+}
+#logo_div {
+	height: 55px;
 }
 #user_block {
 	color: #FFF;
@@ -46,7 +48,6 @@ input {font-family: inherit}
 	text-align: right;
 	width: 290px;
 }
-
 #user_block img {
 	vertical-align: text-top;
 	border: 1px solid #FFF;
@@ -63,9 +64,6 @@ input {font-family: inherit}
 }
 #login_link, #logout, #register_link {
 	margin: 0 0 0 10px !important;
-}
-#logo_div {
-	height: 63px;
 }
 #user_block a.oauth_logo {
 	background-image: url(/m/img/icons/icons.png);

@@ -121,6 +121,7 @@ function update_sidebar_location() {
 }
 
 
+
 /*
  * update_search
  *		Update the fields in the search form from the form_data.

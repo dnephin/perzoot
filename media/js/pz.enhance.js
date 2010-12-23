@@ -42,9 +42,9 @@ function build_tooltips(selector) {
 				var left = elem.position().left - tooltip.width() / 2 + elem.width() / 2;
 				left = (left > 0) ? left : 2;
 				tooltip.css({'left': left, 'top': top});
-				tooltip.fadeIn(200); 
-			}, function() { tooltip.fadeOut(10); })
-			.click(function() { tooltip.fadeOut(10); });
+				tooltip.fadeIn(200);
+			}, function() { tooltip.fadeOut(200); })
+			.click(function() { tooltip.fadeOut(50); });
 	});
 }
 
