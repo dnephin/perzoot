@@ -105,12 +105,12 @@ input {font-family: inherit}
 
 /* Common look and feel styles
 -------------------------------------------------- */
-.tooltip {
+#tooltip {
 	position:absolute;
 	z-index:999;
 	left: -9999px;
 }
-.tooltip p {
+#tooltip p {
 	margin: 0;
 	color: #fff;
 	background-color: #222;
