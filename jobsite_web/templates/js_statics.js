@@ -15,3 +15,11 @@ var URL_SEARCH_SAVED = "{% url saved_searches %}";
 var URL_FAV_POSTINGS = "{% url jobsite_main.views.favorite_postings %}";
 var URL_SAVE_SEARCH = "{% url jobsite_main.views.save_search %}"; 
 var URL_TRACK_EVENT = "{% url track 'name' 0 %}";
+
+{% comment %}
+TODO: Change to ajax call
+{% endcomment %}
+var CITIES = ['Montreal', 'St Laurent', 'Pointe Clair', 'Anjou', 'Dorval', 
+		'Lachin', 'St Léonard', 'Laval', 'Kirkland', 'Dollard', 'Pierrefond',
+		'Mont Royal'];
+var DAYS = ['1', '3', '7', '14', '30'];

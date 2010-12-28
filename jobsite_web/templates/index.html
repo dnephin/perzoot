@@ -7,6 +7,7 @@
 		$(document).ready(function() {
 			default_doc_ready();
 			$('#id_keywords').focus();
+			clickcomplete($('#id_city'), CITIES);
 	});
 	</script>
 
@@ -18,16 +19,17 @@
 	<form id="search" action="{% url jobsite_main.views.search %}" method="POST">
 		<p> 
 			<label for="keywords">
-				<span id="keywords_label">What kind of job are you looking for?</span>
+				<span id="keywords_label">Employment Search. Simple, Fast and Focused.</span>
 			</label><br /> 
 			{{ search_form.keywords }}
 			<input type="submit" value="Search" class="search_button" id="search_button_main" /><br />
 			Search for jobs in {{ search_form.city }}
 			<input type="hidden" name="days" value="60" />
-			{% csrf_token %}
 		</p>
+		{% csrf_token %}
 
 	</form>
+	<p></p>
 
 	</div>
 {% endblock %}
@@ -38,19 +40,18 @@
 
 	<div class="span-24 center last" id="menu">
 	<p class="center">
-		<a class="async" href="{% url static_page 'statistics' %}">Search Statistics</a> | 
+<!--		<a class="async" href="{% url static_page 'statistics' %}">Search Statistics</a> | -->
 		<a class="async" href="{% url static_page 'aboutus' %}">About Perzoot</a>  | 
-		<a class="async" href="{% url static_page 'reportproblem' %}">Report a problem</a> | 
 		<a class="async" href="{% url static_page 'contactus' %}">Contact us</a> |
 		<a class="async" href="{% url static_page 'terms' %}">Terms of Use</a> |  
 		<a class="async" href="{% url static_page 'privacy' %}">Privacy Policy</a> 
 	</p>
-	<p>
+	<div>
 		<ul id="social-links">
 			<li id="facebook"><a href="#">Like us on Facebook</a></li>
 			<li id="twitter"><a href="http://www.twitter.com/perzoot">Follow us on Twitter</a></li>
 		</ul>
-	</p>
+	</div>
 	</div>
 
 	{{ block.super }}

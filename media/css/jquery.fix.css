@@ -118,7 +118,12 @@
 .ui-autocomplete {
 	border: 1px solid #CCC;
 }
-
+.ui-autocomplete {
+	max-height: 12em;
+	overflow-y: auto;
+	overflow-x: hidden;
+	padding-right: 20px;
+}
 
 /* UI Error messages
 -------------------------------------------------- */

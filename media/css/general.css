@@ -28,7 +28,12 @@ body {
 }
 a {color: #0F4ABE;}
 a:hover {color: #1F77FF;}
-input {font-family: inherit}
+input {
+	font-family: inherit
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+}
 
 /* Header
 -------------------------------------------------- */
@@ -115,6 +120,8 @@ input {font-family: inherit}
 	color: #fff;
 	background-color: #222;
 	padding: 2px 7px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
 	border-radius: 3px;
 }
 ul.plain {
