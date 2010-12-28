@@ -27,6 +27,8 @@ from jobsite_main.util import from_json
 from jobsite_main.statics import *
 
 from datetime import datetime
+import re
+import string
 
 
 log = logging.getLogger('View')
@@ -104,11 +106,11 @@ def format_search(sr):
 	}
 
 	for field, value_list in sr['facet_counts']['facet_fields'].iteritems():
-		field = field.capitalize()
+		field = format_caps(field)
 		field_data = []
 		for i in range(0, len(value_list), 2):
 			name = value_list[i] or MISSING
-			field_data.append((name, value_list[i+1]))
+			field_data.append((format_caps(name), value_list[i+1]))
 		resp['filters'].append((field, field_data))
 		
 	field_data = []
@@ -123,7 +125,7 @@ def format_search(sr):
 	for doc in sr['response']['docs']:
 		new_doc = {
 			'id': doc['id'],
-			'title': doc['title'],
+			'title': format_caps(doc['title']),
 			'url':   doc['url'],
 			'details': build_details(doc),
 			'summary': doc['summary'],
@@ -135,7 +137,8 @@ def format_search(sr):
 
 	log.debug('Search response: %s' % (resp))
 	return resp
-		
+
+
 def format_date(date_string):
 	"""
 	Convert a date string (in solr default format) to a standard
@@ -144,6 +147,13 @@ def format_date(date_string):
 	return datetime.strptime(date_string, SOLR_DATE_FORMAT
 			).strftime('%b %d')
 
+__caps_format_pattern = re.compile("([\s+\(\)\.,]+)")
+
+def format_caps(s):
+	"""
+	Format titles and categories with capitalization of the first letter.
+	"""
+	return "".join(p.capitalize() for p in __caps_format_pattern.split(s))
 
 FORMAT_MAP = {
 #	'salary': lambda s: "$%s/yr" % (s),
@@ -287,7 +297,7 @@ def favorite_postings(request):
 	for doc in titles['response']['docs']:
 		resp.append({
 			'id': doc['id'], 
-			'keywords': doc['title'],
+			'keywords': format_caps(doc['title']),
 			'date': posting_map[doc['id']].tstamp.strftime('%b %d'),
 			'url': doc['url'],
 		})
