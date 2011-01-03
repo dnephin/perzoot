@@ -4,7 +4,7 @@
 	border: 1px solid #CCC;
 	background-color: #FFF;
 	margin-bottom: 15px;
-	padding: 0px;
+	padding: 10px 10px 5px 10px;
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
 	border-radius: 4px;
@@ -32,6 +32,14 @@
 */
 }
 #id_days {
+	display: block;
+	float: left;
+	height: 18px;
+	margin: 0 0 2px 0;
+	padding: 2px 5px;
+	width: 320px;
+}
+#id_days {
 	font-size: 0.9em;
 	margin: 0;
 	padding: 1px 5px;
@@ -40,8 +48,8 @@
 #id_city {
 	font-size: 0.9em;
 	margin: 0;
-	padding: 1px 5px;
-	width: 80px;
+	padding:21px 5px;
+	width: 120px;
 }
 #view_options {
 	border-top: 1px solid #CCC;
@@ -58,9 +66,10 @@
 	-moz-border-radius: 3px;
 }
 #buttons {
-	float: right;
-	margin: 0;
+	width: 145px;
 	padding: 0;
+	margin: 1px 0 0 7px;
+	float: left;
 }
 #buttons input {
 	font-family: Helvetica, Arial, FreeSans, sans;
@@ -75,6 +84,10 @@
 }
 #buttons input:active {
 	outline: none;
+}
+.search_toolbar_extra {
+	clear: both;
+	margin-bottom: 3px;
 }
 #search_button {
 	color: #FFF;
@@ -155,7 +168,7 @@
 	background-color: transparent;
 	background-image: url(/m/img/icons/icons.png);
 	border: 0;
-	margin: 0 0 0.2em 0.2em;
+	margin: 0.2em 0 0.2em 0.2em;
 	outline: 0;
 	padding: 0;
 	height: 12px;

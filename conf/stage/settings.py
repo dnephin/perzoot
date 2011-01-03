@@ -75,7 +75,7 @@ OAUTH_ACCESS_SETTINGS = {
 			'request_token': 'http://twitter.com/oauth/request_token',
 			'access_token': 'http://twitter.com/oauth/access_token',
 			'authorize': 'http://twitter.com/oauth/authorize',
-			'callback': '.jobsite_main.oauth_callbacks.twitter',
+			'callback': 'jobsite_main.oauth_callbacks.twitter',
 		},
 		'friendly_name': 'Twitter',
 	},

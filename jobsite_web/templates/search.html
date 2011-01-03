@@ -34,6 +34,9 @@
 			$(this).data('orig_top', $(this).position()['top']);
 		});
 		$(window).scroll(handle_search_scroll);
+
+		clickcomplete($('#id_city'), CITIES);
+		clickcomplete($('#id_days'), DAYS);
 	});
 
 	</script>
@@ -47,19 +50,6 @@
 
 	<div id="left_bar" class="span-5 last">
 		<div id="left_menu" class="tile_widget">
-		</div>
-		<!-- Links hidden because moved to right sidebar -->
-		<div id="left_links" class="hide">
-			<ul class="plain">
-				<li><a href="#">Donate</a> to stay ad free</li>
-				<li><a href="#">Help</a></li>
-				<li><a class="async" href="{% url static_page 'statistics' %}">Search Statistics</a></li> 
-				<li><a class="async" href="{% url static_page 'aboutus' %}">About Perzoot</a></li> 
-				<li><a class="async" href="{% url static_page 'reportproblem' %}">Report a problem</a></li> 
-				<li><a class="async" href="{% url static_page 'contactus' %}">Contact us</a></li>
-				<li><a class="async" href="{% url static_page 'terms' %}">Terms of Use</a></li>  
-				<li><a class="async" href="{% url static_page 'privacy' %}">Privacy Policy</a></li>
-			</ul>
 		</div>
 	</div>
 </div>
@@ -142,10 +132,11 @@
 			<h3><a href="#">Perzoot</a></h3>
 			<div>
 				<ul id="social-links" class="plain">
-					<li id="facebook"><a href="http://www.facebook.com/perzoot" target="_blank">Like us on Facebook</a></li>
-					<li id="twitter"><a href="http://www.twitter.com/perzoot" target="_blank">Follow us on Twitter</a></li>
-					<li><a href="#">Donate</a> to stay ad free</li>
-					<li><a href="#">Help</a></li>
+					<li id="facebook"><a href="#">Like us on Facebook</a></li>
+					<li id="twitter"><a href="http://www.twitter.com/perzoot">Follow us on Twitter</a></li>
+					<li>&nbsp;</li>
+					<li><a class="async" href="{% url static_page 'donate' %}">Donate</a> to stay ad free</li>
+					<li><a class="async" href="{% url static_page 'help' %}">Help</a></li>
 					<!-- <li><a class="async" href="{% url static_page 'statistics' %}">Search Statistics</a></li>  -->
 					<li><a class="async" href="{% url static_page 'aboutus' %}">About Perzoot</a></li>
 					<!-- <li><a class="async" href="{% url static_page 'reportproblem' %}">Report a problem</a></li> --> 

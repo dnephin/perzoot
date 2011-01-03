@@ -38,3 +38,18 @@ function tiles(selector) {
 	selector.find('h3.tile_default_closed.ui-state-active').trigger('click');
 }
 
+/*
+ * Autocomplete widget that displays options on click.
+ *
+ */
+function clickcomplete(selector, source) {
+	selector.autocomplete({
+		source: source,
+		delay: 50,
+		minLength: 0,
+	});
+	selector.focusin( function() {
+		selector.autocomplete("search", '');
+	});
+}
+

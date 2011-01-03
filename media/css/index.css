@@ -33,14 +33,17 @@
 
 /* Middle styles
 -------------------------------------------------- */
+.search_button, #id_keywords {
+	font-size: 1.4em;
+	padding: 6px 10px;
+}
+
+
 .search_button {
 	border: 1px solid #0F4ABE;
 	background-color: #1F77FF;
 	color: white;
-	font-size: 14pt;
-	height: 40px;
 	margin-left: 5px;
-	padding: 7px 10px;
 	width: 100px;
 }
 .search_button:hover {
@@ -59,14 +62,16 @@
 }
 #id_keywords {
 	color: #222;
-	font-size: 1.5em;
-	padding: 8px 10px;
 	width: 450px;
 }
 #id_days {
 	width: 30px;
 }
-
+#id_city {
+	width: 120px;
+	padding: 2px 5px;
+	font-size: 0.9em;
+}
 
 
 

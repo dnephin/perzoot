@@ -25,26 +25,30 @@ function build_tooltips(selector) {
 	var target = selector || $('body');
 	target.find('.tt_link').each(function(i) {
 		var elem = $(this);
+		var tooltip = $('#tooltip');
 
-		var tt = document.createElement("div");
-		tt.className = "tooltip";
-		tt.innerHTML = "<p>" + elem.attr('title') + "</p>";
-//		target.find('.tooltip').remove();
-		target.append(tt);
-
-		var tooltip = $(tt);
-
-		elem.removeAttr('title')
-			.hover(function() { 
+		elem.data('tooltip', elem.attr('title'));
+		elem.removeAttr('title');
+		elem.hover(function() {
+				tooltip.clearQueue();
+				tooltip.find('p').html(elem.data('tooltip'));
 				tooltip.css({'opacity': 0.8, 'display': 'none'});
-				var top = elem.position().top - tooltip.outerHeight() - 4;
-				top = (top > 0) ? top : tooltip.height() + 8;
-				var left = elem.position().left - tooltip.width() / 2 + elem.width() / 2;
+
+				var top = elem.position().top - tooltip.outerHeight() - 2;
+				top = (top > 0) ? top : elem.position().top + elem.outerHeight() + 2;
+				var left = elem.position().left - tooltip.outerWidth() / 2 + elem.width() / 2;
 				left = (left > 0) ? left : 2;
 				tooltip.css({'left': left, 'top': top});
-				tooltip.fadeIn(500);
-			}, function() { tooltip.fadeOut(500); })
-			.click(function() { tooltip.fadeOut(50); });
+				tooltip.fadeIn(200);
+			}, function() { 
+				tooltip.clearQueue();
+				tooltip.fadeOut(50); 
+			});
+		elem.click(function() { tooltip.fadeOut(50); });
+		// In some cases the fadeOut will trigger after the fadeIn, this will
+		// ensure that a tooltip is always displayed when the mouse is over a
+		// tooltip element.
+		elem.mousemove(function() { tooltip.show() });
 	});
 }
 
