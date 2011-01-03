@@ -83,7 +83,7 @@ function handle_search_scroll(event) {
  * Update the location of the search sidebars when the user scrolls down the 
  * page.  There are two possible cases here: The sidebar is shorter then the
  * available space and it should stick to the top, or the sidebar is taller 
- * then the available space and it should tick to the bottom.
+ * then the available space and it should stick to the bottom.
  */
 function update_sidebar_location() {
 
@@ -477,6 +477,8 @@ function update_result_view() {
 		return;	
 	}
 }
+
+
 
 
 /*

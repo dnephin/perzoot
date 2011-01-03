@@ -8,15 +8,15 @@
 }
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
 	border: 0;
-	margin-bottom: 5px;
+/* 	margin-bottom: 5px; */
 }
 .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
 	border: 0;
 }
 .ui-accordion .ui-accordion-content {
-	border: 1px solid #BBB;
+	border: 1px solid #CCC;
 	border-top: none;
-	margin: 0 0 10px 0;
+	margin: 0 0 0 0;
 	padding: 4px 8px;
 	top: 0;
 }
@@ -35,7 +35,7 @@
 
 /* Open state */
 .ui-accordion .ui-accordion-header-active {
-	border-bottom: 1px solid #BBB; 
+	border-bottom: 1px solid #CCC; 
 }
 .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited {
 	color: #333;
@@ -45,7 +45,7 @@
 	background-color: #D9D9D9;
 	background-image: url(/m/img/widget_sprite.png);
 	background-position: 0 0;
-	border: 1px solid #BBB;
+	border: 1px solid #CCC;
 }
 
 /* Closed state */
@@ -57,7 +57,7 @@
 	background-color: #F1F1F1;
 	background-image: url(/m/img/widget_sprite.png);
 	background-position: 0 0;
-	border: 1px solid #BBB;
+	border: 1px solid #CCC;
 }
 
 
@@ -81,8 +81,9 @@
 /* UI buttons
 -------------------------------------------------- */
 .ui-buttonset .ui-state-default {
-	background: #FFF;
+	background: #EEE;
 	border: 1px solid #CCC;
+	color: #666;
 }
 
 .ui-buttonset .ui-state-active {
@@ -92,21 +93,28 @@
 	background-image: url(/m/img/search_sprite.png);
 	background-position: 0 0;
 }
+.ui-buttonset .ui-state-active:hover {
+	border: 1px solid #0F4ABE;
+	color: white;
+}
 
 .ui-buttonset .ui-state-hover {
 	border-color: #0F4ABE;
+	border-color: #666;
+	background-color: #FFF;
+	color: #222;
 }
 
 .ui-buttonset .ui-button {
 	font-size: 0.9em;
 }
 
-.ui-buttonset .ui-button SPAN {
+.ui-buttonset .ui-button span {
 	padding: 3px 5px;
 }
 
 .ui-button .ui-button-text {
-	font-size: 0.9em;
+	font-size: 1.0em;
 }
 
 .ui-buttonset {

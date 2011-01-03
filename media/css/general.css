@@ -33,13 +33,15 @@ input {font-family: inherit}
 /* Header
 -------------------------------------------------- */
 #header {
-	/* border-bottom: 1px solid #CCC; */
 	background-color: #1F77FF;
 	height: auto;
 	white-space: nowrap;
 }
 #logo_div {
 	height: 55px;
+}
+#logo_div img {
+	margin-left: 10px;
 }
 #user_block {
 	color: #FFF;
@@ -87,7 +89,7 @@ input {font-family: inherit}
 /* Middle 
 -------------------------------------------------- */
 #main {
-	background: #fff;
+	background-color: #FFF;
 	min-height: 400px;
 }
 

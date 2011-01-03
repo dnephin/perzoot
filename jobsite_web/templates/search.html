@@ -74,7 +74,7 @@
 			<input type="button" id="save_button"  class="button ignore button_main" value="Save"
 			onclick="return save_search(this)" /><br />
 		</div>
-		<div class="search_toolbar_extra">
+		<div id="country_time_select" class="search_toolbar_extra">
 			jobs in {{ search_form.city }} posted in the last {{ search_form.days }} days
 			<input type="hidden" name="sort" id="id_sort" value="" />
 			{{ search_form.filter_category }}
@@ -82,7 +82,7 @@
 			{{ search_form.filter_company }}
 		</div>
 	</form>
-		<div class="search_toolbar_extra">
+		<div id="view_options" class="search_toolbar_extra">
 			<span id="sort_buttons">
 			Sort: 
 				<input type="radio" id="relevancy" name="sort"/><label for="relevancy">Relevancy</label>
@@ -109,7 +109,6 @@
 		
 		</div>
 	</div>
-
 	<div id="results">
 	</div>
 </div>
@@ -118,12 +117,12 @@
 
 	<div id="right_bar" class="span-6 last">
 	<div class="tile_widget" id="search_meta">
-		<div id="widget_history">
+		<div id="widget_history" class="widget_right">
 			<h3 id="search_history"><a href="#">Search History</a></h3>
 			<div></div>
 		</div>
 
-		<div id="widget_saved">
+		<div id="widget_saved" class="widget_right">
 			<h3 id="saved_searches" class="tile_default_closed">
 				<a href="#">Saved Searches</a></h3>
 			<div>
@@ -131,7 +130,7 @@
 			</div>
 		</div>
 		
-		<div id="widget_favourites">
+		<div id="widget_favourites" class="widget_right">
 			<h3 id="favorite_posts" class="tile_default_closed">
 				<a href="#">Your Favourite Postings</a></h3>
 			<div>
@@ -139,13 +138,12 @@
 			</div>
 		</div>
 		
-		<div id="widget_social">
-			<h3><a href="#">&nbsp;</a></h3>
+		<div id="widget_social" class="widget_right">
+			<h3><a href="#">Perzoot</a></h3>
 			<div>
 				<ul id="social-links" class="plain">
-					<li id="facebook"><a href="#">Like us on Facebook</a></li>
-					<li id="twitter"><a href="http://www.twitter.com/perzoot">Follow us on Twitter</a></li>
-					<li>&nbsp;</li>
+					<li id="facebook"><a href="http://www.facebook.com/perzoot" target="_blank">Like us on Facebook</a></li>
+					<li id="twitter"><a href="http://www.twitter.com/perzoot" target="_blank">Follow us on Twitter</a></li>
 					<li><a href="#">Donate</a> to stay ad free</li>
 					<li><a href="#">Help</a></li>
 					<!-- <li><a class="async" href="{% url static_page 'statistics' %}">Search Statistics</a></li>  -->

@@ -7,15 +7,17 @@
 			</span>
 	<div class="result_title"> 
 			<span class="job_title">
-				<a href="<%=url%>"><%=title%></a>
-			</span>  
+				<a target="_blank" href="<%=url%>"><%=title%></a>
+			</span>
 	</div>
 	<div class="result_details">
-			<strong>Details:</strong> <%= details %><br />
+			<strong>Details:</strong> <span class="category_tags"> <%= details %> </span>
 	</div>
+	
 	<div class="result_summary">
 		<%=summary%>
-	</div> 
+	</div>
+	
 	<div class="result_links"> 
 		<strong>Source:</strong> <a href="<%=url%>"><%=source%></a> |
 		<strong>Post date:</strong> <%=date%>
