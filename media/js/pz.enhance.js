@@ -200,34 +200,4 @@ function default_doc_ready() {
 	build_async_links();
 	build_input_select();
 	update_user_block();
-	//summary_hover_delay();
 }
-
-
-
-/*
-function makeTall() {
-	$('div.result_summary').css({'max-height': '9em', 'overflow': 'auto'});
-}
-function makeShort() {
-	$('div.result_summary').css({'max-height': '3em', 'overflow': 'hidden'});
-}
-*/
-
-//function summary_hover_delay() {}
-/*
-$(document).ready(function() {
-	$('#result_1 button.expand_summary').click(
-		function() {
-			//$(this).toggleClass('short long'); 
-			alert("Hello");
-		}
-	);
-});
-*/
-	
-
-
-
-
-

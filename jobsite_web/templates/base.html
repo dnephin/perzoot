@@ -26,6 +26,7 @@
 	<script type="text/javascript" src="/m/js/pz.general.js"></script>
 	<script type="text/javascript" src="/m/js/pz.widgets.js"></script>
 	<script type="text/javascript" src="/m/js/pz.enhance.js"></script>
+	<script type="text/javascript" src="/m/js/pz.summary.js"></script>
 	
 
 	
@@ -34,6 +35,9 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			default_doc_ready();
+			function() {
+				$('.result_summary').css({'color': 'red'});	
+			}
 		});
 	</script>
 	{% endblock %}

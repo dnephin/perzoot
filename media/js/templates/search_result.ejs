@@ -10,12 +10,14 @@
 				<a target="_blank" href="<%=url%>"><%=title%></a>
 			</span>
 	</div>
-	<div class="result_details">
-			<strong>Details:</strong> <span class="category_tags"> <%= details %> </span>
-	</div>
 	
+	<div class="result_details">
+		<h5 class="details_title">Job Details</h5>
+		<div class="details_box"> <%= details %> </div>
+	</div>
 	<div class="result_summary">
-		<%=summary%>
+		<h5 class="summary_title">Job Summary</h5>
+		<div class="summary_box"> <%=summary%> </div>
 	</div>
 	
 	<div class="result_links"> 

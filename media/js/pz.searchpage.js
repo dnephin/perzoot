@@ -460,18 +460,18 @@ function update_result_view() {
 		
 	$('#view_buttons').buttonset('refresh');
 	if (view == 'full_view') {
-		$('.search_result DIV').show();
+		$('.search_result div').show();
 		return;
 	}
 
 	if (view == 'summary_view') {
-		$('.search_result DIV').show();
+		$('.search_result div').show();
 		$('.search_result .result_details').hide();
 		return;
 	}
 
 	if (view == 'minimal_view') {
-		$('.search_result DIV').hide();
+		$('.search_result div').hide();
 		$('.search_result .result_title').show();
 		$('.search_result .result_links').show();
 		return;	
