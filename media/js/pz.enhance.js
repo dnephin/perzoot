@@ -195,9 +195,59 @@ function handle_user_account_action(elem) {
 }
 
 
+/*
+ * jQuery hoverIntent plugin to delay hover time for summary and detail boxes
+ */
+
+function summary_hover_delay() {
+	
+	var hoverConfig = {
+		over: function() { $(this).animate({'max-height': '9em', 'overflow': 'auto'}, 500); },
+		timeout: 500,
+		out: function() { $(this).animate({'max-height': '3.5em', 'overflow': 'hidden'}, 500); },
+		sensitivity: 20,
+		interval: 500
+	}
+	
+	$('div.summary_box').hoverIntent( hoverConfig );
+		/*
+function() {
+			$(this).animate({'max-height': '9em', 'overflow': 'auto'}, 500);
+		},
+		1000,
+		function() {
+			$(this).animate({'max-height': '3.5em', 'overflow': 'hidden'}, 500);
+		},
+*/
+}
+
+
+/*
+ *  Click toggle to expand summary and detail boxes
+ */
+function summary_click_toggle() {
+	$('div.summary_box').hover(function() {
+		$(this).css({'cursor': 'pointer'});
+	});
+	$('div.summary_box').toggle(
+		function() {
+			$(this).animate({'max-height': '9em', 'overflow': 'auto'}, 500);
+		},
+		function() {
+			$(this).animate({'max-height': '3.5em', 'overflow': 'hidden'}, 500);
+		}
+	);
+}
+
+
+
 function default_doc_ready() {
 	build_tooltips();
 	build_async_links();
 	build_input_select();
 	update_user_block();
+	summary_hover_delay();
 }
+
+
+

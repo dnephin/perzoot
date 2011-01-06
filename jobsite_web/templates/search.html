@@ -38,8 +38,8 @@
 		clickcomplete($('#id_city'), CITIES);
 		clickcomplete($('#id_days'), DAYS);
 		
-		//$('div.summary_box').css({color: "blue"});
-		
+		//summary_click_toggle();
+		summary_hover_delay();
 	});
 
 	</script>
@@ -84,7 +84,7 @@
 			<span id="view_buttons">
 			View: 
 				<input type="radio" id="full_view" name="view"/><label for="full_view">Full</label>
-				<input type="radio" id="summary_view" name="view"/><label for="summary_view">Summary</label>
+				<input type="radio" id="summary_view" name="view"/><label for="summary_view" id="summary_view_label">Summary</label>
 				<input type="radio" id="minimal_view" name="view"/><label for="minimal_view" id="minimal_view_label">Minimal</label>
 			</span>
 			<span id="hl_buttons">
@@ -135,12 +135,6 @@
 			<h3><a href="#">Perzoot</a></h3>
 			<div>
 				<ul id="social-links" class="plain">
-					<li><a href="#">
-						<span class="link_icon" id="icon_facebook"></span>
-						<span class="link_text">Like us on Facebook</span></a></li>
-					<li><a href="http://www.twitter.com/perzoot">
-						<span class="link_icon" id="icon_twitter"></span>
-						<span class="link_text">Follow us on Twitter</span></a></li>
 					<li><a class="async" href="{% url static_page 'donate' %}">
 						<span class="link_icon" id="icon_donate"></span>
 						<span class="link_text">Donate to stay ad free</span></a></li>
@@ -159,6 +153,12 @@
 					<li><a class="async" href="{% url static_page 'privacy' %}">
 						<span class="link_icon" id="icon_privacy"></span>
 						<span class="link_text">Privacy Policy</span></a></li>
+					<li><a href="#">
+						<span class="link_icon" id="icon_facebook"></span>
+						<span class="link_text">Like us on Facebook</span></a></li>
+					<li><a href="http://www.twitter.com/perzoot">
+						<span class="link_icon" id="icon_twitter"></span>
+						<span class="link_text">Follow us on Twitter</span></a></li>
 					<!-- <li><a class="async" href="{% url static_page 'reportproblem' %}">Report a problem</a></li> -->
 					<!-- <li><a class="async" href="{% url static_page 'statistics' %}">Search Statistics</a></li>  -->
 				</ul>

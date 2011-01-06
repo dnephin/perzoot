@@ -128,7 +128,7 @@
 	max-height: 50px;
 	overflow: auto;
 }
-#hl_off_label, #minimal_view_label, #date_label {
+#hl_off_label, #minimal_view_label, #summary_view_label, #date_label {
 	border-left: none;
 }
 
@@ -147,7 +147,6 @@
 }
 .search_result div {
 	margin: 0.1em 0 0.5em 0;
-	padding: 0 0px;
 }
 .search_result div:first-child {
 	margin-top: 2px;
@@ -202,27 +201,13 @@
 .summary_box, .details_box {
 	border: 1px solid #CCC;
 	background-color: #FFF;
-	padding: 0;
-	max-height: 3em;
+	padding: 3px;
+	max-height: 3.5em;
 	overflow: hidden;
 }
 .summary_box:hover, .details_box:hover {
-/* 	background-color: #FAFAEB; */
-	border: 1px solid #CCC;
-	max-height: 9em;
-	overflow: auto;
+	/* cursor: pointer; */
 }
-/*
-.short {
-	max-height: 3em;
-	overflow: hidden;
-}
-.long {
-	max-height: 9em;
-	overflow: auto;
-}
-*/
-
 .highlight { 
 	background-color: #CDF;
 	color: black;
@@ -242,30 +227,29 @@
 .ui-widget ul {
 	color: #333;
 }
-#results .opened_event {
+.opened_event {
 	border: 1px solid #CCC;
-	/* background: #F5F5F5; */
 	color: #666;
 }
-#results .opened_event .job_title a {
+.opened_event .job_title a {
 	color: #999;
 }
-#results .opened_event .result_links a {
+.opened_event .result_links a {
 	color: #666;
 }
-#results .opened_event .result_summary {
+.opened_event .summary_box, .opened_event .details_box {
 	background-color: none;
 }
 
 /* -- Saved -- */
-#results .saved_event {
+.saved_event {
 	border: 1px solid #FFD67D;
 	background: #FFFFD7;
 }
-#results .saved_event .job_title a {
+.saved_event .job_title a {
 	color: #FFA528;
 }
-.saved_event .result_summary {
+.saved_event .summary_box, .saved_event .details_box {
 	border-color: #FFD67D;
 	background-color: transparent;
 	background-color: #ffffe5;
@@ -311,14 +295,17 @@
 	padding: 3px 8px;
 	display: block;
 }
-#widget_social ul li:first-child {
-	margin: 3px 0 0 0;
+#widget_social ul li:first-child a {
+	padding-top: 6px;
 }
-#widget_social ul li:last-child {
-	margin: 0 0 3px 0;
+#widget_social ul li:last-child a {
+	padding-bottom: 6px;
 }
 #widget_social ul li a:hover {
 	background-color: #EEE;
+}
+#widget_social ul li a:active {
+	color: #CCC;
 }
 .link_icon {
 	background-image: url(/m/img/icons/icons.png);
