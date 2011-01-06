@@ -141,7 +141,7 @@
 	border-radius: 4px;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
-	margin-bottom: 4px;
+	margin-bottom: 5px;
 	padding: 6px 10px;
 	background-image: url(/m/img/stripe_EEE_FFF.png);
 }
@@ -297,6 +297,48 @@
 	background-image: url(/m/img/icons/pin.png);
 	background-repeat: no-repeat;
 }
+
+#widget_social .ui-accordion .ui-accordion-content {
+	padding: 0;
+}
+#widget_social ul li {
+	margin: 0;
+	padding: 0;
+}
+#widget_social ul li a {
+	text-decoration: none;
+	margin: 0;
+	padding: 3px 8px;
+	display: block;
+}
+#widget_social ul li:first-child {
+	margin: 3px 0 0 0;
+}
+#widget_social ul li:last-child {
+	margin: 0 0 3px 0;
+}
+#widget_social ul li a:hover {
+	background-color: #EEE;
+}
+.link_icon {
+	background-image: url(/m/img/icons/icons.png);
+	display: inline-block;
+	height: 16px;
+	width: 16px;
+	vertical-align: middle;
+	margin-right: 4px;
+}
+.link_text {
+	text-decoration: underline;
+}
+#icon_contact {background-position: -176px -48px;}
+#icon_about {background-position: -48px -48px;}
+#icon_help {background-position: -160px -48px;}
+#icon_donate {background-position: -144px -48px;}
+#icon_facebook {background-position: 0 -64px;}
+#icon_twitter {background-position: -48px -64px;}
+#icon_terms {background-position: -256px -48px;}
+#icon_privacy {background-position: -272px -48px;}
 
 /* Search Filters and Left Column
 -------------------------------------------------- */

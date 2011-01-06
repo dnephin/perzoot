@@ -20,6 +20,9 @@
 	padding: 4px 8px;
 	top: 0;
 }
+#widget_social .ui-accordion-content {
+	padding: 0;
+}
 /*
 .ui-accordion .ui-accordion-content:last-child {
 	border-bottom: 0;

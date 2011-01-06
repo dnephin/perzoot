@@ -29,7 +29,7 @@ body {
 a {color: #0F4ABE;}
 a:hover {color: #1F77FF;}
 input {
-	font-family: inherit
+	font-family: inherit;
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
 	border-radius: 4px;
