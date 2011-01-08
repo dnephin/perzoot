@@ -239,14 +239,15 @@ function update_search_filters(filter_data) {
 	$('#left_menu').html(filters);
 	tiles($('#left_menu'));
 
+	// add hidden field to search form on check
 	$('#left_menu .filter').each(function (i) {
 		$(this).change(function () {
-			// add hidden field to search form
 			update_filter_field($(this).attr('filter_type'), $(this).attr('name'));
 			$(this).parent().remove();
 			search_type('&otp_filter=1')
 		});
 	});
+
 	// add elements for removed filters and add hidden fields to search form
 	$('#search input[name^="filter_"]').each(function () {
 		var filter_type = $(this).attr('name').split('_')[1];

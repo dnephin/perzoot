@@ -79,9 +79,9 @@
 	height: 28px;
 	outline: none;
 	padding: 0 10px;
-	border-radius: 15px;
-	-moz-border-radius: 15px;
-	-webkit-border-radius: 15px;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
 }
 #buttons input:active {
 	outline: none;
@@ -92,10 +92,7 @@
 }
 #search_button {
 	color: #FFF;
-	border: 0px solid #224CC4;
-	/* background-image: url(/m/img/search_sprite.png); */
-	background-position: 0 0;
-	/* background-color: #1F77FF; */
+	border: 1px solid #224CC4;
 	background-color: #1F77FF;
 }
 #search_button:hover {
@@ -109,9 +106,7 @@
 	outline: 0;
 }
 #save_button {
-	border: 0px solid #287511;
-	/* background-image: url(/m/img/save_sprite.png); */
-	background-position: 0 0;
+	border: 1px solid #287511;
 	background-color: #00AD00;
 	color: #FFF;
 	margin-left: 4px;
@@ -119,7 +114,7 @@
 #save_button:hover {
 	background-position: 0 -33px;
 	background-color: #00AD00;
-	border: 0px solid #287511;
+	border: 1px solid #287511;
 	color: white;
 }
 #save_button:active {

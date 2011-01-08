@@ -106,11 +106,10 @@ def format_search(sr):
 	}
 
 	for field, value_list in sr['facet_counts']['facet_fields'].iteritems():
-		field = format_caps(field)
 		field_data = []
 		for i in range(0, len(value_list), 2):
 			name = value_list[i] or MISSING
-			field_data.append((format_caps(name), value_list[i+1]))
+			field_data.append((name, value_list[i+1]))
 		resp['filters'].append((field, field_data))
 		
 	field_data = []

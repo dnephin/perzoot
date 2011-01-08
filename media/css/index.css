@@ -64,17 +64,15 @@
 	color: #222;
 	width: 450px;
 }
-#id_days {
-	width: 30px;
-}
 #id_city {
 	width: 120px;
 	padding: 2px 5px;
 	font-size: 0.9em;
 }
-
-
-
+#id_city:hover {
+	background-color: #EEE;
+	cursor: pointer;
+}
 #searchbox {
 	margin: 100px auto 140px auto;
 	text-align: center;
