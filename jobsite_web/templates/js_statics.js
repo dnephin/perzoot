@@ -20,6 +20,6 @@ var URL_TRACK_EVENT = "{% url track 'name' 0 %}";
 TODO: Change to ajax call
 {% endcomment %}
 var CITIES = ['Montreal', 'St Laurent', 'Pointe Clair', 'Anjou', 'Dorval', 
-		'Lachin', 'St Léonard', 'Laval', 'Kirkland', 'Dollard', 'Pierrefond',
+		'Lachine', 'St Léonard', 'Laval', 'Kirkland', 'Dollard', 'Pierrefond',
 		'Mont Royal'];
 var DAYS = ['1', '3', '7', '14', '30'];

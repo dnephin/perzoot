@@ -17,8 +17,11 @@
 	/* padding: 10px; */
 }
 #country_time_select {
-	padding: 10px 3px 0;
-	text-transform: uppercase;
+	padding: 5px 3px;
+	color: black;
+}
+#country_time_select input {
+	margin: 0 3px;
 }
 #id_keywords {
 	border: 1px solid #CCC;

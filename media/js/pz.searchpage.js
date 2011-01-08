@@ -90,6 +90,7 @@ function update_sidebar_location() {
 	var view_bottom = $(window).scrollTop() + $(window).height();
 	var doc_bottom = $('body').height();
 	var pad = 20;
+	var padding_from_top = 18;
 
 	var down = (GLOBAL_SCROLL_TOP < $(window).scrollTop())
 	var up = !down;
@@ -107,7 +108,9 @@ function update_sidebar_location() {
 				((down && bot + pad < doc_bottom) ||
 				(up && top >= orig_top))) {
 			$(this).css({position: "absolute", 
-					top: Math.max($(window).scrollTop(), orig_top)});
+					top: Math.max(
+						$(window).scrollTop() + padding_from_top, 
+						orig_top)});
 		}
 
 		// The bar is taller then the window
@@ -211,6 +214,8 @@ function handle_search_response(data, append, event_url) {
 
 	// Add event handlers
 	build_result_handlers();
+	build_summary_hover_delay($('div.summary_box'));
+	build_summary_hover_delay($('div.details_box'));
 
 
 	// If this was an append search (page scrolling), and we didn't get any
@@ -418,13 +423,12 @@ function build_result_handlers() {
 
 		// outbound tracking links
 		$(e).find('.job_title A,.result_links A').each(function() {
-			$(this).click( function(event) { track_outbound(event, id) } );
+			$(this).click( function(event) { 
+				track_outbound(event, id) 
+				$(event.target).parents('.search_result').addClass('opened_event');
+			} );
 		});
-
-		// TODO: open all above links
-		
 	});
-
 }
 
 
@@ -479,6 +483,21 @@ function update_result_view() {
 }
 
 
+/*
+ * jQuery hoverIntent plugin to delay hover time for summary and detail boxes
+ */
+function build_summary_hover_delay(selector) {
+	
+	var hoverConfig = {
+		over: function() { $(this).animate({'max-height': '9em', 'overflow': 'auto'}, 500); },
+		timeout: 300,
+		out: function() { $(this).animate({'max-height': '3.5em', 'overflow': 'hidden'}, 500); },
+		sensitivity: 20,
+		interval: 200
+	}
+	
+	selector.hoverIntent( hoverConfig );
+}
 
 
 /*
