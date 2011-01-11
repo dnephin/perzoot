@@ -196,7 +196,6 @@ function handle_user_account_action(elem) {
 
 
 
-
 function default_doc_ready() {
 	build_tooltips();
 	build_async_links();

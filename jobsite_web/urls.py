@@ -22,7 +22,8 @@ urlpatterns = patterns('',
 	(r'^main$', 'jobsite_main.views.main'),
 	(r'^search$', 'jobsite_main.views.search'),
 
-	# Static pages
+	# Site pages and static pages
+	url(r'^contactus$', jobsite_main.views.contactus, name='contactus'),
 	url(r'^page/(?P<page_name>\w+)', jobsite_main.views.static_page,
 		name='static_page'),
 	(r'^favicon\.ico$', 'django.views.generic.simple.redirect_to', 

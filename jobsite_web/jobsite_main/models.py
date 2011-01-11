@@ -122,3 +122,18 @@ class SitePage(Model):
 			'content': self.content }
 
 
+
+class ContactUs(Model):
+	"""
+	Contents of contact us form.
+	"""
+
+	name = CharField(max_length=50)
+	date = DateTimeField(auto_now_add=True, editable=False)
+	email = EmailField()
+	message = TextField()
+
+
+	def __str__(self):
+		return "Message from %s(%s) on %s" % (self.name, self.email, 
+			self.date.strftime("%Y-%m-%d %H:%M"))

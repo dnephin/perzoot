@@ -8,7 +8,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.core import validators
 
-from jobsite_main.models import SearchEvent, SearchFilter
+from jobsite_main.models import SearchEvent, SearchFilter, ContactUs
 
 
 class SearchFilterWidget(HiddenInput):
@@ -194,3 +194,16 @@ class UserForm(UserCreationForm):
 		return user
 		
 
+
+class ContactUsForm(ModelForm):
+	"""
+	Contact Us Form.
+	"""
+
+	class Meta:
+		model = ContactUs
+
+	error_css_class = 'error'
+	required_css_class = 'required'
+	async = BooleanField(widget=HiddenInput(), initial=False)
+	

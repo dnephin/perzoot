@@ -19,7 +19,7 @@ from django.forms import ValidationError
 from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
 
-from jobsite_main.forms import JobSearchForm, UserForm
+from jobsite_main.forms import JobSearchForm, UserForm, ContactUsForm
 from jobsite_main.search import Search, SOLR_DATE_FORMAT, MISSING
 from jobsite_main import db, business
 from jobsite_main.util import service_friendly_name, to_json, auto_authenticate
@@ -335,19 +335,6 @@ def track_event(request, event_name, posting_id):
 
 
 
-def static_page(request, page_name):
-	"""
-	Retrieve the contents for a (relatively) static page.
-	"""
-	page = db.load_static_page(page_name)
-	if not page:
-		return handle_response(request, code=NOTFOUND)
-
-	return handle_response(request, {'page_data': page}, 
-			template="static_page.html")
-
-
-
 ###############################################################################
 #		User/Authentication Actions
 ###############################################################################
@@ -503,5 +490,60 @@ def register(request):
 	
 	# TODO: register without javascript
 	return handle_response(request, { 'content_block': 'blocks/register.html',
+			'form': form }, 'base.html')
+
+
+###############################################################################
+#	 Misc	
+###############################################################################
+
+
+def static_page(request, page_name):
+	"""
+	Retrieve the contents for a (relatively) static page.
+	"""
+	page = db.load_static_page(page_name)
+	if not page:
+		return handle_response(request, code=NOTFOUND)
+
+	return handle_response(request, {'page_data': page}, 
+			template="static_page.html")
+
+
+
+def contactus(request):
+	"""
+	Display and save contact us.
+	"""
+
+	if request.GET.get('submit', False):
+		form = ContactUsForm(request.GET)
+		
+		if form.is_valid():
+			form.save()
+			return handle_response(request, {'content_block': 'blocks/thankyou.html'}, 
+					'base.html')
+
+		else:
+			if is_async(request):
+				return json_response(request, code=INPUT, 
+						data=render_to_string('blocks/contactus.html', {'form': form}))
+			else:
+				return handle_response(request, { 'content_block': 'blocks/contactus.html',
+					'form': form }, 'base.html')
+				
+
+	else:
+		form = ContactUsForm(initial={'async': is_async(request)})
+
+	if is_async(request):
+		return json_response(request, code=INPUT, data={
+			'page_data': {
+				'content': render_to_string('blocks/contactus.html', {'form': form}),
+				'title': 'Contact Us',
+			},
+		})
+
+	return handle_response(request, { 'content_block': 'blocks/contactus.html',
 			'form': form }, 'base.html')
 
