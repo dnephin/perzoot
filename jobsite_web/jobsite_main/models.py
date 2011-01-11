@@ -29,7 +29,9 @@ class UserEvent(Model):
 		unique_together = ('event', 'posting_id', 'session')
 
 	def __str__(self):
-		return "UserEvent [%s|%s] %s %s" % (self.user, self.tstamp, self.event, self.posting_id)
+		return "UserEvent [%s|%s] %s %s" % (self.user or self.session, 
+				self.tstamp.strftime("%Y-%m-%d %H:%M"), self.event, 
+				self.posting_id)
 
 
 class SearchEvent(Model):
@@ -55,7 +57,8 @@ class SearchEvent(Model):
 
 
 	def __str__(self):
-		return "Search [%s|%s] %s" % (self.user_id, self.tstamp, self.terms)
+		return "Search [%s|%s] %s" % (self.user or self.session, 
+				self.tstamp.strftime("%Y-%m-%d %H:%M"), self.keywords)
 
 	# TODO: add filters and extra params
 	def __json__(self):
