@@ -175,7 +175,7 @@ var LOGIN	= 'login';
 /*
  * Handle the login and register form submission
  */
-function handle_user_account_action(elem) {
+function handle_user_account_action(elem, skip_reload) {
 	$.ajax({
 		'url': add_async_param($(elem).attr('action') + '?' + $(elem).serialize()),
 		'success': function(data, code) {
@@ -188,7 +188,7 @@ function handle_user_account_action(elem) {
 
 			// Success
 			d.dialog('close');
-			window.location.reload()
+			if (!skip_reload) window.location.reload()
 		},
 	});
 	return false;
