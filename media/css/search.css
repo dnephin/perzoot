@@ -21,37 +21,37 @@
 	margin: 0 3px;
 }
 #id_keywords {
-	border: 1px solid #CCC;
+	border: 1px solid #999;
+	border-top: 1px solid #CCC;
+	border-left: 1px solid #CCC;
 	height: 21px;
 	float: left;
-	margin: 0 0 2px 0;
-	padding: 5px;
-	width: 320px;
+	margin: 0;
+	padding: 2px 5px;
+	width: 340px;
 }
 #id_keywords:focus {
 	border: 1px solid #999;
 }
-#buttons {
-	width: 145px;
-	padding: 0;
-	margin: 1px 0 0 7px;
-	float: left;
-}
-#buttons .button {
+
+#search .button {
 	font-family: Helvetica, Arial, FreeSans, sans;
 	font-size: 1.2em;
 	font-weight: bold;
+	float: left;
 	height: 28px;
+	margin: 0 0 0 5px;
 	outline: none;
 	padding: 0 5px;
 	text-shadow: 0px 1px 1px #333;
+	width: auto;
 	/*
 border-radius: 3px;
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
 */
 }
-#buttons .button:active {
+#search .button:active {
 	outline: none;
 }
 #search_button {
@@ -59,6 +59,7 @@ border-radius: 3px;
 	border: 1px solid #224CC4;
 	background-color: #1F77FF;
 	background-image: url(/m/img/search_sprite.png);
+	background-position: 0 0;
 }
 #search_button:hover {
 	background-position: 0 -32px;
@@ -90,9 +91,10 @@ border-radius: 3px;
 	outline: 0;
 }
 
-
-
 #id_city {
+	border: 1px solid #999;
+	border-top: 1px solid #CCC;
+	border-left: 1px solid #CCC;
 	font-size: 0.9em;
 	margin: 0;
 	padding: 1px 5px;
@@ -103,6 +105,9 @@ border-radius: 3px;
 	cursor: pointer;
 }
 #id_days {
+	border: 1px solid #999;
+	border-top: 1px solid #CCC;
+	border-left: 1px solid #CCC;
 	font-size: 0.9em;
 	font-family: Helvetica, Arial, FreeSans, sans;
 	margin: 0;
@@ -116,6 +121,7 @@ border-radius: 3px;
 #id_days:focus {
 	cursor: text;
 }
+
 #view_options {
 	background: #FFF;
 	border: 1px solid #CCC;
@@ -132,20 +138,22 @@ border-radius: 3px;
 	max-height: 50px;
 	overflow: auto;
 }
+/*
 #hl_off_label, #minimal_view_label, #summary_view_label, #date_label {
 	border-left: none;
 }
+*/
 
 
 /* Search Results
 -------------------------------------------------- */
-.search_result  {
+.search_result {
 	background-color: #FFF;
 	border: 1px solid #CCC;
 	border-radius: 4px;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
-	margin-bottom: 5px;
+	margin-bottom: 8px;
 	padding: 6px 10px;
 	background-image: url(/m/img/stripe_EEE_FFF.png);
 }
@@ -171,7 +179,7 @@ border-radius: 3px;
 	font-weight: bold;
 	font-size: 1.2em;
 	max-width: 430px;
-	padding: 1px 3px;
+	padding: 0px 3px;
 }
 .result_title a:hover {
 	background-color: #1F77FF;
@@ -261,7 +269,7 @@ border-radius: 3px;
 	border-color: #FFD67D;
 	background-color: transparent;
 	background-color: #ffffe5;
-	background-image: url(/m/img/stripe_FFF_FFFFD7.png);
+	/* background-image: url(/m/img/stripe_FFF_FFFFD7.png); */
 }
 .saved_event .result_save {background-position: -64px -16px;}
 .result_save:hover {background-position: -64px -16px;}
@@ -276,52 +284,38 @@ border-radius: 3px;
 .widget_left, .widget_right {
 	margin-bottom: 10px;
 }
+.widget_right .ui-accordion-content {
+	padding: 0;
+}
 .widget_right ul li {
 	color: #999;
-	padding-bottom: 5px;
+	margin: 0;
+	padding: 0;
+}
+.widget_right ul li {
+	margin: 0;
+	padding: 0;
+}
+.widget_right ul li:first-child a {
+	margin-top: 4px;
+}
+.widget_right ul li:last-child a {
+	margin-bottom: 4px;
 }
 .widget_right ul li a {
 	color: #1F77FF;
-	padding-left: 20px;
-}
-#widget_history ul li {
-	background-image: url(/m/img/icons/clock.png);
-	background-repeat: no-repeat;
-}
-#widget_saved ul li {
-	background-image: url(/m/img/icons/star_1.png);
-	background-repeat: no-repeat;
-}
-#widget_favourites ul li {
-	background-image: url(/m/img/icons/pin.png);
-	background-repeat: no-repeat;
-}
-
-#widget_social .ui-accordion .ui-accordion-content {
-	padding: 0;
-}
-#widget_social ul li {
-	margin: 0;
-	padding: 0;
-}
-#widget_social ul li a {
-	text-decoration: none;
+	display: block;
 	margin: 0;
 	padding: 3px 8px;
-	display: block;
+	text-decoration: none;
 }
-#widget_social ul li:first-child a {
-	padding-top: 6px;
-}
-#widget_social ul li:last-child a {
-	padding-bottom: 6px;
-}
-#widget_social ul li a:hover {
+.widget_right ul li a:hover {
 	background-color: #EEE;
 }
-#widget_social ul li a:active {
+.widget_right ul li a:active {
 	color: #CCC;
 }
+
 .link_icon {
 	background-image: url(/m/img/icons/icons.png);
 	display: inline-block;
@@ -333,6 +327,20 @@ border-radius: 3px;
 .link_text {
 	text-decoration: underline;
 }
+.item_date {
+	color: #999;
+}
+
+#search_history .link_icon {
+	background-position: -192px -48px;
+}
+#saved_searches .link_icon {
+	background-position: -16px -48px;
+}
+#favorite_posts .link_icon {
+	background-position: -112px -48px;	
+}
+
 #icon_contact {background-position: -176px -48px;}
 #icon_about {background-position: -48px -48px;}
 #icon_help {background-position: -160px -48px;}

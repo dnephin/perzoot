@@ -1,16 +1,21 @@
-<h3 id="<%=id%>"><a href="#"> <%=title%> </a></h3>
-<div>
-	<ul class="plain">
-		<% 
-			$.each(content, function(i, item) { 
-				var url = (dynamic_click_url) ?	item['url'] :
-						click_url + "?event=" + item['id'];
-				var classes = (dynamic_click_url) ? "" : "search_link";
-		%>
-			<li>
-				<a href="<%=url%>" 
-					class="closeable_item <%=classes%>"><%=item.keywords%></a> <%=item.date%>
-			</li> 
-		<% }) %>
-	</ul>
+<div class="widget_right" id="<%=id%>">
+	<h3><a href="#"> <%=title%> </a></h3>
+	<div>
+		<ul class="plain">
+			<% 
+				$.each(content, function(i, item) { 
+					var url = (dynamic_click_url) ?	item['url'] :
+							click_url + "?event=" + item['id'];
+					var classes = (dynamic_click_url) ? "" : "search_link";
+			%>
+				<li>
+					<a href="<%=url%>" class="closeable_item <%=classes%>">
+						<span class="link_icon"></span>
+						<span class="link_text"><%=item.keywords%></span>
+						<span class="item_date"><%=item.date%></span>
+					</a>
+				</li> 
+			<% }) %>
+		</ul>
+	</div>
 </div>

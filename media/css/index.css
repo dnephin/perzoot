@@ -3,10 +3,84 @@
  */
 
 
+/* Middle styles
+-------------------------------------------------- */
+#searchbox {
+	margin: 100px auto 140px auto;
+	text-align: center;
+}
+
+#search_bar {
+	margin: 0 auto 10px;
+	width: 570px;
+}
+
+#id_keywords {
+	border: 1px solid #999;
+	border-top: 1px solid #CCC;
+	border-left: 1px solid #CCC;
+	color: #222;
+	font-size: 19px;
+	float: left;
+	margin: 0;
+	padding: 3px 10px;
+	width: 450px;
+}
+.tagline {
+	color: #222;
+	font-size: 1.8em;
+	font-weight: normal;
+	margin-bottom: 20px;
+	padding: 0;
+	white-space: nowrap;
+}
+
+#search_button {
+	border: 1px solid #0F61FF;
+	background-color: #1F77FF;
+	background-image: url(/m/img/search_sprite.png);
+	background-position: 0 0;
+	color: white;
+	font-size: 16px;
+	font-weight: bold;
+	float: left;
+	padding: 4px 10px;
+	margin: 0 0 0 5px;
+	text-shadow: 0 1px 1px #000;
+	width: 90px;
+}
+#search_button:hover {
+	background-color: #1F96FF;
+	background-image: url(/m/img/search_sprite.png);
+	background-position: 0 -32px;
+	cursor: pointer;
+}
+#search_button:active {
+	background-image: url(/m/img/search_sprite.png);
+	background-position: 0 -64px;
+	color: #CCC;
+}
+
+#city_select {
+	font-size: 1.2em;
+}
+
+#id_city {
+	border: 1px solid #999;
+	border-top: 1px solid #CCC;
+	border-left: 1px solid #CCC;
+	padding: 2px 5px;
+	font-size: 0.9em;
+	width: 120px;
+}
+#id_city:hover {
+	background-color: #EEE;
+	cursor: pointer;
+}
+
 
 /* Footer extras
 -------------------------------------------------- */
-
 #facebook {
 	background-image: url(/m/img/icons/facebook-24x24.png);
 	background-repeat: no-repeat;
@@ -29,51 +103,3 @@
 	position: relative;
 	top: 3px;
 }
-
-/* Middle styles
--------------------------------------------------- */
-#id_keywords {
-	color: #222;
-	width: 450px;
-}
-.search_button, #id_keywords {
-	font-size: 1.4em;
-	padding: 6px 10px;
-}
-
-#search_button_main {
-	border: 1px solid #0F4ABE;
-	background-color: #1F77FF;
-	color: white;
-	margin-left: 5px;
-	width: 100px;
-}
-.search_button:hover {
-	background-color: #1F96FF;
-	cursor: pointer;
-}
-.search_button:active {
-	background-color: #1F77FF;
-}
-
-#keywords_label {
-	font-size: 1.8em;
-	font-weight: normal;
-	padding-bottom: 5px;
-	white-space: nowrap;
-}
-
-#id_city {
-	width: 120px;
-	padding: 2px 5px;
-	font-size: 0.9em;
-}
-#id_city:hover {
-	background-color: #EEE;
-	cursor: pointer;
-}
-#searchbox {
-	margin: 100px auto 140px auto;
-	text-align: center;
-}
-

@@ -40,20 +40,21 @@ input {
 #main {
 	background-color: #FFF;
 	min-height: 400px;
+	padding-top: 55px;
 }
 
 /* Header
 -------------------------------------------------- */
 #header {
 	background-color: #1F77FF;
-	background-image: url(/m/img/header_bg_3.png);
+	background-image: url(/m/img/header_bg.png);
 	border-bottom: 1px solid #FFF;
 	height: auto;
-	position: relative;
+	position: fixed;
 	white-space: nowrap;
 	width: 100%;
 	z-index: 10;
-	-moz-box-shadow: 0 0 4px #000;
+	-moz-box-shadow: 0 0 2px #000;
 }
 #logo_div {
 	height: 55px;
