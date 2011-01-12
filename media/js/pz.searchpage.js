@@ -90,6 +90,7 @@ function update_sidebar_location() {
 	var view_bottom = $(window).scrollTop() + $(window).height();
 	var doc_bottom = $('body').height();
 	var pad = 20;
+	//var padding_from_top = 18;
 	var padding_from_top = 18;
 
 	var down = (GLOBAL_SCROLL_TOP < $(window).scrollTop())

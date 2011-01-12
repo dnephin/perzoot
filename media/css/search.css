@@ -13,9 +13,6 @@
 #search_toolbar br {
 	margin: 0.8em 0;
 }
-#search {
-	/* padding: 10px; */
-}
 #country_time_select {
 	padding: 5px 3px;
 	color: black;
@@ -31,9 +28,70 @@
 	padding: 5px;
 	width: 320px;
 }
-#id_keywords: {
-	
+#id_keywords:focus {
+	border: 1px solid #999;
 }
+#buttons {
+	width: 145px;
+	padding: 0;
+	margin: 1px 0 0 7px;
+	float: left;
+}
+#buttons .button {
+	font-family: Helvetica, Arial, FreeSans, sans;
+	font-size: 1.2em;
+	font-weight: bold;
+	height: 28px;
+	outline: none;
+	padding: 0 5px;
+	text-shadow: 0px 1px 1px #333;
+	/*
+border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+*/
+}
+#buttons .button:active {
+	outline: none;
+}
+#search_button {
+	color: #FFF;
+	border: 1px solid #224CC4;
+	background-color: #1F77FF;
+	background-image: url(/m/img/search_sprite.png);
+}
+#search_button:hover {
+	background-position: 0 -32px;
+	background-color: #52a1ff;
+	color: white;
+}
+#search_button:active {
+	color: #B2CDFB;
+	background-position: 0 -64px;
+	outline: 0;
+}
+
+#save_button {
+	border: 1px solid #287511;
+	background-color: #00AD00;
+	background-image: url(/m/img/save_sprite.png);
+	color: #FFF;
+	margin-left: 4px;
+}
+#save_button:hover {
+	background-position: 0 -33px;
+	background-color: #00AD00;
+	border: 1px solid #287511;
+	color: white;
+}
+#save_button:active {
+	color: #BEDFBF;
+	background-position: 0 -65px;
+	outline: 0;
+}
+
+
+
 #id_city {
 	font-size: 0.9em;
 	margin: 0;
@@ -66,61 +124,9 @@
 	border-radius: 0 0 4px 4px;
 	-webkit-border-radius: 0 0 4px 4px;
 }
-#buttons {
-	width: 145px;
-	padding: 0;
-	margin: 1px 0 0 7px;
-	float: left;
-}
-#buttons input {
-	font-family: Helvetica, Arial, FreeSans, sans;
-	font-size: 1.2em;
-	font-weight: bold;
-	height: 28px;
-	outline: none;
-	padding: 0 10px;
-	border-radius: 3px;
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
-}
-#buttons input:active {
-	outline: none;
-}
 .search_toolbar_extra {
 	clear: both;
 	margin-bottom: 3px;
-}
-#search_button {
-	color: #FFF;
-	border: 1px solid #224CC4;
-	background-color: #1F77FF;
-}
-#search_button:hover {
-	background-position: 0 -32px;
-	background-color: #52a1ff;
-	color: white;
-}
-#search_button:active {
-	color: #B2CDFB;
-	background-position: 0 -64px;
-	outline: 0;
-}
-#save_button {
-	border: 1px solid #287511;
-	background-color: #00AD00;
-	color: #FFF;
-	margin-left: 4px;
-}
-#save_button:hover {
-	background-position: 0 -33px;
-	background-color: #00AD00;
-	border: 1px solid #287511;
-	color: white;
-}
-#save_button:active {
-	color: #BEDFBF;
-	background-position: 0 -65px;
-	outline: 0;
 }
 #search_messages {
 	max-height: 50px;
@@ -153,20 +159,19 @@
 	margin-bottom: 2px;
 }
 .search_result h5 {
-	color: #666;
+	color: #444;
 	font-size: 0.8em;
 	font-weight: normal;
 	line-height: normal;
 	margin: 0;
 	text-transform: uppercase;
 }
-.result_title {
-	font-weight: bold;
-	max-width: 430px;
-}
 .result_title a {
 	color: #1F77FF;
+	font-weight: bold;
 	font-size: 1.2em;
+	max-width: 430px;
+	padding: 1px 3px;
 }
 .result_title a:hover {
 	background-color: #1F77FF;
@@ -218,28 +223,29 @@
 .result_links a:hover {
 	background-color: #00AD00;
 	color: white;
-	
-	-moz-border-radius: 3px;
 }
-/* -- Opened -- */
-.ui-widget ul {
-	color: #333;
-}
+
+/*
+ * Opened styles
+ */
 .opened_event {
 	border: 1px solid #CCC;
-	color: #666;
+	color: #444;
 }
-.opened_event .job_title a {
+.opened_event a {
 	color: #999;
 }
-.opened_event .result_links a {
-	color: #666;
+.opened_event a:hover {
+	background-color: #666;
+	color: white;
 }
 .opened_event .summary_box, .opened_event .details_box {
 	background-color: none;
 }
 
-/* -- Saved -- */
+/*
+ * Saved styles
+ */
 .saved_event {
 	border: 1px solid #FFD67D;
 	background: #FFFFD7;
@@ -247,12 +253,23 @@
 .saved_event .job_title a {
 	color: #FFA528;
 }
+.saved_event .job_title a:hover {
+	background-color: #FFA528;
+	color: white;
+}
 .saved_event .summary_box, .saved_event .details_box {
 	border-color: #FFD67D;
 	background-color: transparent;
 	background-color: #ffffe5;
 	background-image: url(/m/img/stripe_FFF_FFFFD7.png);
 }
+.saved_event .result_save {background-position: -64px -16px;}
+.result_save:hover {background-position: -64px -16px;}
+.result_save:active {background-position: -80px -16px;}
+.saved_event .result_close {background-position: -64px 0px;}
+.result_close:hover {background-position: -64px 0px;}
+.result_close:active {background-position: -80px 0px;}
+
 
 /* Sidebars
 -------------------------------------------------- */

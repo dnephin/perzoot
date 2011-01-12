@@ -28,19 +28,32 @@ body {
 }
 a {color: #0F4ABE;}
 a:hover {color: #1F77FF;}
+ 
 input {
 	font-family: inherit;
-	-moz-border-radius: 4px;
+	/*
+-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
 	border-radius: 4px;
+*/
+}
+#main {
+	background-color: #FFF;
+	min-height: 400px;
 }
 
 /* Header
 -------------------------------------------------- */
 #header {
 	background-color: #1F77FF;
+	background-image: url(/m/img/header_bg_3.png);
+	border-bottom: 1px solid #FFF;
 	height: auto;
+	position: relative;
 	white-space: nowrap;
+	width: 100%;
+	z-index: 10;
+	-moz-box-shadow: 0 0 4px #000;
 }
 #logo_div {
 	height: 55px;
@@ -91,16 +104,11 @@ input {
 	background-position: -48px -80px;
 }
 
-/* Middle 
--------------------------------------------------- */
-#main {
-	background-color: #FFF;
-	min-height: 400px;
-}
 
 
-/* Footer
--------------------------------------------------- */
+/*
+ * Footer
+ */
 #footer {
 	border-top: 1px solid #CCC;
 	padding: 20px 0;
