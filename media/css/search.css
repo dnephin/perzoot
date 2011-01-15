@@ -1,3 +1,13 @@
+/*
+ * search.css - styles for specific elements on the search results page
+ */
+
+
+#header {
+	position: fixed;
+}
+
+
 /* Search toolbar 
 -------------------------------------------------- */
 #search_toolbar {
@@ -24,18 +34,18 @@
 	border: 1px solid #999;
 	border-top: 1px solid #CCC;
 	border-left: 1px solid #CCC;
-	height: 21px;
+	height: 22px;
 	float: left;
 	margin: 0;
 	padding: 2px 5px;
 	width: 340px;
 }
 #id_keywords:focus {
-	border: 1px solid #999;
+	/* border: 1px solid #999; */
 }
 
 #search .button {
-	font-family: Helvetica, Arial, FreeSans, sans;
+	font-family: inherit;
 	font-size: 1.2em;
 	font-weight: bold;
 	float: left;
@@ -97,26 +107,28 @@ border-radius: 3px;
 	border-left: 1px solid #CCC;
 	font-size: 0.9em;
 	margin: 0;
-	padding: 1px 5px;
+	padding: 2px 5px;
 	width: 120px;
 }
 #id_city:hover {
-	background-color: #EEE;
+	/*
+background-color: #EEE;
 	cursor: pointer;
+*/
 }
 #id_days {
 	border: 1px solid #999;
 	border-top: 1px solid #CCC;
 	border-left: 1px solid #CCC;
 	font-size: 0.9em;
-	font-family: Helvetica, Arial, FreeSans, sans;
+	font-family: inherit;
 	margin: 0;
-	padding: 1px 5px;
-	width: 20px;
+	padding: 2px 5px;
+	width: 28px;
 }
 #id_days:hover {
-	background-color: #EEE;
-	cursor: pointer;
+/* 	background-color: #EEE; */
+/* 	cursor: pointer; */
 }
 #id_days:focus {
 	cursor: text;
@@ -126,9 +138,12 @@ border-radius: 3px;
 	background: #FFF;
 	border: 1px solid #CCC;
 	padding: 10px;
-	-moz-border-radius: 4px;
+	-moz-border-radius: 0 0 4px 4px;
 	border-radius: 0 0 4px 4px;
 	-webkit-border-radius: 0 0 4px 4px;
+}
+#view_options .ui-button-text {
+	font-size: 0.9em;
 }
 .search_toolbar_extra {
 	clear: both;
@@ -296,12 +311,14 @@ border-radius: 3px;
 	margin: 0;
 	padding: 0;
 }
+/*
 .widget_right ul li:first-child a {
 	margin-top: 4px;
 }
 .widget_right ul li:last-child a {
 	margin-bottom: 4px;
 }
+*/
 .widget_right ul li a {
 	color: #1F77FF;
 	display: block;

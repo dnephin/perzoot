@@ -23,29 +23,39 @@
 	font-size: 19px;
 	float: left;
 	margin: 0;
-	padding: 3px 10px;
+	padding: 5px 10px 3px;
 	width: 450px;
 }
 .tagline {
 	color: #222;
-	font-size: 1.8em;
+	font-size: 2.2em;
 	font-weight: normal;
+	font-family: "Helvetica Roman", Helvetica, Arial, FreeSans, sans;
 	margin-bottom: 20px;
 	padding: 0;
 	white-space: nowrap;
+/* 	text-shadow: 1px 0 0 #666; */
 }
-
 #search_button {
-	border: 1px solid #0F61FF;
+	/*
+border: 1px solid #0F61FF;
+	border-top: 1px solid #267CFB;
+	border-left: 1px solid #267CFB;
+*/
+	border-width: 1px;
+	border-style: solid;
+	border-color: /* #267CFB #267CFB */ #0F61FF #0F61FF;
 	background-color: #1F77FF;
 	background-image: url(/m/img/search_sprite.png);
 	background-position: 0 0;
 	color: white;
-	font-size: 16px;
-	font-weight: bold;
+	font-size: 17px;
+	font-weight: normal;
 	float: left;
-	padding: 4px 10px;
+	height: 34px;
+	/* letter-spacing: -0.08em; */
 	margin: 0 0 0 5px;
+	padding: 4px 10px 4px;
 	text-shadow: 0 1px 1px #000;
 	width: 90px;
 }
@@ -74,32 +84,42 @@
 	width: 120px;
 }
 #id_city:hover {
-	background-color: #EEE;
+	/*
+background-color: #EEE;
 	cursor: pointer;
+*/
 }
 
 
 /* Footer extras
 -------------------------------------------------- */
-#facebook {
-	background-image: url(/m/img/icons/facebook-24x24.png);
-	background-repeat: no-repeat;
-}
-#twitter {
-	background-image: url(/m/img/icons/twitter-24x24.png);
-	background-repeat: no-repeat;
+#footer p {
+	color: #999;
 }
 
-#social-links li {
+.link_icon {
+	background-image: url(/m/img/icons/icons.png);
 	display: inline-block;
-	list-style: none;
-	height: 24px;
-	margin: 10px 0;
-	padding: 0;
+	height: 16px;
+	margin-right: 4px;
+	vertical-align: middle;
+	width: 16px;
 }
-#social-links li a {
-	margin: 0 0 0 0px;
-	padding: 3px 6px 3px 30px;
-	position: relative;
-	top: 3px;
+.link_text:hover {
+	text-decoration: underline;
+}
+#facebook .link_icon {
+	background-position: 0 -64px;
+}
+#twitter .link_icon {
+	background-position: -48px -64px;
+}
+
+#social_links li {
+	display: inline;
+	list-style: none;
+}
+#social_links li a {
+	padding: 3px 8px;
+	text-decoration: none;
 }

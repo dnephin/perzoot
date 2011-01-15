@@ -5,37 +5,76 @@
  * items in base.html, and any commonly used styles used all over the site
  * (such as form elements, common link styles, etc.).
  */
-
-/* Colors
---------------------------------------------------
+ 
+ 
+/*
+ * Colors
+ *
 bright blue		#1F77FF
 				#0F4ABE
-bright green	#00AD00
 darker blue		#224CC4
 				#0055E5
+bright green	#00AD00
+
 dark grey		#333
 grey			#CCC
 light grey		#F1F1F1;
+
 */
 
+/* Imported fonts
+-------------------------------------------------- */
+
+@font-face {
+  font-family: "Lucida Sans";
+  src: url(/m/fonts/LucidaSansStd.otf) format("opentype");
+}
+@font-face {
+  font-family: "Minion Pro";
+  src: url(/m/fonts/MinionPro-Regular.otf) format("opentype");
+}
+@font-face {
+  font-family: "Minion Pro Bold";
+  src: url(/m/fonts/MinionPro-Bold.otf) format("opentype");
+}
+@font-face {
+  font-family: "Minion Pro Semi";
+  src: url(/m/fonts/MinionPro-Semibold.otf) format("opentype");
+}
+@font-face {
+  font-family: "Helvetica Ultra Light";
+  src: url(/m/fonts/HelveticaNeueLTStd-UltLt.otf) format("opentype");
+}
+@font-face {
+  font-family: "Helvetica Thin";
+  src: url(/m/fonts/HelveticaNeueLTStd-Th.otf) format("opentype");
+}
+@font-face {
+  font-family: "Helvetica Roma";
+  src: url(/m/fonts/HelveticaNeueLTStd-Roman.otf) format("opentype");
+}
 
 /* HTML elements base style
 -------------------------------------------------- */
+
+
 body {
 	color: #222;	
-	font-family: Helvetica, Arial, FreeSans, sans-serif;
-	background: #DBE8F3;
+	font-family:  "Lucida Grande", "Lucida Sans", Helvetica, Arial, FreeSans, sans-serif;
+	background: #FFF;
 }
-a {color: #0F4ABE;}
-a:hover {color: #1F77FF;}
+a {
+	color: #1F77FF;
+	text-decoration: none
+}
+a:hover {	
+	color: #1F77FF;
+	text-decoration: underline;
+}
  
 input {
-	font-family: inherit;
-	/*
--moz-border-radius: 4px;
-	-webkit-border-radius: 4px;
-	border-radius: 4px;
-*/
+	color: #222;
+	font-family: Helvetica, Arial, FreeSans, sans-serif;;
 }
 #main {
 	background-color: #FFF;
@@ -48,19 +87,19 @@ input {
 #header {
 	background-color: #1F77FF;
 	background-image: url(/m/img/header_bg.png);
-	border-bottom: 1px solid #FFF;
+	border-bottom: 1px solid #AAA;
 	height: auto;
-	position: fixed;
+	position: absolute;
 	white-space: nowrap;
 	width: 100%;
 	z-index: 10;
-	-moz-box-shadow: 0 0 2px #000;
+	/* -moz-box-shadow: 0 0 1px #000; */
 }
 #logo_div {
 	height: 55px;
 }
 #logo_div img {
-	margin-left: 10px;
+	margin-left: 0px;
 }
 #user_block {
 	color: #FFF;
@@ -94,6 +133,7 @@ input {
 	position: relative;
 	/* top: 4px; */
 	width: 24px;
+	vertical-align: middle;
 }
 #oauth_linkedin {
 	background-position: -24px -80px;
@@ -111,6 +151,7 @@ input {
  * Footer
  */
 #footer {
+	background: #F2F2F2; 
 	border-top: 1px solid #CCC;
 	padding: 20px 0;
 	text-align: center;
