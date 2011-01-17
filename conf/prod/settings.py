@@ -1,13 +1,13 @@
 """
  Perzoot - settings.py
- Staging Environment.
+ Production Environment.
 """
 
 DEBUG = False 
 TEMPLATE_DEBUG = DEBUG
 
 import os
-PROJECT_ROOT = '/var/pz_stage/jobsite_web/'
+PROJECT_ROOT = '/var/pz_prod/jobsite_web/'
 
 import logging.config
 logging.config.fileConfig('%s/logging.conf' % PROJECT_ROOT)
@@ -20,7 +20,7 @@ SOLR_URL = 'http://localhost:8080/solr'
 ADMINS = (
 	('Perzoot Admin', 'admin@perzoot.com'),
 )
-SERVER_EMAIL = 'admin@stage.perzoot'
+SERVER_EMAIL = 'admin@prod.perzoot'
 SEND_BROKEN_LINK_EMAILS = True
 
 MANAGERS = ADMINS
@@ -85,7 +85,7 @@ OAUTH_ACCESS_SETTINGS = {
 # Locale
 TIME_ZONE = 'America/Montreal'
 LANGUAGE_CODE = 'en-us'
-SITE_ID = 2
+SITE_ID = 1
 USE_I18N = True
 USE_L10N = True
 

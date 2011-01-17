@@ -27,7 +27,7 @@ case $2 in
 		CONF_DIR=$1/conf/stage
 		;;
 	"prod")
-		DEPLOY_ENV=/var/perzoot
+		DEPLOY_ENV=/var/pz_prod
 		CONF_DIR=$1/conf/prod
 		;;
 	*)

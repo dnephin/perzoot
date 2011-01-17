@@ -90,8 +90,8 @@ function update_sidebar_location() {
 	var view_bottom = $(window).scrollTop() + $(window).height();
 	var doc_bottom = $('body').height();
 	var pad = 20;
-	//var padding_from_top = 18;
 	var padding_from_top = 18;
+	var scroll_top = $(window).scrollTop() + $('#header').height();
 
 	var down = (GLOBAL_SCROLL_TOP < $(window).scrollTop())
 	var up = !down;
@@ -110,7 +110,7 @@ function update_sidebar_location() {
 				(up && top >= orig_top))) {
 			$(this).css({position: "absolute", 
 					top: Math.max(
-						$(window).scrollTop() + padding_from_top, 
+						scroll_top + padding_from_top, 
 						orig_top)});
 		}
 
