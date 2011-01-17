@@ -75,15 +75,12 @@ input:focus {
 	border-color: #999 #CCC #CCC;
 }
 .search_button {
-	border-width: 1px;
-	border-style: solid;
-	border-color: #0055E5 #0055E5 #0F4ABE;
+	border: 1px solid #0055E5;
 	color: white;
 	-moz-box-shadow: inset 0 1px 0px 0px #68B1F0;
 	box-shadow: inset 0 1px 0px 0px #00ADF0;
 	-webkit-box-shadow: inset 0 1px 0px 0px #00ADF0;
 }
-
 #main {
 	background-color: #FFF;
 	min-height: 400px;

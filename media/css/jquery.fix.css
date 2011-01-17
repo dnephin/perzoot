@@ -116,6 +116,14 @@
 .ui-buttonset .ui-button {
 	font-size: 1.0em;
 	text-shadow: 0 1px 1px #222;
+	-moz-box-shadow: inset 0 1px 0px 0px #68B1F0;
+	box-shadow: inset 0 1px 0px 0px #68B1F0;
+	-webkit-box-shadow: inset 0 1px 0px 0px #68B1F0;
+}
+.ui-buttonset .ui-state-active {
+	-moz-box-shadow: inset 0 1px 0px 0px #224CC4;
+	box-shadow: inset 0 1px 0px 0px #224CC4;
+	-webkit-box-shadow: inset 0 1px 0px 0px #224CC4;
 }
 
 .ui-buttonset .ui-button span {
