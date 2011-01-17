@@ -20,9 +20,9 @@
 		
 		<form id="search" action="{% url jobsite_main.views.search %}" method="POST">
 			<div id="search_bar">
-			{{ search_form.keywords }}
-			
-			<input type="submit" value="Search" id="search_button" /><br />
+				{{ search_form.keywords }}
+				
+				<input type="submit" value="Search" id="search_button" class="search_button" /><br />
 			</div>
 			<br />
 			<div id="city_select">

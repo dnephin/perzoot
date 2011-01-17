@@ -62,8 +62,3 @@ function size(obj) {
 	return size;
 }
 
-$(document).ready(function() {
-	$('li.ui-menu-item a.ui-corner-all').removeClass('ui-corner-all');
-	//alert('hello');
-});
-

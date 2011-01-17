@@ -57,20 +57,21 @@
 <div class="span-13 prepend-top">
 
 	<div id="search_toolbar">
-	<form action="{% url jobsite_main.views.search %}" method="GET" id="search">
-		{{ search_form.keywords }}
-		<input type="submit" id="search_button" class="button ignore button_main" value="Search" />
-		<input type="button" id="save_button"  class="button ignore button_main" value="Save"
-			onclick="return save_search(this)" /><br />
-		<div id="country_time_select" class="search_toolbar_extra">
-			jobs in {{ search_form.city }} posted in the last {{ search_form.days }} days
-			<input type="hidden" name="sort" id="id_sort" value="" />
-			{{ search_form.filter_category }}
-			{{ search_form.filter_domain }}
-			{{ search_form.filter_company }}
-		</div>
-	</form>
-		<div id="view_options" class="search_toolbar_extra">
+		<form action="{% url jobsite_main.views.search %}" method="GET" id="search">
+			{{ search_form.keywords }}
+			<input type="submit" id="search_button" class="button ignore button_main search_button" value="Search" />
+			<input type="button" id="save_button"  class="button ignore button_main" value="Save"
+				onclick="return save_search(this)" /><br />
+			<div id="country_time_select" class="search_toolbar_extra">
+				jobs in {{ search_form.city }} posted in the last {{ search_form.days }} days
+				<input type="hidden" name="sort" id="id_sort" value="" />
+				{{ search_form.filter_category }}
+				{{ search_form.filter_domain }}
+				{{ search_form.filter_company }}
+			</div>
+		</form>
+		
+		<div id="view_options" class="search_toolbar_extra input_box">
 			<span id="sort_buttons">
 			Sort: 
 				<input type="radio" id="relevancy" name="sort"/><label for="relevancy">Relevancy</label>
@@ -148,10 +149,10 @@
 					<li><a class="async" href="{% url static_page 'privacy' %}">
 						<span class="link_icon" id="icon_privacy"></span>
 						<span class="link_text">Privacy Policy</span></a></li>
-					<li><a href="http://www.facebook.com/apps/application.php?id=146340722079336">
+					<li><a href="http://www.facebook.com/apps/application.php?id=146340722079336" target="_blank">
 						<span class="link_icon" id="icon_facebook"></span>
 						<span class="link_text">Like us on Facebook</span></a></li>
-					<li><a href="http://www.twitter.com/perzoot">
+					<li><a href="http://www.twitter.com/perzoot" target="_blank">
 						<span class="link_icon" id="icon_twitter"></span>
 						<span class="link_text">Follow us on Twitter</span></a></li>
 					<!-- <li><a class="async" href="{% url static_page 'reportproblem' %}">Report a problem</a></li> -->

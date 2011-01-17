@@ -11,9 +11,11 @@
  * Colors
  *
 bright blue		#1F77FF
-				#0F4ABE
-darker blue		#224CC4
 				#0055E5
+				
+darker blue		#224CC4
+				#0F4ABE
+				
 bright green	#00AD00
 
 dark grey		#333
@@ -28,18 +30,6 @@ light grey		#F1F1F1;
 @font-face {
   font-family: "Lucida Sans";
   src: url(/m/fonts/LucidaSansStd.otf) format("opentype");
-}
-@font-face {
-  font-family: "Minion Pro";
-  src: url(/m/fonts/MinionPro-Regular.otf) format("opentype");
-}
-@font-face {
-  font-family: "Minion Pro Bold";
-  src: url(/m/fonts/MinionPro-Bold.otf) format("opentype");
-}
-@font-face {
-  font-family: "Minion Pro Semi";
-  src: url(/m/fonts/MinionPro-Semibold.otf) format("opentype");
 }
 @font-face {
   font-family: "Helvetica Ultra Light";
@@ -60,7 +50,7 @@ light grey		#F1F1F1;
 
 body {
 	color: #222;	
-	font-family:  "Lucida Grande", "Lucida Sans", Helvetica, Arial, FreeSans, sans-serif;
+	font-family: Helvetica, Arial, FreeSans, sans-serif;
 	background: #FFF;
 }
 a {
@@ -76,6 +66,24 @@ input {
 	color: #222;
 	font-family: Helvetica, Arial, FreeSans, sans-serif;;
 }
+input:focus {
+	outline: 0;
+}
+.input_box {
+	border-width: 1px;
+	border-style: solid;
+	border-color: #999 #CCC #CCC;
+}
+.search_button {
+	border-width: 1px;
+	border-style: solid;
+	border-color: #0055E5 #0055E5 #0F4ABE;
+	color: white;
+	-moz-box-shadow: inset 0 1px 0px 0px #68B1F0;
+	box-shadow: inset 0 1px 0px 0px #00ADF0;
+	-webkit-box-shadow: inset 0 1px 0px 0px #00ADF0;
+}
+
 #main {
 	background-color: #FFF;
 	min-height: 400px;
@@ -89,10 +97,12 @@ input {
 	background-image: url(/m/img/header_bg.png);
 	border-bottom: 1px solid #AAA;
 	height: auto;
+	font-weight: bold;
 	position: absolute;
 	white-space: nowrap;
 	width: 100%;
 	z-index: 10;
+	-moz-text-shadow: 0 1px 0 #FFF;
 	/* -moz-box-shadow: 0 0 1px #000; */
 }
 #logo_div {
@@ -144,7 +154,6 @@ input {
 #oauth_twitter {
 	background-position: -48px -80px;
 }
-
 
 
 /*

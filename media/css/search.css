@@ -13,12 +13,18 @@
 #search_toolbar {
 	border: 1px solid #CCC;
 	background-color: #FFF;
-	background-image: url(/m/img/stripe_EEE_FFF.png);
+	background-image: url(/m/img/stripe_EEExFFF_8x4.png);
 	margin-bottom: 15px;
 	padding: 10px 10px 5px 10px;
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
 	border-radius: 4px;
+	-moz-box-shadow: 0 1px 0px 0px #999;
+	-webkit-border-shadow: 0 1px 0px 0px #999;
+	box-shadow: 0 1px 0px 0px #999;
+}
+#search_toolbar input {
+	/* -moz-box-shadow: inset 0 1px 0px 0px #CCC; */
 }
 #search_toolbar br {
 	margin: 0.8em 0;
@@ -31,10 +37,10 @@
 	margin: 0 3px;
 }
 #id_keywords {
-	border: 1px solid #999;
-	border-top: 1px solid #CCC;
-	border-left: 1px solid #CCC;
-	height: 22px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #999 #CCC #CCC;
+	height: 23px;
 	float: left;
 	margin: 0;
 	padding: 2px 5px;
@@ -53,33 +59,22 @@
 	margin: 0 0 0 5px;
 	outline: none;
 	padding: 0 5px;
-	text-shadow: 0px 1px 1px #333;
+	text-shadow: 0px 1px 1px #444;
 	width: auto;
-	/*
-border-radius: 3px;
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
-*/
 }
 #search .button:active {
 	outline: none;
 }
 #search_button {
-	color: #FFF;
-	border: 1px solid #224CC4;
 	background-color: #1F77FF;
 	background-image: url(/m/img/search_sprite.png);
 	background-position: 0 0;
 }
-#search_button:hover {
-	background-position: 0 -32px;
-	background-color: #52a1ff;
-	color: white;
-}
 #search_button:active {
-	color: #B2CDFB;
+	/* color: #B2CDFB; */
 	background-position: 0 -64px;
 	outline: 0;
+	-moz-box-shadow: inset 0 1px 0px 0px #2145BF;
 }
 
 #save_button {
@@ -88,6 +83,7 @@ border-radius: 3px;
 	background-image: url(/m/img/save_sprite.png);
 	color: #FFF;
 	margin-left: 4px;
+	-moz-box-shadow: inset 0 1px 0px 0px #00DC6B;
 }
 #save_button:hover {
 	background-position: 0 -33px;
@@ -96,47 +92,34 @@ border-radius: 3px;
 	color: white;
 }
 #save_button:active {
-	color: #BEDFBF;
+	/* color: #BEDFBF; */
 	background-position: 0 -65px;
 	outline: 0;
+	-moz-box-shadow: inset 0 1px 0px 0px #145800;
 }
 
 #id_city {
-	border: 1px solid #999;
-	border-top: 1px solid #CCC;
-	border-left: 1px solid #CCC;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #999 #CCC #CCC;
 	font-size: 0.9em;
 	margin: 0;
 	padding: 2px 5px;
 	width: 120px;
 }
-#id_city:hover {
-	/*
-background-color: #EEE;
-	cursor: pointer;
-*/
-}
 #id_days {
-	border: 1px solid #999;
-	border-top: 1px solid #CCC;
-	border-left: 1px solid #CCC;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #999 #CCC #CCC;
 	font-size: 0.9em;
 	font-family: inherit;
 	margin: 0;
 	padding: 2px 5px;
 	width: 28px;
 }
-#id_days:hover {
-/* 	background-color: #EEE; */
-/* 	cursor: pointer; */
-}
-#id_days:focus {
-	cursor: text;
-}
 
 #view_options {
 	background: #FFF;
-	border: 1px solid #CCC;
 	padding: 10px;
 	-moz-border-radius: 0 0 4px 4px;
 	border-radius: 0 0 4px 4px;
