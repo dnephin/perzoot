@@ -363,7 +363,6 @@ function right_tile_helper(url, div_id, click_url) {
 				return;
 			}
 			
-			elem.next().remove();
 			elem.replaceWith(list.render(
 				{'title': elem.find('a').html(), 'id': elem.attr('id'),
 				 'content': data.content.list, 'click_url': click_url,

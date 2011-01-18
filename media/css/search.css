@@ -298,6 +298,10 @@
 .widget_right .ui-accordion-content {
 	padding: 0;
 }
+.widget_right div p.right_default {
+	text-align: center;
+	padding: 3px;
+}
 .widget_right ul li {
 	color: #999;
 	margin: 0;
