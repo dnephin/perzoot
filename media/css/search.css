@@ -40,11 +40,12 @@
 	border-width: 1px;
 	border-style: solid;
 	border-color: #999 #CCC #CCC;
-	height: 23px;
+	height: 25px;
 	float: left;
+	font-size: 16px;
 	margin: 0;
 	padding: 2px 5px;
-	width: 340px;
+	width: 360px;
 }
 #id_keywords:focus {
 	/* border: 1px solid #999; */
@@ -53,9 +54,9 @@
 #search .button {
 	font-family: inherit;
 	font-size: 1.2em;
-	font-weight: bold;
+	font-weight: normal;
 	float: left;
-	height: 28px;
+	height: 30px;
 	margin: 0 0 0 5px;
 	outline: none;
 	padding: 0 5px;
@@ -66,40 +67,35 @@
 	outline: none;
 }
 #search_button {
-	border: 1px solid #0055E5;
+	border: none;
+	border-left: 1px solid #223C86;
+	border-right: 1px solid #223C86;
 	background-color: #1F77FF;
-	background-image: url(/m/img/search_sprite.png);
-	background-position: 0 0;
+	background-image: url(/m/img/button-sprites.png);
+	background-position: 0 -128px;
 }
 #search_button:hover {
-	border: 1px solid #0055E5;
+	/* background-position: 0 -160px; */
 }
 #search_button:active {
-	/* color: #B2CDFB; */
-	background-position: 0 -64px;
-	outline: 0;
-	-moz-box-shadow: inset 0 1px 0px 0px #2145BF;
+	background-position: 0 -192px;
 }
 
 #save_button {
-	border: 1px solid #287511;
+	border: none;
+	border-left: 1px solid #00752C;
+	border-right: 1px solid #00752C;
 	background-color: #00AD00;
-	background-image: url(/m/img/save_sprite.png);
-	color: #FFF;
+	background-image: url(/m/img/button-sprites.png);
+	background-position: 0 -232px;
+	color: white;
 	margin-left: 4px;
-	-moz-box-shadow: inset 0 1px 0px 0px #00DC6B;
 }
 #save_button:hover {
-	background-position: 0 -33px;
-	background-color: #00AD00;
-	border: 1px solid #287511;
-	color: white;
+	/* background-position: 0 -264px; */
 }
 #save_button:active {
-	/* color: #BEDFBF; */
-	background-position: 0 -65px;
-	outline: 0;
-	-moz-box-shadow: inset 0 1px 0px 0px #145800;
+	background-position: 0 -296px;
 }
 
 #id_city {
@@ -124,6 +120,9 @@
 
 #view_options {
 	background: #FFF;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #999 #CCC #CCC;
 	padding: 10px;
 	-moz-border-radius: 0 0 4px 4px;
 	border-radius: 0 0 4px 4px;
@@ -193,7 +192,7 @@
 }
 .result_options button {
 	background-color: transparent;
-	background-image: url(/m/img/icons/icons.png);
+	background-image: url(/m/img/icons.png);
 	border: 0;
 	margin: 0.2em 0 0.2em 0.2em;
 	outline: 0;
@@ -275,10 +274,10 @@
 	/* background-image: url(/m/img/stripe_FFF_FFFFD7.png); */
 }
 .opened_event .result_links a {
-	color: #00AD00;
+	color: #999;
 }
 .opened_event .result_links a:hover {
-	background-color: #00AD00;
+	background-color: #999;
 	color: white;
 }
 
@@ -334,7 +333,7 @@
 }
 
 .link_icon {
-	background-image: url(/m/img/icons/icons.png);
+	background-image: url(/m/img/icons.png);
 	display: inline-block;
 	height: 16px;
 	width: 16px;

@@ -14,23 +14,45 @@
 {% endblock %}
 
 {% block content %}
-	<div id="searchbox" class="span-24 center last">
+	<div id="searchbox" class="span-24 last">
 	
 		<h2 class="tagline">Employment Search. Simple, Fast, and Focused.</h2>
 		
 		<form id="search" action="{% url jobsite_main.views.search %}" method="POST">
-			<div id="search_bar">
-				{{ search_form.keywords }}
+			<!-- <div id="search_bar"> -->
+				<table id="search_table">
 				
-				<input type="submit" value="Search" id="search_button" class="search_button" /><br />
-			</div>
-			<br />
-			<div id="city_select">
-				Search for jobs in {{ search_form.city }}
+					<tr id="row_1">
+						<td colspan="2">
+							{{ search_form.keywords }}
+						</td>
+						<td></td>
+						<td>
+							<input type="submit" value="Search" id="search_button" class="search_button" />
+						</td>
+						
+					</tr>
+					
+					</tr>
+					<tr id="row_2">
+						<td>
+							<label for="id_keywords" id="search_suggest">
+								<span class="keywords">keywords</span>, <span class="job">job title</span>, <span class="company">company name</span>
+							</label>
+						</td>
+						<td style="text-align: right">
+							<div id="city_select">
+								Your city: {{ search_form.city }}
+							</div>
+						</td>
+						<td  style="padding: 0;"></td>
+					</tr>
+				
+				</table>
 				<input type="hidden" name="days" value="14" />
 			
 			{% csrf_token %}
-			</div>
+			<!-- </div> -->
 		</form>
 
 	</div>

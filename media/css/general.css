@@ -11,13 +11,14 @@
  * Colors
  *
 bright blue		#1F77FF
-				#0055E5
+							#0055E5
 				
 darker blue		#224CC4
-				#0F4ABE
+							#0F4ABE
 				
 bright green	#00AD00
 
+orange 				#FF8F29
 dark grey		#333
 grey			#CCC
 light grey		#F1F1F1;
@@ -40,7 +41,7 @@ light grey		#F1F1F1;
   src: url(/m/fonts/HelveticaNeueLTStd-Th.otf) format("opentype");
 }
 @font-face {
-  font-family: "Helvetica Roma";
+  font-family: "Helvetica Roman";
   src: url(/m/fonts/HelveticaNeueLTStd-Roman.otf) format("opentype");
 }
 
@@ -75,11 +76,7 @@ input:focus {
 	border-color: #999 #CCC #CCC;
 }
 .search_button {
-	border: 1px solid #0055E5;
-	color: white;
-	-moz-box-shadow: inset 0 1px 0px 0px #68B1F0;
-	box-shadow: inset 0 1px 0px 0px #00ADF0;
-	-webkit-box-shadow: inset 0 1px 0px 0px #00ADF0;
+	border: none;
 }
 #main {
 	background-color: #FFF;
@@ -133,7 +130,7 @@ input:focus {
 	margin: 0 0 0 10px !important;
 }
 #user_block a.oauth_logo {
-	background-image: url(/m/img/icons/icons.png);
+	background-image: url(/m/img/icons.png);
 	display: inline-block;
 	height: 24px;
 	margin: 0 0 0 3px;
