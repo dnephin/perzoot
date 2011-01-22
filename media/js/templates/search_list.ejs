@@ -7,9 +7,10 @@
 					var url = (dynamic_click_url) ?	item['url'] :
 							click_url + "?event=" + item['id'];
 					var classes = (dynamic_click_url) ? "" : "search_link";
+					var target = (dynamic_click_url ) ? "target=\"_blank\"" : "";
 			%>
 				<li>
-					<a href="<%=url%>" class="closeable_item <%=classes%>">
+					<a href="<%=url%>" <%=target%> class="closeable_item <%=classes%>">
 						<span class="link_icon"></span>
 						<span class="link_text"><%=item.keywords%></span>
 						<span class="item_date"><%=item.date%></span>
