@@ -191,7 +191,8 @@ button.ui-button-icon-only .ui-button-text {
 -------------------------------------------------- */
 
 .ui-draggable .ui-dialog-titlebar {
-	background: url(/m/img/search_sprite.png);
+	background: url(/m/img/button-sprites.png);
+	background-position: 0 -3px;
 	border: 1px solid #0F4ABE;
 	color: #FFF;
 	-moz-border-radius: 0;
@@ -202,8 +203,8 @@ button.ui-button-icon-only .ui-button-text {
 	border: none;
 	padding: 0;
 	-moz-box-shadow: 0 0 10px #000;
-	border-radius: 0 0 10px #000;
-	-webkit-border-radius: 0 0 10px #000;
+	box-shadow: 0 0 10px #000;
+	-webkit-box-shadow: 0 0 10px #000;
 	-moz-border-radius: 0;
 	border-radius: 0;
 	-webkit-border-radius: 0;
@@ -214,7 +215,6 @@ button.ui-button-icon-only .ui-button-text {
 	border-width: 0 1px 1px;
 	border-style: solid;
 	border-color: #999;
-	border: none;
 	-moz-border-radius: 0;
 	border-radius: 0;
 	-webkit-border-radius: 0;

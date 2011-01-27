@@ -6,7 +6,6 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			default_doc_ready();
-			$('#id_keywords').focus();
 			clickcomplete($('#id_city'), CITIES);
 	});
 	</script>
@@ -21,12 +20,18 @@
 		<form id="search" action="{% url jobsite_main.views.search %}" method="POST">
 			<!-- <div id="search_bar"> -->
 				<table id="search_table">
-				
 					<tr id="row_1">
-						<td colspan="2">
+						<td>Job</td>
+						<td>City</td>
+						<td></td>
+					</tr>
+					<tr id="row_2">
+						<td>
 							{{ search_form.keywords }}
 						</td>
-						<td></td>
+						<td>
+							{{ search_form.city }}
+						</td>
 						<td>
 							<input type="submit" value="Search" id="search_button" class="search_button" />
 						</td>
@@ -34,9 +39,9 @@
 					</tr>
 					
 					</tr>
-					<tr id="row_2">
+					<tr id="row_2" style="display: none">
 						<td>
-							<label for="id_keywords" id="search_suggest">
+							<label for="id_keywords" id="search_suggest" class="hide">
 								<span class="keywords">keywords</span>, <span class="job">job title</span>, <span class="company">company name</span>
 							</label>
 						</td>
@@ -45,7 +50,6 @@
 								Your city: {{ search_form.city }}
 							</div>
 						</td>
-						<td  style="padding: 0;"></td>
 					</tr>
 				
 				</table>

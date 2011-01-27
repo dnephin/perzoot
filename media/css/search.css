@@ -12,8 +12,9 @@
 -------------------------------------------------- */
 #search_toolbar {
 	border: 1px solid #CCC;
-	background-color: #FFF;
-	background-image: url(/m/img/stripe_EEExFFF_8x4.png);
+	background-color: #EEE;
+/* 	background-image: url(/m/img/stripe_EEExFFF_8x4.png); */
+	background-image: url(/m/img/search-toolbar.png);
 	margin-bottom: 15px;
 	padding: 10px 10px 5px 10px;
 	-moz-border-radius: 4px;
