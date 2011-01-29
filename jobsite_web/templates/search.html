@@ -63,13 +63,15 @@
 			<input type="button" id="save_button"  class="button ignore button_main" value="Save"
 				onclick="return save_search(this)" /><br />
 			<div id="country_time_select" class="search_toolbar_extra">
-				jobs in {{ search_form.city }} posted in the last {{ search_form.days }} days
+				<span class="search_label">Your city:</span> {{ search_form.city }} <span class="search_label">Posts from the last {{ search_form.days }} days</span>
 				<input type="hidden" name="sort" id="id_sort" value="" />
 				{{ search_form.filter_category }}
 				{{ search_form.filter_domain }}
 				{{ search_form.filter_company }}
 			</div>
 		</form>
+		
+		<hr class="toolbar_line" />
 		
 		<div id="view_options" class="search_toolbar_extra">
 			<span id="sort_buttons">

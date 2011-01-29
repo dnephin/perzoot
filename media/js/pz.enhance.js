@@ -194,20 +194,26 @@ function handle_user_account_action(elem, skip_reload) {
 	return false;
 }
 
-
+/*
+ * Toggles value of search input on index.css with search suggestions
+ */
 function search_hints_focus() {
-	var k = "#id_keywords";
+	var k = $("#search_table #id_keywords");
+	var text = "keywords, job title, company name";
 	
-	$(k).val("keywords, job title, company name").css({color: '#CCC'});
+	k.val(text).css({color: '#CCC'});
 	
-	$(k).focusin( function() {
-		$(this).val('').css({color: '#222'});
+	k.focus( function() {
+		if(k.val() == text) {
+			k.val('').css({color: '#222'});
+		}
+	});	
+	
+	k.blur( function() {
+		if(k.val() == '') {
+			$(k).val(text).css({color: '#CCC'});
+		}
 	});
-	
-	$(k).focusout( function() {
-		$(this).val("keywords, job title, company name").css({color: '#CCC'});
-	});
-
 }
 
 
