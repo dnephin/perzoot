@@ -195,12 +195,29 @@ function handle_user_account_action(elem, skip_reload) {
 }
 
 
+function search_hints_focus() {
+	var k = "#id_keywords";
+	
+	$(k).val("keywords, job title, company name").css({color: '#CCC'});
+	
+	$(k).focusin( function() {
+		$(this).val('').css({color: '#222'});
+	});
+	
+	$(k).focusout( function() {
+		$(this).val("keywords, job title, company name").css({color: '#CCC'});
+	});
+
+}
+
+
 
 function default_doc_ready() {
 	build_tooltips();
 	build_async_links();
 	build_input_select();
 	update_user_block();
+	search_hints_focus();
 }
 
 

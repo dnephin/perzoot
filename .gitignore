@@ -5,3 +5,4 @@
 .hgtags
 .DS_Store
 TODO_ROSS
+jobsite_web/settings.py
