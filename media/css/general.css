@@ -89,7 +89,8 @@ input:focus {
 #header {
 	background-color: #1F77FF;
 	background-image: url(/m/img/header_bg.png);
-	border-bottom: 1px solid #AAA;
+	border-bottom: 1px solid #91BAFF;
+	border-bottom: 1px solid #607BAB;
 	height: auto;
 	font-weight: bold;
 	position: absolute;
