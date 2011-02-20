@@ -64,6 +64,7 @@ function search_type(extra_params, append, event_url) {
 function handle_search_scroll(event) {
 
 	update_sidebar_location();
+	update_top_link();
 
 	if (GLOBAL_FETCHING_PAGE) return;
 	if (GLOBAL_END_OF_RESULTS) return; 
@@ -88,43 +89,52 @@ function handle_search_scroll(event) {
 function update_sidebar_location() {
 
 	var view_bottom = $(window).scrollTop() + $(window).height();
-	var doc_bottom = $('body').height();
-	var pad = 20;
-	var padding_from_top = 18;
-	var scroll_top = $(window).scrollTop() + $('#header').height();
 
 	var down = (GLOBAL_SCROLL_TOP < $(window).scrollTop())
 	var up = !down;
 	GLOBAL_SCROLL_TOP = $(window).scrollTop();
 
 	$('#left_bar,#right_bar').each(function() {
+		var taller = ($(this).height() > $(window).height());
+
+		if (!taller) {
+			return true;
+		}
+
 		var bot = $(this).position()['top'] + $(this).height();
 		var top = $(this).position()['top'];
 		var orig_top = $(this).data('orig_top');
-		var taller = ($(this).height() > $(window).height());
 
-
-		// The bar is shorter then the window
-		if ($(window).scrollTop() != top && !taller &&
-				((down && bot + pad < doc_bottom) ||
-				(up && top >= orig_top))) {
-			$(this).css({position: "absolute", 
-					top: Math.max(
-						scroll_top + padding_from_top, 
-						orig_top)});
+		if (down && bot < view_bottom) {
+			$(this).css({position: 'fixed', top: $(window).height() - $(this).height() });
+			return true;
 		}
 
-		// The bar is taller then the window
-		if (taller &&
-				((down && bot < doc_bottom && bot < view_bottom) ||
-				(up && top >= orig_top ))) {
-			$(this).css({position: "absolute", 
-					top: Math.max(view_bottom - $(this).height(), orig_top)});
+		if ((down && bot > view_bottom) || (up && top < orig_top)) {
+			$(this).css({position: 'static', top: ''});
 		}
+
 	});
 }
 
 
+/*
+ * Hide and show the 'return to top' link
+ */
+function update_top_link() {
+
+	var tbar_bottom = $('#search_toolbar').position()['top'] + $('#search_toolbar').height();
+	var link = $('#top_link');
+
+	if ($(window).scrollTop() < tbar_bottom && link.css('display') == 'block') {
+		link.fadeOut(800)
+	} 
+
+	if ($(window).scrollTop() > tbar_bottom && link.css('display') == 'none') {
+		link.fadeIn(800)
+	}
+
+}
 
 /*
  * update_search
@@ -530,4 +540,13 @@ function highlight_toggle() {
 		selector.removeHighlight();
 		return;
 	}
+}
+
+
+/*
+ * Return the scroll to the top of the page.
+ */
+function return_to_top() {
+	window.scroll(0,0);
+	return false;
 }

@@ -443,6 +443,32 @@ button.result_save:active {
 #icon_terms {background-position: -256px -48px;}
 #icon_privacy {background-position: -272px -48px;}
 
+
+#left_bar, #right_bar {
+	position: fixed;
+}
+
+#top_link {
+	background: #000;
+	position: fixed;
+	display: none;
+	bottom: 0;
+	right: 0;
+	width: 80px;
+	padding: 5px;
+	text-decoration: none;
+	text-align: center;
+	color: #fff;
+	font-weight: bold;
+
+	border-radius: 3px 0 0 0;
+	-moz-border-radius: 3px 0 0 0;
+	-webkit-border-radius: 3px 0 0 0;
+}
+#top_link:hover {
+	text-decoration: underline;
+}
+
 /* Search Filters and Left Column
 -------------------------------------------------- */
 #left_links {
