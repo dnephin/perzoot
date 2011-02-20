@@ -28,6 +28,8 @@ urlpatterns = patterns('',
 		name='static_page'),
 	(r'^favicon\.ico$', 'django.views.generic.simple.redirect_to', 
 		{'url': '/m/img/favicon.ico'}),
+	(r'^robots.txt$', 'django.views.generic.simple.direct_to_template', 
+		{'template': 'robots.txt', 'mimetype': 'text/plain'}),
 
 	# Ajax only
 	url(r'^jax/track/(?P<event_name>\w+)/(?P<posting_id>\w+)$', 
