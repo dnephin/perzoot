@@ -92,7 +92,10 @@ def get_search_history(request, saved=False, ids=None, limit=10):
 	elif isinstance(ids, list):
 		return []
 
-	searches = SearchEvent.objects.filter(**selector).order_by('-tstamp')[:limit]
+	searches = SearchEvent.objects.filter(**selector).order_by('-tstamp')
+	
+	if limit:
+		return searches[:limit]
 	return searches
 
 

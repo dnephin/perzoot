@@ -76,6 +76,33 @@ function handle_field(elem) {
 }
 
 
+
+function fetch_list(list_name) {
+
+	var url = USER_URLS[list_name];
+	var template = '/m/js/templates/user_list.ejs';
+
+	$.ajax({
+		url: url,
+		dataType: 'json',
+		success: function(data) {
+			list = new EJS({url: template});
+			$('#list_content').html(list.render(data.content));
+		},
+		error: handle_error,
+	});
+
+	return false;
+}
+
+
+
+
+
+
+
+
+
 /*
  * Add focusout events to form fields on account page.
  */

@@ -1,0 +1,25 @@
+<table>
+	<thead>
+	<tr>
+		<td>Name</td>
+		<td>Date</td>
+	</tr>
+
+	</thead>
+
+	<% 
+		$.each(list, function(i, item) { 
+	%>
+		<tr>
+		<td>
+			<a href="<%=item.url%>" class="closeable_item ">
+				<span class="link_icon"></span>
+				<span class="link_text"><%=item.keywords%></span>
+			</a>
+		</td>
+		<td>
+			<span class="item_date"><%=item.date%></span>
+		</td>
+		</tr> 
+	<% }) %>
+</table>

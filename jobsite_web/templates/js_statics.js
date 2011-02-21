@@ -16,6 +16,14 @@ var URL_FAV_POSTINGS = "{% url jobsite_main.views.favorite_postings %}";
 var URL_SAVE_SEARCH = "{% url jobsite_main.views.save_search %}"; 
 var URL_TRACK_EVENT = "{% url track 'name' 0 %}";
 
+
+var USER_URLS = {
+		'saved_searches': "{% url all_saved_searches %}",
+		'search_history': "{% url all_search_history %}",
+		'favorite_postings': "{% url all_favorite_postings %}",
+		'deleted_postings': "{% url all_deleted_postings %}",
+};
+
 {% comment %}
 TODO: Change to ajax call
 {% endcomment %}

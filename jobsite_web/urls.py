@@ -30,6 +30,7 @@ urlpatterns = patterns('',
 		{'url': '/m/img/favicon.ico'}),
 	(r'^robots.txt$', 'django.views.generic.simple.direct_to_template', 
 		{'template': 'robots.txt', 'mimetype': 'text/plain'}),
+#	(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
 
 	# Ajax only
 	url(r'^jax/track/(?P<event_name>\w+)/(?P<posting_id>\w+)$', 
@@ -40,6 +41,15 @@ urlpatterns = patterns('',
 			{'saved': True}, name='saved_searches'),
 	url(r'^jax/search/save$', jobsite_main.views.save_search),
 	url(r'^jax/postings/favs$', jobsite_main.views.favorite_postings),
+
+	url(r'^jax/user/search_history$', jobsite_main.views.full_search_history,
+			name='all_search_history'),
+	url(r'^jax/user/saved_list$', jobsite_main.views.full_search_history,
+			{'saved': True}, name='all_saved_searches'),
+	url(r'^jax/user/fav_postings$', jobsite_main.views.full_user_postings,
+			name='all_favorite_postings'),
+	url(r'^jax/user/del_postings$', jobsite_main.views.full_user_postings,
+			{'type': 'remove'}, name='all_deleted_postings'),
 
 	# Dev only
 	(r'^m/(?P<path>.*)$', 'django.views.static.serve', 

@@ -93,7 +93,7 @@ input:focus {
 	border-bottom: 1px solid #607BAB;
 	height: auto;
 	font-weight: bold;
-	position: absolute;
+	position: fixed;
 	white-space: nowrap;
 	width: 100%;
 	z-index: 10;

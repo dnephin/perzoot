@@ -1,0 +1,35 @@
+
+
+#user_tabs p.user_field .success, 
+#user_tabs p.user_field .error,
+#user_tabs p.user_field .alert,
+#user_tabs p.user_field .info,
+#user_tabs p.user_field .notice {
+	padding: 0.2em;
+	float: left;
+	margin: 0;
+}
+
+
+#user_tabs p.user_field {
+	clear: both;
+}
+#user_tabs p.user_field label {
+	width: 150px;
+	display: block;
+	float: left;
+	margin: 0.5em 0;
+}
+
+#user_tabs p.user_field input {
+	width: 250px;
+	display: block;
+	float: left;
+}
+#user_tabs p.user_field .help_text {
+	display: block;
+	float: left;
+	clear: left;
+	margin: 0.5em 0;
+}
+

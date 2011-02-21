@@ -77,8 +77,14 @@ tbody tr:nth-child(even) td, tbody tr.even td {
 }
 
 .ui-tabs .ui-tabs-nav .ui-tabs-selected {
-	border: 1px solid #CCC;
-	border-bottom: 0;
+	color: black;
+	font-weight: bold;
+	background: white;
+}
+
+.ui-tabs .ui-tabs-panel {
+	border: 1px #CCC solid;
+	border-top: 0;
 }
 
 /* UI buttons

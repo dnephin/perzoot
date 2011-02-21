@@ -279,6 +279,14 @@ def search_history(request, saved=False):
 			'list': db.get_search_history(request, saved)
 	})
 
+def full_search_history(request, saved=False):
+	"""
+	Retrieve the search history.
+	"""
+	return json_response(request, data={
+			'list': db.get_search_history(request, saved, limit=None)
+	})
+
 def favorite_postings(request):
 	"""
 	Retrieve the favorite postings for the user.
@@ -304,6 +312,30 @@ def favorite_postings(request):
 	return json_response(request, data={'list': resp})
 
 	
+def full_user_postings(request, type='save'):
+	"""
+	Retrieve the favorite postings for the user.
+	"""
+
+	posting_list = db.get_user_events(request, type=type, sorted=True, limit=None)
+	if len(posting_list) < 1:
+		return json_response(request, data={'list': None})
+	# TODO: caching for these posts
+	titles = Search().retrieve_titles(map(lambda u: u.posting_id, posting_list))
+
+	posting_map = dict(map(lambda p: (p.posting_id, p),posting_list))
+
+	resp = []
+	for doc in titles['response']['docs']:
+		resp.append({
+			'id': doc['id'], 
+			'keywords': format_caps(doc['title']),
+			'date': posting_map[doc['id']].tstamp.strftime('%b %d'),
+			'url': doc['url'],
+		})
+
+	return json_response(request, data={'list': resp})
+
 
 def save_search(request):
 	"""
