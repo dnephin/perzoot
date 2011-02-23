@@ -337,6 +337,25 @@ def full_user_postings(request, type='save'):
 	return json_response(request, data={'list': resp})
 
 
+def remove_from_user_list(request):
+	"""
+	Remove items from a users list.
+	"""
+	# TODO: stubbed
+	if request.method != 'GET' or 'list_type' not in request.GET:
+		json_response(request, code=ERROR)
+	
+	id_list = []
+	for param, value in request.GET.iteritems():
+		if not param.startswith('item'):
+			continue
+		id_list.append(int(param.replace('item_','')))
+
+	list_type = request.GET['list_type'][0]
+	return json_response(request)
+
+
+
 def save_search(request):
 	"""
 	Save the last search.

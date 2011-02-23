@@ -1,0 +1,39 @@
+
+<p>
+<%
+	$.each(buttons, function(i, button) {
+%>
+	<button id="<%= button[1] %>" class="list_button"> <%= button[0] %> </button>
+
+<% }) %>
+</p>
+
+<form action="#" method="GET" id="user_list_form">
+<input type="hidden" name="list_type" value="<%=name%>" />
+<table class="list_data posting_list">
+	<thead>
+	<tr>
+		<td> </td>
+		<td>Name</td>
+		<td>Date</td>
+	</tr>
+
+	</thead>
+
+	<% 
+		$.each(list, function(i, item) { 
+	%>
+	<tr>
+		<td>
+			<input type="checkbox" name="<%= item.id %>" />
+		</td>
+		<td>
+			<a href="<%=item.url%>" class="posting_link"><%=item.keywords%></a>
+		</td>
+		<td>
+			<%= item.date %>
+		</td>
+	</tr> 
+	<% }) %>
+</table>
+</form>

@@ -67,6 +67,9 @@ class SearchEvent(Model):
 			'date': self.tstamp.strftime("%b %d"),
 			'keywords': self.keywords,
 			'saved': self.saved,
+			'city': self.city,
+			'sort': self.sort or 'default',
+			'days': self.days
 		}
 
 

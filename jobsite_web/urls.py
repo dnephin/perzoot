@@ -42,14 +42,16 @@ urlpatterns = patterns('',
 	url(r'^jax/search/save$', jobsite_main.views.save_search),
 	url(r'^jax/postings/favs$', jobsite_main.views.favorite_postings),
 
-	url(r'^jax/user/search_history$', jobsite_main.views.full_search_history,
+	url(r'^jax/user/list/search_history$', jobsite_main.views.full_search_history,
 			name='all_search_history'),
-	url(r'^jax/user/saved_list$', jobsite_main.views.full_search_history,
+	url(r'^jax/user/list/saved_searches$', jobsite_main.views.full_search_history,
 			{'saved': True}, name='all_saved_searches'),
-	url(r'^jax/user/fav_postings$', jobsite_main.views.full_user_postings,
+	url(r'^jax/user/list/favorite_postings$', jobsite_main.views.full_user_postings,
 			name='all_favorite_postings'),
-	url(r'^jax/user/del_postings$', jobsite_main.views.full_user_postings,
+	url(r'^jax/user/list/deleted_postings$', jobsite_main.views.full_user_postings,
 			{'type': 'remove'}, name='all_deleted_postings'),
+
+	url(r'^jax/user/del_list_items$', jobsite_main.views.remove_from_user_list),
 
 	# Dev only
 	(r'^m/(?P<path>.*)$', 'django.views.static.serve', 

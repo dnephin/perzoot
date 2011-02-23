@@ -77,30 +77,105 @@ function handle_field(elem) {
 
 
 
+/*
+ * Select all elements in a user list.
+ */
+function select_all_user_list() {
+	$('.list_data TBODY INPUT').attr('checked', true);
+	$(this).button({'label': 'Unselect All'}).click(unselect_all_user_list);
+}
+function unselect_all_user_list() {
+	$('.list_data TBODY INPUT').attr('checked', false);
+	$(this).button({'label': 'Select All'}).click(select_all_user_list);
+}
+
+function delete_items_user_list() {
+
+	$.ajax({
+		url: URL_DEL_LIST_ITEMS + '?' + $('#user_list_form').serialize(),
+		dataType: 'json',
+		success: function(data) {
+			// TODO: display message
+
+			// refresh list
+			fetch_list($('#user_list_form input[name="list_type"]').val())
+		}
+	});
+
+}
+
+function open_items_user_list() {
+	$('.list_data TBODY TR').each(function (i, row) {
+		if ($(this).find('input').attr('checked')) {
+			open($(this).find('TD A.posting_link').attr('href'));
+		}
+	});
+}
+
+/*
+ * Setup for users lists
+ */
+var USER_LIST_SETUP = {
+		'saved_searches': {
+			'template': '/m/js/templates/user_search_list.ejs',
+			'buttons': [
+				['Select All', 'select_all_button', select_all_user_list],
+				['Delete', 'delete_button', delete_items_user_list],
+			]
+		},
+		'search_history': {
+			'template': '/m/js/templates/user_search_list.ejs',
+			'buttons': [
+				['Select All', 'select_all_button', select_all_user_list],
+				['Delete', 'delete_button', delete_items_user_list],
+			]
+		},
+		'favorite_postings': {
+			'template': '/m/js/templates/user_posting_list.ejs',
+			'buttons': [
+				['Select All', 'select_all_button', select_all_user_list],
+				['Delete', 'delete_button', delete_items_user_list],
+				['Open', 'open_button', open_items_user_list],
+			]
+		},
+		'deleted_postings': {
+			'template': '/m/js/templates/user_posting_list.ejs',
+			'buttons': [
+				['Select All', 'select_all_button', select_all_user_list],
+				['Un-Delete', 'delete_button', delete_items_user_list],
+			]
+		},
+};
+
+
+/*
+ * Retrieve a users search or posting lists and display them.
+ */
 function fetch_list(list_name) {
 
 	var url = USER_URLS[list_name];
-	var template = '/m/js/templates/user_list.ejs';
+	var template = USER_LIST_SETUP[list_name]['template'];
 
 	$.ajax({
 		url: url,
 		dataType: 'json',
 		success: function(data) {
 			list = new EJS({url: template});
-			$('#list_content').html(list.render(data.content));
+			$('#list_content').html(list.render({
+				'name': list_name,
+				'list': data.content.list,
+				'buttons': USER_LIST_SETUP[list_name]['buttons']
+			}));
+
+			$.each(USER_LIST_SETUP[list_name]['buttons'], function(i, button) {
+				$('#'+button[1]).button({text: button[0]}).click(button[2]);
+			})
 		},
 		error: handle_error,
 	});
 
 	return false;
 }
-
-
-
-
-
-
-
 
 
 /*

@@ -1,5 +1,7 @@
 
 
+/* User Account Styles */
+
 #user_tabs p.user_field .success, 
 #user_tabs p.user_field .error,
 #user_tabs p.user_field .alert,
@@ -33,3 +35,48 @@
 	margin: 0.5em 0;
 }
 
+
+/* User List table Styles */
+
+.saved_search_icon {
+	background-position: -16px -48px;
+	background-image: url(/m/img/icons.png);
+	display: inline-block;
+	height: 16px;
+	width: 16px;
+	vertical-align: middle;
+	margin-right: 4px;
+}
+.list_data {
+	background: #E8EDFF;
+}
+.list_data THEAD TD{
+	border-top: 2px solid #333;
+	border-bottom: 2px solid #333;
+	font-weight: bold;
+}
+.list_data TBODY TD {
+	border-bottom: 1px solid white;
+}
+.list_data THEAD TR TD {
+	width: 80px
+}
+.list_data THEAD TR TD:nth-child(1) {
+	width: 18px
+}
+.search_list THEAD TR TD:nth-child(2) {
+	width: 18px
+}
+.search_list THEAD TR TD:nth-child(3) {
+	width: auto;
+}
+.search_list THEAD TR TD:nth-child(4) {
+	width: 120px
+}
+
+.posting_list THEAD TR TD:nth-child(2) {
+	width: auto;
+}
+.posting_list THEAD TR TD:nth-child(3) {
+	width: 80px;
+}
