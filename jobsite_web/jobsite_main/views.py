@@ -276,7 +276,7 @@ def search_history(request, saved=False):
 	Retrieve the search history.
 	"""
 	return json_response(request, data={
-			'list': db.get_search_history(request, saved)
+			'list': db.get_search_history(request, saved, limit=5)
 	})
 
 def full_search_history(request, saved=False):
@@ -292,7 +292,7 @@ def favorite_postings(request):
 	Retrieve the favorite postings for the user.
 	"""
 
-	posting_list = db.get_user_events(request, type='save', sorted=True, limit=10)
+	posting_list = db.get_user_events(request, type='save', sorted=True, limit=5)
 	if len(posting_list) < 1:
 		return json_response(request, data={'list': None})
 	# TODO: caching for these posts
@@ -329,6 +329,7 @@ def full_user_postings(request, type='save'):
 	for doc in titles['response']['docs']:
 		resp.append({
 			'id': doc['id'], 
+			'event_id': posting_map[doc['id']].id,
 			'keywords': format_caps(doc['title']),
 			'date': posting_map[doc['id']].tstamp.strftime('%b %d'),
 			'url': doc['url'],
@@ -341,7 +342,6 @@ def remove_from_user_list(request):
 	"""
 	Remove items from a users list.
 	"""
-	# TODO: stubbed
 	if request.method != 'GET' or 'list_type' not in request.GET:
 		json_response(request, code=ERROR)
 	
@@ -351,7 +351,13 @@ def remove_from_user_list(request):
 			continue
 		id_list.append(int(param.replace('item_','')))
 
-	list_type = request.GET['list_type'][0]
+	list_type = request.GET['list_type']
+	if list_type in ('saved_searches', 'search_history'):
+		db.deactivate_search_events(request, id_list)
+	elif list_type in ('favorite_postings', 'deleted_postings'):
+		db.deactivate_user_events(request, id_list)
+
+	# TODO: response message ?
 	return json_response(request)
 
 

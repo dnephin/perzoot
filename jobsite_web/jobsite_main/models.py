@@ -24,6 +24,7 @@ class UserEvent(Model):
 	posting_id = CharField(max_length=32)
 	event =   CharField(max_length=6, choices=EVENTS)
 	tstamp =  DateTimeField(auto_now_add=True)
+	active = BooleanField(default=True)
 
 	class Meta:
 		unique_together = ('event', 'posting_id', 'session')
@@ -32,6 +33,7 @@ class UserEvent(Model):
 		return "UserEvent [%s|%s] %s %s" % (self.user or self.session, 
 				self.tstamp.strftime("%Y-%m-%d %H:%M"), self.event, 
 				self.posting_id)
+
 
 
 class SearchEvent(Model):
@@ -54,6 +56,7 @@ class SearchEvent(Model):
 	days = 		IntegerField()
 	city =		CharField(max_length=200)
 	sort = 		CharField(choices=SORT_CHOICES, max_length=20, null=True)
+	active = 	BooleanField(default=True)
 
 
 	def __str__(self):

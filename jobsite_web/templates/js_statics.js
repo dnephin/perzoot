@@ -15,6 +15,7 @@ var URL_SEARCH_SAVED = "{% url saved_searches %}";
 var URL_FAV_POSTINGS = "{% url jobsite_main.views.favorite_postings %}";
 var URL_SAVE_SEARCH = "{% url jobsite_main.views.save_search %}"; 
 var URL_TRACK_EVENT = "{% url track 'name' 0 %}";
+var URL_USER_VIEW = "{% url user_view %}";
 
 // USER page urls
 var URL_DEL_LIST_ITEMS = "{% url jobsite_main.views.remove_from_user_list %}";

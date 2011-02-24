@@ -121,14 +121,16 @@ var USER_LIST_SETUP = {
 			'buttons': [
 				['Select All', 'select_all_button', select_all_user_list],
 				['Delete', 'delete_button', delete_items_user_list],
-			]
+			],
+			'title': 'Saved Searches',
 		},
 		'search_history': {
 			'template': '/m/js/templates/user_search_list.ejs',
 			'buttons': [
 				['Select All', 'select_all_button', select_all_user_list],
 				['Delete', 'delete_button', delete_items_user_list],
-			]
+			],
+			'title': 'Search History',
 		},
 		'favorite_postings': {
 			'template': '/m/js/templates/user_posting_list.ejs',
@@ -136,14 +138,16 @@ var USER_LIST_SETUP = {
 				['Select All', 'select_all_button', select_all_user_list],
 				['Delete', 'delete_button', delete_items_user_list],
 				['Open', 'open_button', open_items_user_list],
-			]
+			],
+			'title': 'Favorite Postings',
 		},
 		'deleted_postings': {
 			'template': '/m/js/templates/user_posting_list.ejs',
 			'buttons': [
 				['Select All', 'select_all_button', select_all_user_list],
 				['Un-Delete', 'delete_button', delete_items_user_list],
-			]
+			],
+			'title': 'Deleted Postings',
 		},
 };
 
@@ -160,11 +164,16 @@ function fetch_list(list_name) {
 		url: url,
 		dataType: 'json',
 		success: function(data) {
+
+			if (!data.content.list)
+				data.content.list = {}
+
 			list = new EJS({url: template});
 			$('#list_content').html(list.render({
 				'name': list_name,
 				'list': data.content.list,
-				'buttons': USER_LIST_SETUP[list_name]['buttons']
+				'buttons': USER_LIST_SETUP[list_name]['buttons'],
+				'title': USER_LIST_SETUP[list_name]['title'],
 			}));
 
 			$.each(USER_LIST_SETUP[list_name]['buttons'], function(i, button) {
@@ -177,6 +186,18 @@ function fetch_list(list_name) {
 	return false;
 }
 
+
+/*
+ * Load the list in the user tab, if the hash contains a reference to a list.
+ */
+function load_sublist() {
+	var hash = window.location.hash.substring(1);
+
+	if (USER_LIST_SETUP[hash]) {
+		fetch_list(hash);
+		$('#user_tabs').tabs('select', '#user_lists');
+	}
+}
 
 /*
  * Add focusout events to form fields on account page.

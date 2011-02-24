@@ -3,6 +3,13 @@
 {% block document_head %}
 	<script type="text/javascript" src="/m/js/pz.userpage.js" ></script>
 	<link rel="stylesheet" type="text/css" href="/m/css/user.css" />
+
+	<script type="text/javascript">
+	$(document).ready(function() {
+		load_sublist();
+	});
+	</script>
+
 {% endblock %}
 
 {% block content %}
@@ -45,10 +52,10 @@
 		<div id="user_lists">
 			<p>View and edit any of the following lists.</p>
 			<ul>
-				<li><a href="#" onclick="return fetch_list('saved_searches')">Saved Searches</a></li>
-				<li><a href="#" onclick="return fetch_list('search_history')">Search History</a></li>
-				<li><a href="#" onclick="return fetch_list('favorite_postings')">Favorite Postings</a></li>
-				<li><a href="#" onclick="return fetch_list('deleted_postings')">Deleted Postings</a></li>
+				<li><a href="#saved_searches" onclick="return fetch_list('saved_searches')">Saved Searches</a></li>
+				<li><a href="#search_history" onclick="return fetch_list('search_history')">Search History</a></li>
+				<li><a href="#favorite_postings" onclick="return fetch_list('favorite_postings')">Favorite Postings</a></li>
+				<li><a href="#deleted_postings" onclick="return fetch_list('deleted_postings')">Deleted Postings</a></li>
 			</ul>
 
 			<div id="list_content">

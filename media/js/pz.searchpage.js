@@ -357,7 +357,7 @@ function update_saved_search() {
  * Update the favorite postings block
  */
 function update_favorite_postings() {
-	right_tile_helper(URL_FAV_POSTINGS, '#favorite_posts', null);
+	right_tile_helper(URL_FAV_POSTINGS, '#favorite_postings', null);
 }
 
 function right_tile_helper(url, div_id, click_url) {

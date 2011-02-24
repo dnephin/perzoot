@@ -1,5 +1,8 @@
 
-<p>
+<h3 id="user_list_title"> <%= title %> </h3>
+
+<p class="user_list_buttons">
+
 <%
 	$.each(buttons, function(i, button) {
 %>
@@ -25,7 +28,7 @@
 	%>
 	<tr>
 		<td>
-			<input type="checkbox" name="<%= item.id %>" />
+			<input type="checkbox" name="item_<%= item.event_id %>" />
 		</td>
 		<td>
 			<a href="<%=item.url%>" class="posting_link"><%=item.keywords%></a>

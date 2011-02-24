@@ -4,6 +4,7 @@
  Database abstraction layer.
 """
 
+from django.db import IntegrityError, transaction
 from jobsite_main.models import *
 from jobsite_main.util import to_json
 from django.core.exceptions import ObjectDoesNotExist
@@ -25,17 +26,35 @@ def get_user_selector(request):
 # End Helper
 
 
+@transaction.commit_manually
 def save_user_event(event_name, posting_id, user, session_id):
 	"""
 	Save a user event object.
 	"""
+
 	ue = UserEvent(session=session_id, user=user, 
 			posting_id=posting_id, event=event_name)
+
 	try:
 		ue.save()
+
+	except IntegrityError, e:
+		transaction.rollback()
+	else:
+		transaction.commit()
+		return True
+
+	try:
+		UserEvent.objects.filter(session=session_id,
+				user=user,
+				posting_id=posting_id,
+				event=event_name).update(active=True)
 	except BaseException, e:
 		log.warn('Failed to save UserEvent (%s): %s' % (ue, e))
+		transaction.rollback()
 		return False
+
+	transaction.commit()
 	return True
 
 
@@ -46,6 +65,7 @@ def update_action_with_user_id(session, user):
 	# TODO: is there some way to check this session is theirs ?
 	UserEvent.objects.filter(session=session, user=None).update(user=user)
 	SearchEvent.objects.filter(session=session, user=None).update(user=user)
+
 
 def load_static_page(page_name):
 	" Load the static content page. "
@@ -84,6 +104,8 @@ def save_search(request, event_id):
 def get_search_history(request, saved=False, ids=None, limit=10):
 	" Retrieve the search history for this user, or for their session. "
 	selector = get_user_selector(request)
+	selector['active'] = True
+
 	if saved:
 		selector['saved'] = True
 
@@ -104,6 +126,8 @@ def get_user_events(request, type=None, ids=None, sorted=False, limit=None):
 	Retrieve a list of user events for a user.
 	"""
 	selector = get_user_selector(request)
+	selector['active'] = True
+
 	if type:
 		selector['event'] = type
 
@@ -121,3 +145,26 @@ def get_user_events(request, type=None, ids=None, sorted=False, limit=None):
 		query = query[:limit]
 
 	return query
+
+
+def deactivate_user_events(request, ids):
+	"""
+	Set active flag on a list of user_events to false.
+	"""
+	selector = get_user_selector(request)
+	selector['id__in'] = ids
+
+	UserEvent.objects.filter(**selector).update(active=False)
+
+
+
+def deactivate_search_events(request, ids):
+	"""
+	Set active flag on a list of search_events to false.
+	"""
+	selector = get_user_selector(request)
+	selector['id__in'] = ids
+
+	SearchEvent.objects.filter(**selector).update(active=False)
+
+

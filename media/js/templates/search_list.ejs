@@ -18,5 +18,13 @@
 				</li> 
 			<% }) %>
 		</ul>
+
+		<% if (content.length == 5) { %>
+		
+		<div class="view_all_link">
+			<a href="<%= URL_USER_VIEW %>#<%=id%>">View All</a>
+		</div>
+
+		<% } %>
 	</div>
 </div>

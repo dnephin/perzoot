@@ -424,7 +424,7 @@ button.result_save:active {
 #saved_searches .link_icon {
 	background-position: -16px -48px;
 }
-#favorite_posts .link_icon {
+#favorite_postings .link_icon {
 	background-position: -112px -48px;
 }
 
@@ -437,6 +437,15 @@ button.result_save:active {
 #icon_terms {background-position: -256px -48px;}
 #icon_privacy {background-position: -272px -48px;}
 
+.view_all_link {
+	text-align: center;
+	margin: 3px 0 5px 0;
+}
+.view_all_link A {
+	font-style: italic;
+	font-size: 0.9em;
+	color: #223C86;
+}
 
 #left_bar, #right_bar {
 	position: fixed;
